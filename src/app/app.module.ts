@@ -4,24 +4,26 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { RouterModule, Routes } from '@angular/router';
+import { GerenciaComponent } from './gerencia/gerencia.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 const appRoutes: Routes = [
   { path: 'reserva', component: ReservaComponent },
+  { path: 'gerencia', component: GerenciaComponent },
+  { path: 'inicio', component: InicioComponent },
   { path: 'app', component: AppComponent },
   { path: '',
-    redirectTo: '/reserva',
+    redirectTo: '/inicio',
     pathMatch: 'full'
   },
-  /*{
-    path: '**', component: PageNotFoundComponent
-  }*/
-
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     ReservaComponent,
+    GerenciaComponent,
+    InicioComponent,
   ],
   imports: [
     RouterModule.forRoot(
