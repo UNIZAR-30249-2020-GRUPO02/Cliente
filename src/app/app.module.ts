@@ -6,10 +6,12 @@ import { ReservaComponent } from './reserva/reserva.component';
 import { RouterModule, Routes } from '@angular/router';
 import { GerenciaComponent } from './gerencia/gerencia.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { AuthGuard } from './auth/auth.guard';
+import { LoginComponent } from './auth/login/login.component';
 
 const appRoutes: Routes = [
   { path: 'reserva', component: ReservaComponent },
-  { path: 'gerencia', component: GerenciaComponent },
+  { path: 'gerencia', component: GerenciaComponent, canActivate: [AuthGuard] },
   { path: 'inicio', component: InicioComponent },
   { path: 'app', component: AppComponent },
   { path: '',
@@ -24,6 +26,7 @@ const appRoutes: Routes = [
     ReservaComponent,
     GerenciaComponent,
     InicioComponent,
+    LoginComponent,
   ],
   imports: [
     RouterModule.forRoot(

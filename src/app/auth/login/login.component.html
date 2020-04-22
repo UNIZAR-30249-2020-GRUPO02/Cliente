@@ -1,0 +1,6 @@
+<h5>Acceso Gerencia</h5>
+<p>{{message}}</p>
+<p>
+  <button (click)="login()"  *ngIf="!authService.isLoggedIn">Entrar</button>
+  <button (click)="logout()" *ngIf="authService.isLoggedIn">Salir</button>
+</p>
