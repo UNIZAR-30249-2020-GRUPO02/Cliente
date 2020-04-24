@@ -8,6 +8,8 @@ import { GerenciaComponent } from './gerencia/gerencia.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
+import { AcceptComponent } from './accept/accept.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'reserva', component: ReservaComponent },
@@ -27,6 +29,7 @@ const appRoutes: Routes = [
     GerenciaComponent,
     InicioComponent,
     LoginComponent,
+    AcceptComponent,
   ],
   imports: [
     RouterModule.forRoot(
@@ -34,6 +37,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
     BrowserModule,
+    HttpClientModule,
     RouterModule
   ],
   providers: [],
