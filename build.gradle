@@ -1,0 +1,14 @@
+apply plugin: 'idea'
+//and standard one
+apply plugin: 'java'
+
+allprojects {
+  repositories {
+    jcenter()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+  }
+}
+dependencies {
+  implementation 'com.github.UNIZAR-30249-2020-GRUPO02:DTO:-SNAPSHOT'
+}
