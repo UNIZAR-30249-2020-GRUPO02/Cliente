@@ -10,9 +10,13 @@ import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { AcceptComponent } from './accept/accept.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { BusquedaComponent } from './busqueda/busqueda.component';
+import { SeleccionEspaciosComponent } from './seleccion-espacios/seleccion-espacios.component';
+// Rutas necesarias para navegar entre componentes
 const appRoutes: Routes = [
   { path: 'reserva', component: ReservaComponent },
+  { path: 'busqueda', component: BusquedaComponent },
+  { path: 'seleccion-espacios', component: SeleccionEspaciosComponent },
   { path: 'gerencia', component: GerenciaComponent, canActivate: [AuthGuard] },
   { path: 'inicio', component: InicioComponent },
   { path: 'app', component: AppComponent },
@@ -30,6 +34,8 @@ const appRoutes: Routes = [
     InicioComponent,
     LoginComponent,
     AcceptComponent,
+    BusquedaComponent,
+    SeleccionEspaciosComponent,
   ],
   imports: [
     RouterModule.forRoot(

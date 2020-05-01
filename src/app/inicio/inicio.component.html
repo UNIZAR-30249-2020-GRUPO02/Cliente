@@ -1,1 +1,17 @@
-<p>inicio works!</p>
+<div class="jumbotron">
+  <h2> Reservas EINA </h2>
+</div>
+<div class="container-fluid">
+  <br>
+  <div class="row">
+    <div class="col-sm-4">
+      <button routerLink="gerencia" type="button" class="btn btn-primary btn-lg btn-block" ><app-login></app-login></button>
+    </div>
+    <div class="col-sm-4">
+      <button (click)="goBusqueda()" type="button" class="btn btn-primary btn-lg btn-block">Buscar</button>
+    </div>
+    <div class="col-sm-4">
+      <button (click)="goReservas()" type="button" class="btn btn-primary btn-lg btn-block">Tramitar</button>
+    </div>
+  </div>
+</div>
