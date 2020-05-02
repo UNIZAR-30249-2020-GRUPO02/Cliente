@@ -12,6 +12,9 @@ import { AcceptComponent } from './accept/accept.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { SeleccionEspaciosComponent } from './seleccion-espacios/seleccion-espacios.component';
+import { MaterialModule } from './material/material.module';
+import { MatDialogModule } from '@angular/material/dialog';
+
 // Rutas necesarias para navegar entre componentes
 const appRoutes: Routes = [
   { path: 'reserva', component: ReservaComponent },
@@ -27,6 +30,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
+  exports: [MatDialogModule],
   declarations: [
     AppComponent,
     ReservaComponent,
@@ -44,9 +48,11 @@ const appRoutes: Routes = [
     ),
     BrowserModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    MaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [BusquedaComponent]
 })
 export class AppModule { }

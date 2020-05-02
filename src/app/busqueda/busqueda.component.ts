@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MatDialogRef } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-busqueda',
   templateUrl: './busqueda.component.html',
@@ -7,10 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusquedaComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public dialogRef: MatDialogRef<BusquedaComponent>) {
+  }
   ngOnInit(): void {
   }
-
-
+  onCancelClick(): void {
+    this.dialogRef.close();
+  }
 }
