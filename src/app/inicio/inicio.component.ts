@@ -23,7 +23,8 @@ export class InicioComponent implements OnInit {
   }
   goBusqueda() {
     this.matDialog.open(BusquedaComponent, {
-      width: '250px',
+      width: '300px',
+      height: '300px'
     });
   }
   // Para cuando se seleccione un espacio en el mapa

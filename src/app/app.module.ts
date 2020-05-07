@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 // Rutas necesarias para navegar entre componentes
 const appRoutes: Routes = [
   { path: 'reserva', component: ReservaComponent },
+  { path: 'accept', component: AcceptComponent },
   { path: 'busqueda', component: BusquedaComponent },
   { path: 'seleccion-espacios', component: SeleccionEspaciosComponent },
   { path: 'gerencia', component: GerenciaComponent, canActivate: [AuthGuard] },
@@ -30,7 +31,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  exports: [MatDialogModule],
+  exports: [],
   declarations: [
     AppComponent,
     ReservaComponent,
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule,
     MaterialModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gerencia',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GerenciaComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
+  }
+  goInicio() {
+    const redirectUrl = '/inicio';
+    // Redirect the user
+    this.router.navigate([redirectUrl]);
   }
 
 }
