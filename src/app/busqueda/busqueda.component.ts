@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-busqueda',
@@ -14,6 +15,6 @@ export class BusquedaComponent implements OnInit {
   ngOnInit(): void {
   }
   onCancelClick(): void {
-    this.dialogRef.close();
+     this.dialogRef.close();
   }
 }

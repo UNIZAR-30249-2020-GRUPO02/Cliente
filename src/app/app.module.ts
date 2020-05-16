@@ -14,6 +14,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 import { SeleccionEspaciosComponent } from './seleccion-espacios/seleccion-espacios.component';
 import { MaterialModule } from './material/material.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 
 // Rutas necesarias para navegar entre componentes
 const appRoutes: Routes = [
@@ -53,7 +54,7 @@ const appRoutes: Routes = [
     MaterialModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
   bootstrap: [AppComponent],
   entryComponents: [BusquedaComponent]
 })

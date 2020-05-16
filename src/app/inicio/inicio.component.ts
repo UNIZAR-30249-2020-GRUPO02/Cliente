@@ -26,6 +26,7 @@ export class InicioComponent implements OnInit {
       width: '300px',
       height: '300px'
     });
+
   }
   // Para cuando se seleccione un espacio en el mapa
   goSeleccionEspacios() {
