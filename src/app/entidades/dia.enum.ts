@@ -5,6 +5,5 @@ export enum Dia {
   MIERCOLES=4,
   JUEVES=5,
   VIERNES=6,
-  SABADO=7;
-  dia: number;
+  SABADO=7,
 }

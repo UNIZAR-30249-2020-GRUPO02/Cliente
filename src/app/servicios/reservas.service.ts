@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {from, Observable} from 'rxjs';
+import { from, Observable} from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { ReservaDTO } from "../entidades/reserva-dto"
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,10 @@ export class ReservasService {
   public getReservasFiltradas() {
     return this.http.get(this.reservasUrl + '/getReservasFiltradas');
   }
-  public crearReserva() {
-   // return this.http.post<ReservaDTO>(this.reservasUrl + '/createReserva');
+  public crearReserva(nuevaReserva: ReservaDTO) {
+    //return this.http.post<ReservaDTO>(this.reservasUrl + '/createReserva' + nuevaReserva);
   }
-  public cambiarEstado() {
-    // return this.http.patch(this.reservasUrl + '/changeState/{id}');
+  public cambiarEstado(id: number, nuevoEstado: string) {
+    return this.http.patch(this.reservasUrl + '/changeState/' + id, nuevoEstado);
   }
 }
