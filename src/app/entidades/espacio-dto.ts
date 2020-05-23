@@ -1,3 +1,6 @@
+import {Equipamiento} from "./equipamiento"
+import {Ubicacion} from "./ubicacion"
+
 export class EspacioDTO {
     id: string;
     tipo: string;

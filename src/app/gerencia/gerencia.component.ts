@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { GerenteService } from '../servicios/gerente.service';
 
 @Component({
   selector: 'app-gerencia',

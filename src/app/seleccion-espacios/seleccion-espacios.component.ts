@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EspaciosService } from '../servicios/espacios.service';
 
 @Component({
   selector: 'app-seleccion-espacios',

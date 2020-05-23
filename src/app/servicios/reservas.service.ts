@@ -1,27 +1,45 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { from, Observable} from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { ReservaDTO } from "../entidades/reserva-dto"
+import { BusquedaDTO } from "../entidades/busqueda-dto"
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservasService {
-  private reservasUrl: string;  // URL to web api
+  private urlApp: string;  // URL to web api
+  private busqDTO: BusquedaDTO = null;
+
   constructor(private http: HttpClient) {
-    this.reservasUrl = 'http://localhost:8080/reservas';
+    this.urlApp = 'http://localhost:3000';
   }
-  public getReservasByEspacio() {
-    return this.http.get(this.reservasUrl + '/getReservasByEspacio');
+
+  public getReservasByEspacio(id: string) {
+    let params = new HttpParams().set(id, id);
+    return this.http.get(this.urlApp + '/getReservasByEspacio', {params: params});
   }
-  public getReservasFiltradas() {
-    return this.http.get(this.reservasUrl + '/getReservasFiltradas');
+
+  public getReservasFiltradas(edificio: string, tipoEspacio: string, pizarra: boolean, proyector: boolean, capacidad: number) {
+    this.busqDTO = {
+              edificio: edificio,
+              tipoEspacio:  tipoEspacio,
+              pizarra: pizarra,
+              proyector: proyector,
+              capacidad: capacidad
+            };
+
+    return this.http.get(this.urlApp + '/getReservasFiltradas'+ this.busqDTO);
   }
+
   public crearReserva(nuevaReserva: ReservaDTO) {
-    //return this.http.post<ReservaDTO>(this.reservasUrl + '/createReserva' + nuevaReserva);
+    return this.http.post<ReservaDTO>(this.urlApp + '/createReserva', nuevaReserva);
   }
-  public cambiarEstado(id: number, nuevoEstado: string) {
-    return this.http.patch(this.reservasUrl + '/changeState/' + id, nuevoEstado);
+
+  public cambiarEstado(id: number, nuevoEstado: string, motivo: string) {
+    let params = new HttpParams().set("nuevoEstado", nuevoEstado).set("motivo", motivo);
+    return this.http.patch(this.urlApp + '/changeState/' + id, {params: params});
   }
+
 }
