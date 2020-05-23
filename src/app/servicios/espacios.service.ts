@@ -35,7 +35,7 @@ export class EspaciosService {
   }
 
   public getInfoEspacioFiltered(edificio: string, tipo: string) {
-  let params = new HttpParams()
+    let params = new HttpParams()
           .set("edificio", edificio).set("tipo", tipo);
         return this.http.get(this.urlApp + '/getInfoFiltered'+ {params: params});
   }
@@ -48,12 +48,14 @@ export class EspaciosService {
         capacidad: capacidad,
         notas: notas
     };
-    // return this.http.patch(this.urlApp + '/modifySpace'+ this.datosDTO);
+     return this.http.patch(this.urlApp + '/modifySpace', this.datosDTO);
   }
 
-  public obtenerHorarioEntreFechas(idEspacio: string, inicio: Date, fin: Date) {
-        //  return this.http.patch(this.urlApp + '/getSpacesBetween'+ idEspacio, inicio, fin);
-    }
+  public obtenerHorarioEntreFechas(idEspacio: string, inicio: string, fin: string) {
+    let params = new HttpParams()
+              .set("idEspacio", idEspacio).set("inicio", inicio).set("fin", fin);
+    return this.http.patch(this.urlApp + '/getSpacesBetween', {params: params});
+  }
 
 
 }
