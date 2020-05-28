@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+
 import { AppComponent } from './app.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,10 +18,15 @@ import { SeleccionEspaciosComponent } from './seleccion-espacios/seleccion-espac
 import { MaterialModule } from './material/material.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
+import { ModDatosComponent } from './mod-datos/mod-datos.component';
+import { ModHorarioComponent } from './mod-horario/mod-horario.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 // Rutas necesarias para navegar entre componentes
 const appRoutes: Routes = [
   { path: 'reserva', component: ReservaComponent },
+  { path: 'mod-datos', component: ModDatosComponent },
+  { path: 'mod-horario', component: ModHorarioComponent },
   { path: 'accept', component: AcceptComponent },
   { path: 'busqueda', component: BusquedaComponent },
   { path: 'seleccion-espacios', component: SeleccionEspaciosComponent },
@@ -42,7 +50,10 @@ const appRoutes: Routes = [
     AcceptComponent,
     BusquedaComponent,
     SeleccionEspaciosComponent,
+    ModDatosComponent,
+    ModHorarioComponent,
   ],
+  entryComponents: [BusquedaComponent, ModHorarioComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes,
@@ -52,10 +63,13 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule,
     MaterialModule,
-    MatDialogModule
+    MatDialogModule,
+    NoopAnimationsModule,
+    MatDatepickerModule
   ],
-  providers: [{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
-  bootstrap: [AppComponent],
-  entryComponents: [BusquedaComponent]
+  providers: [
+  ModHorarioComponent,
+  {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
+  bootstrap: [AppComponent, ModHorarioComponent],
 })
 export class AppModule { }

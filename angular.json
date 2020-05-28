@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrapDark.min.css"
             ],
@@ -92,11 +93,15 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css",
+              "node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css",
               "node_modules/bootstrap/dist/css/bootstrapDark.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootsrap-datepicker/dist/bootstrap-datepicker.js",
+              "node_modules/bootsrap-datepicker/dist/bootstrap-datepicker.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           }

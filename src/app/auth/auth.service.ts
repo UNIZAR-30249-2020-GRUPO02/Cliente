@@ -12,6 +12,7 @@ export class AuthService {
   redirectUrl: string;
 
   login(): Observable<boolean> {
+    // Añadir llamada a servicio logInGerente
     return of(true).pipe(
       delay(1000),
       tap(val => this.isLoggedIn = true)
