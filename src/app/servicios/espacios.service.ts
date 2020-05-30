@@ -5,6 +5,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { EspacioDTO } from "../entidades/espacio-dto"
 import { BusquedaDTO } from "../entidades/busqueda-dto"
 import { DatosDTO } from "../entidades/datos-dto"
+import {Equipamiento} from "../entidades/equipamiento";
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +24,11 @@ export class EspaciosService {
       return this.http.get(this.urlApp + '/getInfo'+ id);
   }
 
-  public buscarEspacio(edificio: string, tipoEspacio: string, pizarra: boolean, proyector: boolean, capacidad: number) {
+  public buscarEspacio(edificio: string, tipoEspacio: string, equipamiento: Array<Equipamiento>,  capacidad: number) {
      this.busqDTO = {
         edificio: edificio,
         tipoEspacio:  tipoEspacio,
-        pizarra: pizarra,
-        proyector: proyector,
+        equipamiento: equipamiento,
         capacidad: capacidad
      };
      return this.http.get(this.urlApp + '/search'+ this.busqDTO);
@@ -40,12 +40,13 @@ export class EspaciosService {
         return this.http.get(this.urlApp + '/getInfoFiltered'+ {params: params});
   }
 
-  public modificarEspacio( id: string, pizarra: boolean, proyector: boolean, capacidad: number, notas: string) {
+  public modificarEspacio( id: string, equipamiento: Array<Equipamiento>, capacidad: number, reservable: boolean,
+                           notas: string) {
     this.datosDTO = {
         id: id,
-        pizarra: pizarra,
-        proyector: proyector,
+        equipamiento: equipamiento,
         capacidad: capacidad,
+        reservable: reservable,
         notas: notas
     };
      return this.http.patch(this.urlApp + '/modifySpace', this.datosDTO);

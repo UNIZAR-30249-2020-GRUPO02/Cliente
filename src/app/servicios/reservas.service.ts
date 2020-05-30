@@ -4,6 +4,7 @@ import { from, Observable} from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { ReservaDTO } from "../entidades/reserva-dto"
 import { BusquedaDTO } from "../entidades/busqueda-dto"
+import {Equipamiento} from "../entidades/equipamiento";
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,12 @@ export class ReservasService {
     return this.http.get(this.urlApp + '/getReservasByEspacio', {params: params});
   }
 
-  public getReservasFiltradas(edificio: string, tipoEspacio: string, pizarra: boolean, proyector: boolean, capacidad: number) {
+  public getReservasFiltradas(edificio: string, tipoEspacio: string, equipamiento: Array<Equipamiento>,
+                              capacidad: number) {
     this.busqDTO = {
               edificio: edificio,
-              tipoEspacio:  tipoEspacio,
-              pizarra: pizarra,
-              proyector: proyector,
+              tipoEspacio: tipoEspacio,
+              equipamiento: equipamiento,
               capacidad: capacidad
             };
 

@@ -8,4 +8,5 @@ export class EspacioDTO {
     equipamiento: Array<Equipamiento>;
     ubicacion: Ubicacion;
     notas: string;
+    reservable: boolean;
 }

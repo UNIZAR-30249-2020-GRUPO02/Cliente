@@ -1,7 +1,8 @@
+import {Equipamiento} from "./equipamiento";
+
 export class BusquedaDTO {
     edificio: string;
     tipoEspacio: string;
-    pizarra: boolean;
-    proyector: boolean;
+    equipamiento: Array<Equipamiento>;
     capacidad: number;
 }

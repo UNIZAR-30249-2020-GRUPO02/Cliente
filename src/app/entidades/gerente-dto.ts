@@ -1,4 +1,4 @@
 export class GerenteDTO {
-  nombreGerente: string;
+  nomUsuario: string;
   password: string;
 }

@@ -1,7 +1,9 @@
+import {Equipamiento} from "./equipamiento";
+
 export class DatosDTO {
     id: string;
-    pizarra: boolean;
-    proyector: boolean;
+    equipamiento: Array<Equipamiento>;
     capacidad: number;
+    reservable: boolean;
     notas: string;
 }
