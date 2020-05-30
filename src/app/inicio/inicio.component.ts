@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 
 import {BusquedaComponent} from '../busqueda/busqueda.component';
+import {LoginComponent} from '../auth/login/login.component';
 
 @Component({
   selector: 'app-inicio',
@@ -23,11 +24,20 @@ export class InicioComponent implements OnInit {
   }
   goBusqueda() {
     this.matDialog.open(BusquedaComponent, {
-      width: '300px',
-      height: '300px'
+      width: '1400px',
+      height: '650px'
     });
 
   }
+
+  goLoginGerencia() {
+      this.matDialog.open(LoginComponent, {
+        width: '500px',
+        height: '400px'
+      });
+
+  }
+
   // Para cuando se seleccione un espacio en el mapa
   goSeleccionEspacios() {
     const redirectUrl = '/seleccion-espacios';

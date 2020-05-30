@@ -17,4 +17,7 @@ export class BusquedaComponent implements OnInit {
   onCancelClick(): void {
      this.dialogRef.close();
   }
+  busqueda(): void{
+
+  }
 }

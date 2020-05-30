@@ -1,130 +1,133 @@
 <h1 mat-dialog-title>Búsqueda</h1>
 <div mat-dialog-content>
-  <div class="col-sm-6">
-    <div class="form-group">
-      <label for="eleccion0">Edificio</label>
-      <select class="form-control" id="eleccion0">
-        <option>Ada Byron</option>
-        <option>Torres Quevedo</option>
-        <option>Betancourt</option>
-      </select>
-    </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="eleccion0">Edificio</label>
+        <select class="form-control" id="eleccion0">
+          <option>Ada Byron</option>
+          <option>Torres Quevedo</option>
+          <option>Betancourt</option>
+        </select>
+      </div>
 
-    <div class="form-group">
-      <label for="eleccion1">Tipo de espacio</label>
-      <select class="form-control" id="eleccion1">
-        <option>Aula</option>
-        <option>Laboratorio</option>
-        <option>Despacho</option>
-        <option>Sala de conferencia</option>
-      </select>
-    </div>
+      <div class="form-group">
+        <label for="eleccion1">Tipo de espacio</label>
+        <select class="form-control" id="eleccion1">
+          <option>Aula</option>
+          <option>Laboratorio</option>
+          <option>Despacho</option>
+          <option>Sala de conferencia</option>
+        </select>
+      </div>
 
-    <div class="form-group">
-      <label for="InputEmail1">Hora de entrada (hh:mm)</label>
-      <input type="email" class="form-control" id="InputEmail1">
-      <small id="entradaHelp" class="form-text text-muted">Introduzca una hora con el formato adecuado.</small>
-    </div>
+      <div class="form-group">
+        <label for="InputEmail1">Hora de entrada (hh:mm)</label>
+        <input type="email" class="form-control" id="InputEmail1">
+        <small id="entradaHelp" class="form-text text-muted">Introduzca una hora con el formato adecuado.</small>
+      </div>
 
-    <div class="form-group">
-      <label for="InputEmail2">Hora de entrada (hh:mm)</label>
-      <input type="email" class="form-control" id="InputEmail2">
-      <small id="salidaHelp" class="form-text text-muted">Introduzca una hora con el formato adecuado.</small>
-    </div>
+      <div class="form-group">
+        <label for="InputEmail2">Hora de entrada (hh:mm)</label>
+        <input type="email" class="form-control" id="InputEmail2">
+        <small id="salidaHelp" class="form-text text-muted">Introduzca una hora con el formato adecuado.</small>
+      </div>
 
-    <fieldset class="form-group">
-      <legend>Equipamiento</legend>
-      <div class="form-check">
+      <fieldset class="form-group">
+        <legend>Equipamiento</legend>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1">
+            Cañon
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+            Pizarra
+          </label>
+        </div>
+      </fieldset>
+    </div>
+    <div class="col-sm-6">
+
+      <div class="form-check disabled">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1">
-          Cañon
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
+          Periodo
         </label>
       </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-          Pizarra
-        </label>
+      <fieldset class="form-group">
+        <legend>Días (solo para periodos)</legend>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo1" value="option1" checked="">
+            Lunes
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo2" value="option2">
+            Martes
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo3" value="option3">
+            Miércoles
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo4" value="option4">
+            Jueves
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo5" value="option5">
+            Viernes
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo6" value="option6">
+            Sábado
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo7" value="option7">
+            Domingo
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="form-group">
+        <label for="capacidad">Capacidad mínima</label>
+        <select class="form-control" id="capacidad">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+        </select>
       </div>
-    </fieldset>
+
+    </div>
   </div>
-  <div class="col-sm-6">
-
-    <div class="form-check disabled">
-      <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
-        Periodo
-      </label>
-    </div>
-    <fieldset class="form-group">
-      <legend>Días (solo para periodos)</legend>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios" id="periodo1" value="option1" checked="">
-          Lunes
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios" id="periodo2" value="option2">
-          Martes
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios" id="periodo3" value="option3">
-          Miércoles
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios" id="periodo4" value="option4">
-          Jueves
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios" id="periodo5" value="option5">
-          Viernes
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios" id="periodo6" value="option6">
-          Sábado
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios" id="periodo7" value="option7">
-          Domingo
-        </label>
-      </div>
-    </fieldset>
-
-    <div class="form-group">
-      <label for="capacidad">Capacidad mínima</label>
-      <select class="form-control" id="capacidad">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-        <option>10</option>
-        <option>11</option>
-        <option>12</option>
-      </select>
-    </div>
-
-  </div>
-
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button >Buscar</button>
+  <div class="col" style="text-align: center; margin-top: auto;">
+    <button mat-button style="height:50px; width:150px; font-size: 25px;" (click)="onCancelClick()">Cancel</button>
+    <button mat-button style="height:50px; width:150px; font-size: 25px;" (click)="busqueda()">Buscar</button>
+  </div>
 </div>
