@@ -21,10 +21,14 @@ export class BusquedaComponent implements OnInit {
   }
 
   busqueda(): void{
+    if ($('#periodo').is(':checked')) {
+    } else {
+    }
 
   }
 
   cambioPeriodo(event) {
+    console.log(event);
     if (event.target.checked) {
       this.habilitarDias(true);
     } else {
@@ -40,10 +44,12 @@ export class BusquedaComponent implements OnInit {
     $('#periodo5').prop('disabled', !periodo);
     $('#periodo6').prop('disabled', !periodo);
     $('#periodo7').prop('disabled', !periodo);
+    $('#fechaFinal').prop('disabled', !periodo);
   }
 
   checkEquipamiento(event) {
     $('#equipamientoNumero_' + event.target.id.split('_')[1]).prop('disabled', !event.target.checked);
   }
+
 
 }

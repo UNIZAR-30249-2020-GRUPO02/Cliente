@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MatDatepickerModule } from '@angular/material/datepicker';
+//import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 
 import { AppComponent } from './app.component';
@@ -64,8 +64,8 @@ const appRoutes: Routes = [
     RouterModule,
     MaterialModule,
     MatDialogModule,
-    NoopAnimationsModule,
-    MatDatepickerModule
+    NoopAnimationsModule
+    //MatDatepickerModule
   ],
   providers: [
   ModHorarioComponent,
