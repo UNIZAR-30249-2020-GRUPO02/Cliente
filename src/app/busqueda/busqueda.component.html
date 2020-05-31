@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Búsqueda</h1>
 <div mat-dialog-content>
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <div class="form-group">
         <label for="eleccion0">Edificio</label>
         <select class="form-control" id="eleccion0">
@@ -33,27 +33,13 @@
         <small id="salidaHelp" class="form-text text-muted">Introduzca una hora con el formato adecuado.</small>
       </div>
 
-      <fieldset class="form-group">
-        <legend>Equipamiento</legend>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1">
-            Cañon
-          </label>
-        </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-            Pizarra
-          </label>
-        </div>
-      </fieldset>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
 
       <div class="form-check disabled">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
+          <input type="checkbox" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3"
+          (change)="cambioPeriodo($event)">
           Periodo
         </label>
       </div>
@@ -61,43 +47,43 @@
         <legend>Días (solo para periodos)</legend>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo1" value="option1" checked="">
+            <input type="checkbox" class="form-check-input" id="periodo1" value="option1">
             Lunes
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo2" value="option2">
+            <input type="checkbox" class="form-check-input" id="periodo2" value="option2">
             Martes
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo3" value="option3">
+            <input type="checkbox" class="form-check-input" id="periodo3" value="option3">
             Miércoles
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo4" value="option4">
+            <input type="checkbox" class="form-check-input" id="periodo4" value="option4">
             Jueves
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo5" value="option5">
+            <input type="checkbox" class="form-check-input" id="periodo5" value="option5">
             Viernes
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo6" value="option6">
+            <input type="checkbox" class="form-check-input" id="periodo6" value="option6">
             Sábado
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="optionsRadios" id="periodo7" value="option7">
+            <input type="checkbox" class="form-check-input" id="periodo7" value="option7">
             Domingo
           </label>
         </div>
@@ -105,23 +91,87 @@
 
       <div class="form-group">
         <label for="capacidad">Capacidad mínima</label>
-        <select class="form-control" id="capacidad">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-          <option>9</option>
-          <option>10</option>
-          <option>11</option>
-          <option>12</option>
-        </select>
+        <input type="number" class="form-control" id="capacidad" placeholder="Capacidad">
       </div>
 
     </div>
+
+    <div class="col-sm-4">
+      <fieldset class="form-group">
+        <legend>Equipamiento</legend>
+        <div class="row">
+          <div class="col-3" style="margin-top: 2%">
+            <input type="checkbox" class="form-check-input" id="equipamientoCheck_1"
+                   (change)="checkEquipamiento($event)">
+            Cañon
+          </div>
+          <div class="col-9">
+            <input type="number" id="equipamientoNumero_1" placeholder="Número mínimo" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3" style="margin-top: 2%">
+            <input type="checkbox" class="form-check-input" id="equipamientoCheck_2"
+                   (change)="checkEquipamiento($event)">
+            Pantalla
+          </div>
+          <div class="col-9">
+            <input type="number" id="equipamientoNumero_2" placeholder="Número mínimo" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3" style="margin-top: 2%">
+            <input type="checkbox" class="form-check-input" id="equipamientoCheck_3"
+                   (change)="checkEquipamiento($event)">
+            Tv
+          </div>
+          <div class="col-9">
+            <input type="number" id="equipamientoNumero_3" placeholder="Número mínimo" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3" style="margin-top: 2%">
+            <input type="checkbox" class="form-check-input" id="equipamientoCheck_4"
+                   (change)="checkEquipamiento($event)">
+            Video
+          </div>
+          <div class="col-9">
+            <input type="number" id="equipamientoNumero_4" placeholder="Número mínimo" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3" style="margin-top: 2%">
+            <input type="checkbox" class="form-check-input" id="equipamientoCheck_5"
+                   (change)="checkEquipamiento($event)">
+            Dvd
+          </div>
+          <div class="col-9">
+            <input type="number" id="equipamientoNumero_5" placeholder="Número mínimo" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3" style="margin-top: 2%">
+            <input type="checkbox" class="form-check-input" id="equipamientoCheck_6"
+                   (change)="checkEquipamiento($event)">
+            Pizarra
+          </div>
+          <div class="col-9">
+            <input type="number" id="equipamientoNumero_6" placeholder="Número mínimo" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3" style="margin-top: 2%">
+            <input type="checkbox" class="form-check-input" id="equipamientoCheck_7"
+                   (change)="checkEquipamiento($event)">
+            Ordenador
+          </div>
+          <div class="col-9">
+            <input type="number" id="equipamientoNumero_7" placeholder="Número mínimo" disabled>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
   </div>
 </div>
 
