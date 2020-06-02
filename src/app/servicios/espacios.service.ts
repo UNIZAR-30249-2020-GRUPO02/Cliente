@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {BusquedaDTO} from "../entidades/busqueda-dto"
-import {DatosDTO} from "../entidades/datos-dto"
+import {BusquedaDTO} from "../entidades/busqueda-dto";
+import {DatosDTO} from "../entidades/datos-dto";
+import {EspacioDTO} from "../entidades/espacio-dto"
 import {Equipamiento} from "../entidades/equipamiento";
 import {Dia} from "../entidades/dia.enum";
 import { ParserService } from "./parser.service";
@@ -31,6 +32,9 @@ export class EspaciosService {
   public buscarEspacio(edificio: string, tipoEspacio: string, equipamiento: Array<Equipamiento>, capacidad: number,
                        fechaInicio: Date, fechaFin: Date, horaInicio: number, horaFin: number,
                        dias: Array<Dia>, periodo: boolean) {
+
+    let espacios = [];
+
     let params = new HttpParams()
       .set("edificio", edificio)
       .set("tipoEspacio", tipoEspacio)
@@ -42,9 +46,8 @@ export class EspaciosService {
       .set("horaFin", horaFin.toString())
       .set("dias", this.parser.diaArraytoString(dias))
       .set("periodo", periodo.toString());
-     return this.http.get(this.urlApp + '/espacio/search', {params: params}).subscribe(data => {
-       console.log(data);
-     });
+     return this.http.get(this.urlApp + '/espacio/search', {params: params});
+     //return espacios;
   }
 
   public getInfoEspacioFiltered(edificio: string, tipo: string) {

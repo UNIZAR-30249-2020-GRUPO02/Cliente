@@ -6,6 +6,8 @@ import {Equipamiento} from "../entidades/equipamiento";
 import {Dia} from "../entidades/dia.enum";
 import {EspaciosService} from "../servicios/espacios.service";
 import { TipoEquipamiento} from "../entidades/tipo-equipamiento.enum";
+import {EspacioDTO} from "../entidades/espacio-dto";
+import {SesionService} from "../servicios/sesion.service";
 
 @Component({
   selector: 'app-busqueda',
@@ -14,10 +16,18 @@ import { TipoEquipamiento} from "../entidades/tipo-equipamiento.enum";
 })
 export class BusquedaComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<BusquedaComponent>, public espaciosService: EspaciosService) {
-  }
+
+  espacios: Array<EspacioDTO> = [];
+  espaciosSeleccionados: Array<EspacioDTO> = [];
+
+
+  constructor(public dialogRef: MatDialogRef<BusquedaComponent>, public espaciosService: EspaciosService,
+              public sesionService: SesionService) { }
+
   ngOnInit(): void {
     this.habilitarDias(false);
+    this.espacios = this.sesionService.getEspaciosBuscados();
+    this.espaciosSeleccionados = this.sesionService.getEspaciosSeleccionados();
   }
 
   onCancelClick(): void {
@@ -26,22 +36,27 @@ export class BusquedaComponent implements OnInit {
 
   busqueda(): void{
 
+    this.espacios = [];
+    this.espaciosSeleccionados = [];
+
     let fechaInicio: Date = new Date();
     if (<string>$("#fechaInicio").val() != "") {
       let fechaInicioString: string = <string>$("#fechaInicio").val();
       let fechaInicioArray = fechaInicioString.split("-");
-      fechaInicio.setFullYear(+fechaInicioArray[0], +fechaInicioArray[1], +fechaInicioArray[2]);
+      fechaInicio.setFullYear(+fechaInicioArray[0], +fechaInicioArray[1] -1 , +fechaInicioArray[2]);
+      fechaInicio.setHours(0,0,0,0);
     } else {
-      fechaInicio.setFullYear(2020, 1, 1);
+      fechaInicio.setFullYear(2020, 0, 1);
     }
 
     let fechaFin: Date = new Date();
     if (<string>$("#fechaFinal").val() != "") {
       let fechaFinString: string = <string>$("#fechaFinal").val();
       let fechaFinArray = fechaFinString.split("-");
-      fechaFin.setFullYear(+fechaFinArray[0], +fechaFinArray[1], +fechaFinArray[2]);
+      fechaFin.setFullYear(+fechaFinArray[0], +fechaFinArray[1] - 1, +fechaFinArray[2]);
+      fechaFin.setHours(0,0,0,0);
     } else {
-      fechaFin.setFullYear(2020, 11, 1);
+      fechaFin.setFullYear(2020, 11, 31);
     }
 
     let equipamiento: Array<Equipamiento> = [];
@@ -116,8 +131,9 @@ export class BusquedaComponent implements OnInit {
         maxCantidad: 0});
     }
 
+    let periodo: boolean = $('#periodo').prop("checked");
     let dias: Array<Dia> = [];
-    if ($('#periodo').prop("checked")) {
+    if (periodo) {
       if ($('#periodo1').prop("checked")) {
         dias.push(Dia.LUNES);
       }
@@ -145,10 +161,19 @@ export class BusquedaComponent implements OnInit {
     if (<string>$('#capacidad').val() != "") {
       capacidad = <number>$('#capacidad').val();
     }
+    let horaEntrada = <number>$("#horaEntrada").val();
+    let horaSalida = <number>$("#horaSalida").val();
 
-    this.espaciosService.buscarEspacio(<string>$("#edificio").val(), <string>$("#tipoEspacio").val(),
-    equipamiento, capacidad, fechaInicio, fechaFin, <number>$("#horaEntrada").val(),
-      <number>$("#horaSalida").val(), dias, $('#periodo').prop("checked"));
+    this.sesionService.actualizarDatosReserva(fechaInicio, fechaFin, horaEntrada,
+      horaSalida, dias, periodo);
+
+    this.espaciosService.buscarEspacio(<string>$("#edificio").val(), <string>$("#tipoEspacio").val(), equipamiento,
+      capacidad, fechaInicio, fechaFin, horaEntrada, horaSalida, dias, periodo).subscribe(data => {
+      for (let index in data) {
+        this.espacios.push(data[index]);
+      }
+      this.sesionService.actualizarEspaciosBuscados(this.espacios);
+    });
   }
 
   cambioPeriodo(event) {
@@ -175,5 +200,17 @@ export class BusquedaComponent implements OnInit {
     $('#equipamientoNumero_' + event.target.id.split('_')[1]).prop('disabled', !event.target.checked);
   }
 
+  seleccionarEspacio(espacio: EspacioDTO) {
+    this.espaciosSeleccionados.push(espacio);
+    this.sesionService.anadirEspacioSeleccionado(espacio);
+  }
+
+  quitarEspacioSeleccionado(espacio: EspacioDTO) {
+    let i = this.espaciosSeleccionados.indexOf(espacio);
+    if ( i !== -1 ) {
+      this.espaciosSeleccionados.splice( i, 1 );
+    }
+    this.sesionService.quitarEspacioSeleccionado(espacio);
+  }
 
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Dia} from "../entidades/dia.enum";
 import {Equipamiento} from "../entidades/equipamiento";
 import {TipoEquipamiento} from "../entidades/tipo-equipamiento.enum";
+import {EstadoReserva} from "../entidades/estado-reserva.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +70,16 @@ export class ParserService {
       return "PIZARRA";
     } else if (equipamiento.toString() == "ordenador") {
       return "ORDENADOR";
+    }
+  }
+
+  public estadoReservatoString(estado: EstadoReserva) {
+    if (estado.toString() == "Aceptada") {
+      return "ACEPTADA";
+    } else if (estado.toString() == "Rechazada") {
+      return "RECHAZADA";
+    } else if (estado.toString() == "Pendiente") {
+      return "PENDIENTE";
     }
   }
 

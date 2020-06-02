@@ -223,8 +223,46 @@
 </div>
 
 <div mat-dialog-actions>
-  <div class="col" style="text-align: center; margin-top: auto;">
-    <button mat-button style="height:50px; width:150px; font-size: 25px;" (click)="onCancelClick()">Cancel</button>
+  <div class="col" style="text-align: center; margin: auto;">
+    <button mat-button style="height:50px; width:150px; font-size: 25px;" (click)="onCancelClick()">Volver</button>
     <button mat-button style="height:50px; width:150px; font-size: 25px;" (click)="busqueda()">Buscar</button>
+  </div>
+</div>
+<br>
+<br>
+<div style="text-align: center; margin: auto;">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Edificio</th>
+      <th scope="col">Planta</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Capacidad</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let espacio of espacios">
+      <th scope="row"> {{ espacio.id }} </th>
+      <td>{{ espacio.ubicacion.edificio }}</td>
+      <td>{{ espacio.ubicacion.planta }}</td>
+      <td>{{ espacio.tipo }}</td>
+      <td>{{ espacio.capacidad }}</td>
+      <td><button mat-button style="width:80%">Ver info completa</button></td>
+      <td *ngIf="this.espaciosSeleccionados.indexOf(espacio) < 0">
+        <button mat-button style="width:80%" (click)="seleccionarEspacio(espacio)">Añadir a lista</button>
+      </td>
+      <td *ngIf="this.espaciosSeleccionados.indexOf(espacio) >= 0">
+        <button class="btn btn-primary" mat-button style="width:80%"
+                (click)="quitarEspacioSeleccionado(espacio)">Añadido</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="espacios.length == 0" style="text-align: center;">
+    <br>
+    <h4>NO HAY NINGUN ESPACIO ASOCIADO A ESA BUSQUEDA</h4>
   </div>
 </div>

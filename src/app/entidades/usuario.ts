@@ -2,6 +2,6 @@ export class Usuario {
         nombre: string;
         apellidos: string;
         email: string;
-        NIA: number;
+      nia: number;
         telefono: number;
 }

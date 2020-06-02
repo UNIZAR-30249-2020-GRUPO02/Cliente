@@ -3,13 +3,12 @@ import {Usuario} from "./usuario"
 import {Dia} from "./dia.enum"
 
 export class ReservaDTO {
-    id: string;
     horaInicio: Date;
     horaFin: Date;
     fechaInicio: Date;
     fechaFin: Date;
-    estado: EstadoReserva;
-    user: Usuario;
+    estado: String;
+    usuario: Usuario;
     idEspacio: string;
     dias: Array<Dia>;
 }
