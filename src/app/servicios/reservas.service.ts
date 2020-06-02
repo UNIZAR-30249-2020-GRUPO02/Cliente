@@ -24,12 +24,12 @@ export class ReservasService {
 
   public getReservasFiltradas(edificio: string, tipoEspacio: string, equipamiento: Array<Equipamiento>,
                               capacidad: number) {
-    this.busqDTO = {
+    /*this.busqDTO = {
               edificio: edificio,
               tipoEspacio: tipoEspacio,
               equipamiento: equipamiento,
               capacidad: capacidad
-            };
+            };*/
 
     return this.http.get(this.urlApp + '/getReservasFiltradas'+ this.busqDTO);
   }

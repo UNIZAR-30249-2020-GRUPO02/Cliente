@@ -3,17 +3,17 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="form-group">
-        <label for="eleccion0">Edificio</label>
-        <select class="form-control" id="eleccion0">
-          <option>Ada Byron</option>
-          <option>Torres Quevedo</option>
-          <option>Betancourt</option>
+        <label for="edificio">Edificio</label>
+        <select class="form-control" id="edificio">
+          <option value="Ada Byron">Ada Byron</option>
+          <option value="Torres Quevedo">Torres Quevedo</option>
+          <option value="Betancourt">Betancourt</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="eleccion1">Tipo de espacio</label>
-        <select class="form-control" id="eleccion1">
+        <label for="tipoEspacio">Tipo de espacio</label>
+        <select class="form-control" id="tipoEspacio">
           <option>Aula</option>
           <option>Laboratorio</option>
           <option>Despacho</option>
@@ -26,7 +26,7 @@
           <div class="form-group">
             <label>Hora de entrada (08-21)</label>
             <select id="horaEntrada" class="form-control">
-              <option value="22">08</option>
+              <option value="08">08</option>
               <option value="09">09</option>
               <option value="10">10</option>
               <option value="11">11</option>
@@ -70,13 +70,13 @@
         <div class="col-6">
           <div class="form-group">
             <label>Fecha inicio</label>
-            <input type="date" class="form-control" id="fechaInicio" min="2020-01-01" max="2020-12-31">
+            <input type="date" class="form-control" id="fechaInicio" min="2020-01-01" max="2021-12-31">
           </div>
         </div>
         <div class="col-6">
           <div class="form-group">
             <label>Fecha final (solo periodos)</label>
-            <input type="date" class="form-control" id="fechaFinal" min="2020-01-01" max="2020-12-31">
+            <input type="date" class="form-control" id="fechaFinal" min="2020-01-01" max="2021-12-31">
           </div>
         </div>
       </div>

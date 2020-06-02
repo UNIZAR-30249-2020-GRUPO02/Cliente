@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { from, Observable} from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { EspacioDTO } from "../entidades/espacio-dto"
-import { BusquedaDTO } from "../entidades/busqueda-dto"
-import { DatosDTO } from "../entidades/datos-dto"
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {BusquedaDTO} from "../entidades/busqueda-dto"
+import {DatosDTO} from "../entidades/datos-dto"
 import {Equipamiento} from "../entidades/equipamiento";
+import {Dia} from "../entidades/dia.enum";
+import { ParserService } from "./parser.service";
+import {TipoEquipamiento} from "../entidades/tipo-equipamiento.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +16,35 @@ export class EspaciosService {
   private datosDTO: DatosDTO = null;
   private busqDTO: BusquedaDTO = null;
 
-  constructor(private http: HttpClient) {
-     this.urlApp = 'http://localhost:3000';
+  constructor(private http: HttpClient, private  parser: ParserService) {
+     this.urlApp = 'http://localhost:8080';
   }
 
   public getInfoEspacio(id: string) {
-      return this.http.get(this.urlApp + '/getInfo'+ id);
+    let params = new HttpParams()
+      .set("id", id);
+      return this.http.get(this.urlApp + '/espacio/getInfo', {params: params}).subscribe(data => {
+        console.log(data);
+      });
   }
 
-  public buscarEspacio(edificio: string, tipoEspacio: string, equipamiento: Array<Equipamiento>,  capacidad: number) {
-     this.busqDTO = {
-        edificio: edificio,
-        tipoEspacio:  tipoEspacio,
-        equipamiento: equipamiento,
-        capacidad: capacidad
-     };
-     return this.http.get(this.urlApp + '/search'+ this.busqDTO);
+  public buscarEspacio(edificio: string, tipoEspacio: string, equipamiento: Array<Equipamiento>, capacidad: number,
+                       fechaInicio: Date, fechaFin: Date, horaInicio: number, horaFin: number,
+                       dias: Array<Dia>, periodo: boolean) {
+    let params = new HttpParams()
+      .set("edificio", edificio)
+      .set("tipoEspacio", tipoEspacio)
+      .set("equipamiento", this.parser.equipamientoArraytoString(equipamiento))
+      .set("capacidad", capacidad.toString())
+      .set("fechaInicio", fechaInicio.getTime().toString())
+      .set("fechaFin", fechaFin.getTime().toString())
+      .set("horaInicio", horaInicio.toString())
+      .set("horaFin", horaFin.toString())
+      .set("dias", this.parser.diaArraytoString(dias))
+      .set("periodo", periodo.toString());
+     return this.http.get(this.urlApp + '/espacio/search', {params: params}).subscribe(data => {
+       console.log(data);
+     });
   }
 
   public getInfoEspacioFiltered(edificio: string, tipo: string) {
