@@ -8,6 +8,7 @@ import {EspaciosService} from "../servicios/espacios.service";
 import { TipoEquipamiento} from "../entidades/tipo-equipamiento.enum";
 import {EspacioDTO} from "../entidades/espacio-dto";
 import {SesionService} from "../servicios/sesion.service";
+import { InfoEspacioComponent} from "../info-espacio/info-espacio/info-espacio.component";
 
 @Component({
   selector: 'app-busqueda',
@@ -19,10 +20,10 @@ export class BusquedaComponent implements OnInit {
 
   espacios: Array<EspacioDTO> = [];
   espaciosSeleccionados: Array<EspacioDTO> = [];
-
+  mensajeInformacion: String = "Todavía no has realizado ninguna búsqueda";
 
   constructor(public dialogRef: MatDialogRef<BusquedaComponent>, public espaciosService: EspaciosService,
-              public sesionService: SesionService) { }
+              public sesionService: SesionService, public matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.habilitarDias(false);
@@ -35,6 +36,8 @@ export class BusquedaComponent implements OnInit {
   }
 
   busqueda(): void{
+
+    this.mensajeInformacion = "Cargando espacios..."
 
     this.espacios = [];
     this.espaciosSeleccionados = [];
@@ -172,6 +175,7 @@ export class BusquedaComponent implements OnInit {
       for (let index in data) {
         this.espacios.push(data[index]);
       }
+      this.mensajeInformacion = "No hay ningún espacio asociado a esos criterios de búsqueda";
       this.sesionService.actualizarEspaciosBuscados(this.espacios);
     });
   }
@@ -211,6 +215,15 @@ export class BusquedaComponent implements OnInit {
       this.espaciosSeleccionados.splice( i, 1 );
     }
     this.sesionService.quitarEspacioSeleccionado(espacio);
+  }
+
+  goInfoEspacio(espacio: EspacioDTO) {
+    this.sesionService.setEspacioSeleccionadoInfo(espacio);
+    this.matDialog.open(InfoEspacioComponent, {
+      width: '40%',
+      height: 'auto'
+    });
+
   }
 
 }

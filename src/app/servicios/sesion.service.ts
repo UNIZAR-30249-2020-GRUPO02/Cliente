@@ -10,6 +10,7 @@ export class SesionService {
 
   espaciosBuscados: Array<EspacioDTO> = [];
   espaciosSeleccionados: Array<EspacioDTO> = [];
+  espacioSeleccionadoInfo: EspacioDTO;
   datosDisponibles: boolean = false;
   fechaInicio: Date;
   fechaFinal: Date;
@@ -26,6 +27,14 @@ export class SesionService {
 
   public getEspaciosSeleccionados() {
     return this.espaciosSeleccionados;
+  }
+
+  public setEspacioSeleccionadoInfo(espacio: EspacioDTO) {
+    this.espacioSeleccionadoInfo = espacio;
+  }
+
+  public getEspacioSeleccionadoInfo() {
+    return this.espacioSeleccionadoInfo;
   }
 
   public actualizarDatosReserva(fechaInicio: Date, fechaFinal: Date, horaInicio: number, horaFinal: number,

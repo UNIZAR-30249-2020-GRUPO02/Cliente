@@ -10,11 +10,11 @@
             <div *ngIf="datosReserva.periodo">
             <tr>
               <td>Fecha de inicio: {{datosReserva.fechaInicio.getDate()}} -
-                {{datosReserva.fechaInicio.getMonth()}} - {{datosReserva.fechaInicio.getFullYear()}}</td>
+                {{datosReserva.fechaInicio.getMonth() + 1}} - {{datosReserva.fechaInicio.getFullYear()}}</td>
             </tr>
             <tr>
               <td>Fecha de final: {{datosReserva.fechaFinal.getDate()}} -
-                {{datosReserva.fechaFinal.getMonth()}} - {{datosReserva.fechaFinal.getFullYear()}}</td>
+                {{datosReserva.fechaFinal.getMonth() + 1}} - {{datosReserva.fechaFinal.getFullYear()}}</td>
             </tr>
             <tr>
               <td>Hora de inicio: {{datosReserva.horaInicio}}</td>
@@ -26,7 +26,7 @@
             <div *ngIf="!datosReserva.periodo">
             <tr>
               <td>Fecha: {{datosReserva.fechaInicio.getDate()}} -
-                {{datosReserva.fechaInicio.getMonth()}} - {{datosReserva.fechaInicio.getFullYear()}}</td>
+                {{datosReserva.fechaInicio.getMonth() + 1}} - {{datosReserva.fechaInicio.getFullYear()}}</td>
             </tr>
             <tr>
               <td>Hora de inicio: {{datosReserva.horaInicio}}</td>

@@ -16,8 +16,9 @@
         <select class="form-control" id="tipoEspacio">
           <option>Aula</option>
           <option>Laboratorio</option>
-          <option>Despacho</option>
-          <option>Sala de conferencia</option>
+          <option>Seminario</option>
+          <option>Sala</option>
+          <option>Salon de actos</option>
         </select>
       </div>
 
@@ -234,7 +235,7 @@
   <table class="table">
     <thead>
     <tr>
-      <th scope="col">id</th>
+      <th scope="col">Nombre</th>
       <th scope="col">Edificio</th>
       <th scope="col">Planta</th>
       <th scope="col">Tipo</th>
@@ -245,12 +246,12 @@
     </thead>
     <tbody>
     <tr *ngFor="let espacio of espacios">
-      <th scope="row"> {{ espacio.id }} </th>
+      <th scope="row"> {{ espacio.nombre }} </th>
       <td>{{ espacio.ubicacion.edificio }}</td>
       <td>{{ espacio.ubicacion.planta }}</td>
       <td>{{ espacio.tipo }}</td>
       <td>{{ espacio.capacidad }}</td>
-      <td><button mat-button style="width:80%">Ver info completa</button></td>
+      <td><button mat-button style="width:80%" (click)="goInfoEspacio(espacio)">Ver info completa</button></td>
       <td *ngIf="this.espaciosSeleccionados.indexOf(espacio) < 0">
         <button mat-button style="width:80%" (click)="seleccionarEspacio(espacio)">Añadir a lista</button>
       </td>
@@ -263,6 +264,6 @@
   </table>
   <div *ngIf="espacios.length == 0" style="text-align: center;">
     <br>
-    <h4>NO HAY NINGUN ESPACIO ASOCIADO A ESA BUSQUEDA</h4>
+    <h4>{{this.mensajeInformacion}}</h4>
   </div>
 </div>

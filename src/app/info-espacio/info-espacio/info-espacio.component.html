@@ -1,0 +1,15 @@
+<table class="table" style="text-align: center; margin: auto;">
+  <tr>Nombre: {{espacio.nombre}}</tr>
+  <tr>Tipo: {{espacio.tipo}}</tr>
+  <tr>Edificio: {{espacio.ubicacion.edificio}}, planta: {{espacio.ubicacion.planta}}</tr>
+  <tr>Capacidad: {{espacio.capacidad}}</tr>
+  <br>
+  <tr>Equipamiento:</tr>
+  <tr style="padding-left: 5%" *ngFor="let equipamiento of espacio.equipamiento">{{equipamiento.tipo.toString()}}
+    , cantidad: {{equipamiento.cantidad}}</tr>
+</table>
+<div mat-dialog-actions>
+  <div class="col" style="text-align: center; margin: auto;">
+    <button mat-button style="height:50px; width:150px; font-size: 25px;" (click)="onCancelClick()">Volver</button>
+  </div>
+</div>

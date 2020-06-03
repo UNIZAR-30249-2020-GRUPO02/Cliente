@@ -57,7 +57,7 @@ export class ReservaComponent implements OnInit {
       fechaInicio: this.datosReserva.fechaInicio,
       fechaFin: this.datosReserva.fechaFinal,
       horaInicio: this.datosReserva.horaInicio,
-      horaFin: this.datosReserva.horaFinal,
+      horaFin: this.datosReserva.horaFinal - 1,
       estado: this.parserService.estadoReservatoString(EstadoReserva.PENDIENTE),
       idEspacio: this.espacioSeleccionado.id,
       usuario: usuario
