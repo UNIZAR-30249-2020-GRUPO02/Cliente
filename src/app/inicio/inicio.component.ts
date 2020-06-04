@@ -49,11 +49,7 @@ export class InicioComponent implements OnInit {
   }
 
   goBusqueda() {
-    this.matDialog.open(BusquedaComponent, {
-      width: '1400px',
-      height: '650px'
-    });
-
+    this.router.navigate(["/busqueda"]);
   }
 
   goLoginGerencia() {

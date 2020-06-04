@@ -1,269 +1,275 @@
-<h1 mat-dialog-title>Búsqueda</h1>
-<div mat-dialog-content>
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="form-group">
-        <label for="edificio">Edificio</label>
-        <select class="form-control" id="edificio">
-          <option value="Ada Byron">Ada Byron</option>
-          <option value="Torres Quevedo">Torres Quevedo</option>
-          <option value="Betancourt">Betancourt</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="tipoEspacio">Tipo de espacio</label>
-        <select class="form-control" id="tipoEspacio">
-          <option>Aula</option>
-          <option>Laboratorio</option>
-          <option>Seminario</option>
-          <option>Sala</option>
-          <option>Salon de actos</option>
-        </select>
-      </div>
-
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label>Hora de entrada (08-21)</label>
-            <select id="horaEntrada" class="form-control">
-              <option value="08">08</option>
-              <option value="09">09</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">16</option>
-              <option value="17">17</option>
-              <option value="18">18</option>
-              <option value="19">19</option>
-              <option value="20">20</option>
-              <option value="21">21</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label>Hora de salida (09-22)</label>
-            <select id="horaSalida" class="form-control">
-              <option value="09">09</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">16</option>
-              <option value="17">17</option>
-              <option value="18">18</option>
-              <option value="19">19</option>
-              <option value="20">20</option>
-              <option value="21">21</option>
-              <option value="22">22</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label>Fecha inicio</label>
-            <input type="date" class="form-control" id="fechaInicio" min="2020-01-01" max="2021-12-31">
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label>Fecha final (solo periodos)</label>
-            <input type="date" class="form-control" id="fechaFinal" min="2020-01-01" max="2021-12-31">
-          </div>
-        </div>
-      </div>
-
+<div style="width: 99%">
+  <div class="row" style="text-align: center; margin: auto; padding-top: 1vh; padding-bottom: 1vh">
+    <div class="col-sm-6">
+      <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+              (click)="goInicio()" type="button">Inicio</button>
     </div>
-    <div class="col-sm-4">
-
-      <div class="form-check disabled">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" id="periodo" (change)="cambioPeriodo($event)">
-          Periodo
-        </label>
-      </div>
-      <fieldset class="form-group">
-        <legend>Días (solo para periodos)</legend>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" id="periodo1" value="option1">
-            Lunes
-          </label>
-        </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" id="periodo2" value="option2">
-            Martes
-          </label>
-        </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" id="periodo3" value="option3">
-            Miércoles
-          </label>
-        </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" id="periodo4" value="option4">
-            Jueves
-          </label>
-        </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" id="periodo5" value="option5">
-            Viernes
-          </label>
-        </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" id="periodo6" value="option6">
-            Sábado
-          </label>
-        </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" id="periodo7" value="option7">
-            Domingo
-          </label>
-        </div>
-      </fieldset>
-
-      <div class="form-group">
-        <label for="capacidad">Capacidad mínima</label>
-        <input #capacidad type="number" class="form-control" id="capacidad" placeholder="Capacidad">
-      </div>
-
+    <div class="col-sm-6">
+      <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+              (click)="goReserva()" type="button">Tramitar</button>
     </div>
+  </div>
+  <div class="jumbotron" style="padding: 1vh 2vh">
+    <div class="row">
+      <div class="col" style="width: 40%">
+        <div class="form-group">
+          <label for="edificio">Edificio</label>
+          <select class="form-control" id="edificio">
+            <option value="Ada Byron">Ada Byron</option>
+            <option value="Torres Quevedo">Torres Quevedo</option>
+            <option value="Betancourt">Betancourt</option>
+          </select>
+        </div>
 
-    <div class="col-sm-4">
-      <fieldset class="form-group">
-        <legend>Equipamiento</legend>
+        <div class="form-group">
+          <label for="tipoEspacio">Tipo de espacio</label>
+          <select class="form-control" id="tipoEspacio">
+            <option>Aula</option>
+            <option>Laboratorio</option>
+            <option>Seminario</option>
+            <option>Sala</option>
+            <option>Salon de actos</option>
+          </select>
+        </div>
+
         <div class="row">
-          <div class="col-3" style="margin-top: 2%">
-            <input type="checkbox" class="form-check-input" id="equipamientoCheck_1"
-                   (change)="checkEquipamiento($event)">
-            Cañon
+          <div class="col-6">
+            <div class="form-group">
+              <label>Hora de entrada (08-21)</label>
+              <select id="horaEntrada" class="form-control">
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+              </select>
+            </div>
           </div>
-          <div class="col-9">
-            <input type="number" id="equipamientoNumero_1" placeholder="Número mínimo" disabled>
+          <div class="col-6">
+            <div class="form-group">
+              <label>Hora de salida (09-22)</label>
+              <select id="horaSalida" class="form-control">
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+              </select>
+            </div>
           </div>
         </div>
+
         <div class="row">
-          <div class="col-3" style="margin-top: 2%">
-            <input type="checkbox" class="form-check-input" id="equipamientoCheck_2"
-                   (change)="checkEquipamiento($event)">
-            Pantalla
+          <div class="col-6">
+            <div class="form-group">
+              <label>Fecha inicio</label>
+              <input type="date" class="form-control" id="fechaInicio" min="2020-01-01" max="2021-12-31">
+            </div>
           </div>
-          <div class="col-9">
-            <input type="number" id="equipamientoNumero_2" placeholder="Número mínimo" disabled>
+          <div class="col-6">
+            <div class="form-group">
+              <label>Fecha final (solo periodos)</label>
+              <input type="date" class="form-control" id="fechaFinal" min="2020-01-01" max="2021-12-31">
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-3" style="margin-top: 2%">
-            <input type="checkbox" class="form-check-input" id="equipamientoCheck_3"
-                   (change)="checkEquipamiento($event)">
-            Tv
-          </div>
-          <div class="col-9">
-            <input type="number" id="equipamientoNumero_3" placeholder="Número mínimo" disabled>
-          </div>
+
+      </div>
+      <div class="col" style="width: 30%">
+
+        <div class="form-check disabled">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" id="periodo" (change)="cambioPeriodo($event)">
+            Periodo
+          </label>
         </div>
-        <div class="row">
-          <div class="col-3" style="margin-top: 2%">
-            <input type="checkbox" class="form-check-input" id="equipamientoCheck_4"
-                   (change)="checkEquipamiento($event)">
-            Video
+        <fieldset class="form-group">
+          <legend>Días (solo para periodos)</legend>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" id="periodo1" value="option1">
+              Lunes
+            </label>
           </div>
-          <div class="col-9">
-            <input type="number" id="equipamientoNumero_4" placeholder="Número mínimo" disabled>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" id="periodo2" value="option2">
+              Martes
+            </label>
           </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" id="periodo3" value="option3">
+              Miércoles
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" id="periodo4" value="option4">
+              Jueves
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" id="periodo5" value="option5">
+              Viernes
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" id="periodo6" value="option6">
+              Sábado
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" id="periodo7" value="option7">
+              Domingo
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="form-group" style="width: 50%">
+          <label for="capacidad">Capacidad mínima</label>
+          <input #capacidad type="number" class="form-control" id="capacidad" placeholder="Capacidad">
         </div>
-        <div class="row">
-          <div class="col-3" style="margin-top: 2%">
-            <input type="checkbox" class="form-check-input" id="equipamientoCheck_5"
-                   (change)="checkEquipamiento($event)">
-            Dvd
+
+      </div>
+
+      <div class="col" style="width: 30%">
+        <fieldset class="form-group">
+          <legend>Equipamiento</legend>
+          <div class="row">
+            <div class="col-3" style="margin-top: 2%">
+              <input type="checkbox" class="form-check-input" id="equipamientoCheck_1"
+                     (change)="checkEquipamiento($event)">
+              Cañon
+            </div>
+            <div class="col-9">
+              <input type="number" id="equipamientoNumero_1" placeholder="Número mínimo" disabled>
+            </div>
           </div>
-          <div class="col-9">
-            <input type="number" id="equipamientoNumero_5" placeholder="Número mínimo" disabled>
+          <div class="row">
+            <div class="col-3" style="margin-top: 2%">
+              <input type="checkbox" class="form-check-input" id="equipamientoCheck_2"
+                     (change)="checkEquipamiento($event)">
+              Pantalla
+            </div>
+            <div class="col-9">
+              <input type="number" id="equipamientoNumero_2" placeholder="Número mínimo" disabled>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-3" style="margin-top: 2%">
-            <input type="checkbox" class="form-check-input" id="equipamientoCheck_6"
-                   (change)="checkEquipamiento($event)">
-            Pizarra
+          <div class="row">
+            <div class="col-3" style="margin-top: 2%">
+              <input type="checkbox" class="form-check-input" id="equipamientoCheck_3"
+                     (change)="checkEquipamiento($event)">
+              Tv
+            </div>
+            <div class="col-9">
+              <input type="number" id="equipamientoNumero_3" placeholder="Número mínimo" disabled>
+            </div>
           </div>
-          <div class="col-9">
-            <input type="number" id="equipamientoNumero_6" placeholder="Número mínimo" disabled>
+          <div class="row">
+            <div class="col-3" style="margin-top: 2%">
+              <input type="checkbox" class="form-check-input" id="equipamientoCheck_4"
+                     (change)="checkEquipamiento($event)">
+              Video
+            </div>
+            <div class="col-9">
+              <input type="number" id="equipamientoNumero_4" placeholder="Número mínimo" disabled>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-3" style="margin-top: 2%">
-            <input type="checkbox" class="form-check-input" id="equipamientoCheck_7"
-                   (change)="checkEquipamiento($event)">
-            Ordenador
+          <div class="row">
+            <div class="col-3" style="margin-top: 2%">
+              <input type="checkbox" class="form-check-input" id="equipamientoCheck_5"
+                     (change)="checkEquipamiento($event)">
+              Dvd
+            </div>
+            <div class="col-9">
+              <input type="number" id="equipamientoNumero_5" placeholder="Número mínimo" disabled>
+            </div>
           </div>
-          <div class="col-9">
-            <input type="number" id="equipamientoNumero_7" placeholder="Número mínimo" disabled>
+          <div class="row">
+            <div class="col-3" style="margin-top: 2%">
+              <input type="checkbox" class="form-check-input" id="equipamientoCheck_6"
+                     (change)="checkEquipamiento($event)">
+              Pizarra
+            </div>
+            <div class="col-9">
+              <input type="number" id="equipamientoNumero_6" placeholder="Número mínimo" disabled>
+            </div>
           </div>
-        </div>
-      </fieldset>
+          <div class="row">
+            <div class="col-3" style="margin-top: 2%">
+              <input type="checkbox" class="form-check-input" id="equipamientoCheck_7"
+                     (change)="checkEquipamiento($event)">
+              Ordenador
+            </div>
+            <div class="col-9">
+              <input type="number" id="equipamientoNumero_7" placeholder="Número mínimo" disabled>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="col" style="text-align: center; margin: auto;">
+      <button mat-button class="btn btn-primary" style="height:50px; width:150px; font-size: 25px;"
+              (click)="busqueda()">Buscar</button>
     </div>
 
   </div>
-</div>
-
-<div mat-dialog-actions>
-  <div class="col" style="text-align: center; margin: auto;">
-    <button mat-button style="height:50px; width:150px; font-size: 25px;" (click)="onCancelClick()">Volver</button>
-    <button mat-button style="height:50px; width:150px; font-size: 25px;" (click)="busqueda()">Buscar</button>
-  </div>
-</div>
-<br>
-<br>
-<div style="text-align: center; margin: auto;">
-  <table class="table">
-    <thead>
-    <tr>
-      <th scope="col">Nombre</th>
-      <th scope="col">Edificio</th>
-      <th scope="col">Planta</th>
-      <th scope="col">Tipo</th>
-      <th scope="col">Capacidad</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let espacio of espacios">
-      <th scope="row"> {{ espacio.nombre }} </th>
-      <td>{{ espacio.ubicacion.edificio }}</td>
-      <td>{{ espacio.ubicacion.planta }}</td>
-      <td>{{ espacio.tipo }}</td>
-      <td>{{ espacio.capacidad }}</td>
-      <td><button mat-button style="width:80%" (click)="goInfoEspacio(espacio)">Ver info completa</button></td>
-      <td *ngIf="this.espaciosSeleccionados.indexOf(espacio) < 0">
-        <button mat-button style="width:80%" (click)="seleccionarEspacio(espacio)">Añadir a lista</button>
-      </td>
-      <td *ngIf="this.espaciosSeleccionados.indexOf(espacio) >= 0">
-        <button class="btn btn-primary" mat-button style="width:80%"
-                (click)="quitarEspacioSeleccionado(espacio)">Añadido</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <div *ngIf="espacios.length == 0" style="text-align: center;">
-    <br>
-    <h4>{{this.mensajeInformacion}}</h4>
+  <div style="text-align: center; margin: auto;">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Edificio</th>
+        <th scope="col">Planta</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Capacidad</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let espacio of espacios">
+        <th scope="row"> {{ espacio.nombre }} </th>
+        <td>{{ espacio.ubicacion.edificio }}</td>
+        <td>{{ espacio.ubicacion.planta }}</td>
+        <td>{{ espacio.tipo }}</td>
+        <td>{{ espacio.capacidad }}</td>
+        <td><button mat-button style="width:80%" (click)="goInfoEspacio(espacio)">Ver info completa</button></td>
+        <td *ngIf="this.espaciosSeleccionados.indexOf(espacio) < 0">
+          <button mat-button style="width:80%" (click)="seleccionarEspacio(espacio)">Añadir a lista</button>
+        </td>
+        <td *ngIf="this.espaciosSeleccionados.indexOf(espacio) >= 0">
+          <button class="btn btn-primary" mat-button style="width:80%"
+                  (click)="quitarEspacioSeleccionado(espacio)">Añadido</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div *ngIf="espacios.length == 0" style="text-align: center;">
+      <br>
+      <h4>{{this.mensajeInformacion}}</h4>
+    </div>
   </div>
 </div>

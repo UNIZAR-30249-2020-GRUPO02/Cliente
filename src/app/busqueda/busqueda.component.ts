@@ -9,6 +9,8 @@ import { TipoEquipamiento} from "../entidades/tipo-equipamiento.enum";
 import {EspacioDTO} from "../entidades/espacio-dto";
 import {SesionService} from "../servicios/sesion.service";
 import { InfoEspacioComponent} from "../info-espacio/info-espacio/info-espacio.component";
+import {ParserService} from "../servicios/parser.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-busqueda',
@@ -22,17 +24,13 @@ export class BusquedaComponent implements OnInit {
   espaciosSeleccionados: Array<EspacioDTO> = [];
   mensajeInformacion: String = "Todavía no has realizado ninguna búsqueda";
 
-  constructor(public dialogRef: MatDialogRef<BusquedaComponent>, public espaciosService: EspaciosService,
+  constructor(public espaciosService: EspaciosService, public router: Router,
               public sesionService: SesionService, public matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.habilitarDias(false);
     this.espacios = this.sesionService.getEspaciosBuscados();
     this.espaciosSeleccionados = this.sesionService.getEspaciosSeleccionados();
-  }
-
-  onCancelClick(): void {
-     this.dialogRef.close();
   }
 
   busqueda(): void{
@@ -223,7 +221,14 @@ export class BusquedaComponent implements OnInit {
       width: '40%',
       height: 'auto'
     });
+  }
 
+  goInicio() {
+    this.router.navigate(["/inicio"]);
+  }
+
+  goReserva() {
+    this.router.navigate(["/reserva"]);
   }
 
 }

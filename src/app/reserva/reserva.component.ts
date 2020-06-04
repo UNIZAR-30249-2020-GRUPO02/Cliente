@@ -7,6 +7,8 @@ import {EstadoReserva} from "../entidades/estado-reserva.enum";
 import {Usuario} from "../entidades/usuario";
 import {ReservasService} from "../servicios/reservas.service";
 import {ParserService} from "../servicios/parser.service";
+import {Location} from '@angular/common';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-reserva',
@@ -20,7 +22,7 @@ export class ReservaComponent implements OnInit {
   datosReserva;
 
   constructor(public sesionService: SesionService, public reservasService: ReservasService,
-              public parserService: ParserService){ }
+              public parserService: ParserService, public router: Router){ }
   // getReservas(): void{
     //  this.reservaService.getReservas()
     // .subscribe(reservas => this.reservas = reservas);
@@ -63,6 +65,14 @@ export class ReservaComponent implements OnInit {
       usuario: usuario
     }
     this.reservasService.crearReserva(reserva);
+  }
+
+  goInicio() {
+    this.router.navigate(["/inicio"]);
+  }
+
+  goBusqueda() {
+    this.router.navigate(["/busqueda"]);
   }
 
 }

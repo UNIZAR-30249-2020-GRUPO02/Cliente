@@ -55,6 +55,18 @@ export class ParserService {
     }
   }
 
+  public getDiaSemana(numero: number) {
+    var weekday = [];
+    weekday[0] = "Domingo";
+    weekday[1] = "Lunes";
+    weekday[2] = "Martes";
+    weekday[3] = "Miercoles";
+    weekday[4] = "Jueves";
+    weekday[5] = "Viernes";
+    weekday[6] = "Sábado";
+    return weekday[numero];
+  }
+
   public tipoEquipamientoToString(equipamiento: TipoEquipamiento) {
     if (equipamiento.toString() == "cañon") {
       return "CANON";

@@ -1,5 +1,15 @@
+<div class="row" style="text-align: center; margin: auto; padding-top: 1vh; padding-bottom: 1vh">
+  <div class="col-sm-6">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goInicio()" type="button">Inicio</button>
+  </div>
+  <div class="col-sm-6">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goBusqueda()" type="button">Buscar</button>
+  </div>
+</div>
 <form>
-  <div class="jumbotron">
+  <div class="jumbotron" style="padding-top: 2vh">
     <div class="row">
       <div class="col-md-6">
         <div *ngIf="datosReserva.datosDisponibles">

@@ -18,7 +18,7 @@ export class EspaciosService {
   private busqDTO: BusquedaDTO = null;
 
   constructor(private http: HttpClient, private  parser: ParserService) {
-     this.urlApp = 'http://localhost:8080';
+     this.urlApp = 'http://localhost:8080/espacio';
   }
 
   public getInfoEspacio(id: string) {
@@ -46,8 +46,7 @@ export class EspaciosService {
       .set("horaFin", horaFin.toString())
       .set("dias", this.parser.diaArraytoString(dias))
       .set("periodo", periodo.toString());
-     return this.http.get(this.urlApp + '/espacio/search', {params: params});
-     //return espacios;
+     return this.http.get(this.urlApp + '/search', {params: params});
   }
 
   public getInfoEspacioFiltered(edificio: string, tipo: string) {
