@@ -59,7 +59,7 @@
           <table class="table">
             <thead>
             <tr>
-              <th scope="col">id</th>
+              <th scope="col">Nombre</th>
               <th scope="col">Edificio</th>
               <th scope="col">Planta</th>
               <th scope="col">Tipo</th>
@@ -68,7 +68,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let espacio of espacios; index as i" id="espacioRow_{{i}}" (click)="seleccionarRow(i)">
-                <th scope="row"> {{ espacio.id }} </th>
+                <th scope="row"> {{ espacio.nombre }} </th>
                 <td>{{ espacio.ubicacion.edificio }}</td>
                 <td>{{ espacio.ubicacion.planta }}</td>
                 <td>{{ espacio.tipo }}</td>

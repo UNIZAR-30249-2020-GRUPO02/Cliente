@@ -35,6 +35,12 @@ export class BusquedaComponent implements OnInit {
 
   busqueda(): void{
 
+    let cancelar: boolean = false;
+
+    let periodo: boolean = $('#periodo').prop("checked");
+    let horaEntrada = <number>$("#horaEntrada").val();
+    let horaSalida = <number>$("#horaSalida").val();
+
     this.mensajeInformacion = "Cargando espacios..."
 
     this.espacios = [];
@@ -57,7 +63,11 @@ export class BusquedaComponent implements OnInit {
       fechaFin.setFullYear(+fechaFinArray[0], +fechaFinArray[1] - 1, +fechaFinArray[2]);
       fechaFin.setHours(0,0,0,0);
     } else {
-      fechaFin.setFullYear(2020, 11, 31);
+      fechaFin.setFullYear(2021, 11, 31);
+    }
+
+    if((periodo && fechaInicio >= fechaFin) || (horaEntrada >= horaSalida)) {
+      cancelar = true;
     }
 
     let equipamiento: Array<Equipamiento> = [];
@@ -132,7 +142,6 @@ export class BusquedaComponent implements OnInit {
         maxCantidad: 0});
     }
 
-    let periodo: boolean = $('#periodo').prop("checked");
     let dias: Array<Dia> = [];
     if (periodo) {
       if ($('#periodo1').prop("checked")) {
@@ -158,24 +167,32 @@ export class BusquedaComponent implements OnInit {
       }
     }
 
+    if (periodo && dias.length == 0) {
+      cancelar = true;
+    }
+
     let capacidad = 0;
     if (<string>$('#capacidad').val() != "") {
       capacidad = <number>$('#capacidad').val();
     }
-    let horaEntrada = <number>$("#horaEntrada").val();
-    let horaSalida = <number>$("#horaSalida").val();
 
-    this.sesionService.actualizarDatosReserva(fechaInicio, fechaFin, horaEntrada,
-      horaSalida, dias, periodo);
+    if (!cancelar) {
 
-    this.espaciosService.buscarEspacio(<string>$("#edificio").val(), <string>$("#tipoEspacio").val(), equipamiento,
-      capacidad, fechaInicio, fechaFin, horaEntrada, horaSalida, dias, periodo).subscribe(data => {
-      for (let index in data) {
-        this.espacios.push(data[index]);
-      }
-      this.mensajeInformacion = "No hay ningún espacio asociado a esos criterios de búsqueda";
-      this.sesionService.actualizarEspaciosBuscados(this.espacios);
-    });
+      this.sesionService.actualizarDatosReserva(fechaInicio, fechaFin, horaEntrada,
+        horaSalida, dias, periodo);
+
+      this.espaciosService.buscarEspacio(<string>$("#edificio").val(), <string>$("#tipoEspacio").val(), equipamiento,
+        capacidad, fechaInicio, fechaFin, horaEntrada, horaSalida, dias, periodo).subscribe(data => {
+        for (let index in data) {
+          this.espacios.push(data[index]);
+        }
+        this.mensajeInformacion = "No hay ningún espacio asociado a esos criterios de búsqueda";
+        this.sesionService.actualizarEspaciosBuscados(this.espacios);
+      });
+
+    } else {
+      this.mensajeInformacion = "Hay un error con los criterios de búsqueda"
+    }
   }
 
   cambioPeriodo(event) {

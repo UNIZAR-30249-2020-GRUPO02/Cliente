@@ -23,7 +23,7 @@ export class ModHorarioComponent implements OnInit {
               public reservasService: ReservasService, public parserService: ParserService) { }
 
   ngOnInit(): void {
-    //this.espacio = this.sesionService.getEspacioSeleccionadoInfo();
+    this.espacio = this.sesionService.getEspacioSeleccionadoInfo();
     this.getHorarios();
   }
 
@@ -64,7 +64,7 @@ export class ModHorarioComponent implements OnInit {
     }
     this.fechaInicioD = fechaInicio;
 
-    /*this.reservasService.getHorarios(this.espacio.id, fechaInicio, fechaFin).subscribe(data => {
+    this.reservasService.getHorarios(this.espacio.id, fechaInicio, fechaFin).subscribe(data => {
       for (let index in data) {
         let h = new HorarioDTO();
         h.horasOcupadas = data[index].horasOcupadas;
@@ -74,10 +74,8 @@ export class ModHorarioComponent implements OnInit {
         h.idEspacio = data[index].idEspacio;
         this.horarios.push(h);
       }
-    for(let index in )
-      console.log(this.horarios);
-    });*/
-    let i = 0;
+      });
+    /*let i = 0;
     for (let index of this.numberReturn(17)) {
       let h = new HorarioDTO();
       h.horasOcupadas = [12, 17, 20];
@@ -87,8 +85,7 @@ export class ModHorarioComponent implements OnInit {
       h.idEspacio = "idEspacio";
       this.horarios.push(h);
       i++;
-    }
-    console.log(this.horarios);
+    }*/
   }
 
   numberReturn(length){
