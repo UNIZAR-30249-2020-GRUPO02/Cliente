@@ -8,7 +8,7 @@
         <div class="row">
           <div class="form-group">
             <label for="edificio">Edificio</label>
-            <select class="form-control" id="edificio">
+            <select #id class="form-control" id="edificio">
               <option>Ada Byron</option>
               <option>Torres Quevedo</option>
               <option>Betancourt</option>
@@ -48,7 +48,7 @@
         <div class="col-sm-5">
           <div class="form-group">
             <label for="capacidad">Capacidad</label>
-            <select class="form-control" id="capacidad">
+            <select #capacidad class="form-control" id="capacidad">
               <option>20</option>
               <option>30</option>
               <option>40</option>
@@ -59,7 +59,7 @@
           <fieldset class="form-group">
             <div class="form-check">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionsRadios" id="equipamiento1" value="option1" checked="">
+                <input #equipamiento type="radio" class="form-check-input" name="optionsRadios" id="equipamiento1" value="option1" checked="">
                 Pizarra
               </label>
             </div>
@@ -77,13 +77,13 @@
       <div class="row" style="text-align: left; margin-top: auto; margin-right: 25%">
         <div class="form-group">
           <label for="exampleTextarea">Añadir nota</label>
-          <textarea class="form-control" id="exampleTextarea" rows="5" cols="50"></textarea>
+          <textarea #notas class="form-control" id="exampleTextarea" rows="5" cols="50"></textarea>
         </div>
       </div>
       <br>
       <div class="row" style="text-align: left; margin-top: auto; margin-right: 25%">
         <div class="col-sm-6"> <button type="button" class="btn btn-primary btn-lg btn-block">Horario</button></div>
-        <div class="col-sm-6"><button type="button" class="btn btn-primary btn-lg btn-block">Guardar</button></div>
+        <div class="col-sm-6"><button (click)="modEspacio(id, equipamiento, capacidad, notas)" type="button" class="btn btn-primary btn-lg btn-block">Guardar</button></div>
       </div>
     </div>
   </div>

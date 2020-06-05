@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {EspaciosService} from "../servicios/espacios.service";
+import {Equipamiento} from "../entidades/equipamiento";
 
 @Component({
   selector: 'app-mod-datos',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModDatosComponent implements OnInit {
 
-  constructor() { }
+  constructor(public espacioService: EspaciosService) { }
 
   ngOnInit(): void {
   }
 
+  modEspacio(id: string, equipamiento: Array<Equipamiento>, capacidad: number, notas: string){
+      this.espacioService.modificarEspacio(id, equipamiento, capacidad, null, notas);
+  }
 }
