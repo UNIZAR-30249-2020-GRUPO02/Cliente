@@ -14,7 +14,7 @@ export class ReservasService {
   private busqDTO: BusquedaDTO = null;
 
   constructor(private http: HttpClient) {
-    this.urlApp = 'http://localhost:3000';
+    this.urlApp = 'http://localhost:8080/reserva';
   }
 
   public getReservasByEspacio(id: string) {
@@ -34,13 +34,23 @@ export class ReservasService {
     return this.http.get(this.urlApp + '/getReservasFiltradas'+ this.busqDTO);
   }
 
-  public crearReserva(nuevaReserva: ReservaDTO) {
-    return this.http.post<ReservaDTO>(this.urlApp + '/createReserva', nuevaReserva);
+  public crearReserva(reserva: ReservaDTO) {
+    return this.http.post<ReservaDTO>(this.urlApp + '/createReserva', reserva).subscribe(data => {
+      console.log(data);
+    });
   }
 
   public cambiarEstado(id: number, nuevoEstado: string, motivo: string) {
     let params = new HttpParams().set("nuevoEstado", nuevoEstado).set("motivo", motivo);
     return this.http.patch(this.urlApp + '/changeState/' + id, {params: params});
+  }
+
+  public getHorarios(idEspacio: string, fechaInicio: Date, fechaFin: Date) {
+    let params = new HttpParams()
+      .set("idEspacio", idEspacio)
+      .set("fechaInicio", fechaInicio.getTime().toString())
+      .set("fechaFin", fechaFin.getTime().toString());
+    return this.http.get(this.urlApp + '/getHorarios', {params: params});
   }
 
 }

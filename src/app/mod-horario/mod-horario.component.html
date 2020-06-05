@@ -1,38 +1,93 @@
-<div class="jumbotron">
-  <div class="row">
-    <h2> Modificar Horario </h2>
+<div class="row" style="text-align: center; margin: auto; padding-top: 1vh; padding-bottom: 1vh">
+  <div class="col-sm-4">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goInicio()" type="button">Inicio</button>
   </div>
-  <br>
-  <br>
-  <div class="row">
-    <div class="col-sm-2">
-      <div class="row">
-          <!--
-            <mat-form-field>
-            <mat-label>Choose aaa date</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-           -->
+  <div class="col-sm-4">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goBusqueda()" type="button">Buscar</button>
+  </div>
+  <div class="col-sm-4">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goReserva()" type="button">Tramitar</button>
+  </div>
+</div>
+<div class="jumbotron">
+  <div style="text-align: center; margin: auto;">
+    <div>
+      <h2> Horario de: </h2>
+      <h2> {{espacio.nombre}}</h2>
+    </div>
+    <br>
+    <div class="row">
 
+      <div class="col-4">
+        <div class="form-group" style="width: 50%">
+          <label>Fecha inicio</label>
+          <input type="date" class="form-control" id="fechaInicio" min="2020-01-01" max="2021-12-31">
+        </div>
       </div>
-      <br>
-      <div class="row">
-        <div class="row">
-          <div class="col-md-12">
 
+      <div class="col-4">
+        <div class="form-group" style="width: 50%">
+          <label>Fecha final</label>
+          <input type="date" class="form-control" id="fechaFinal" min="2020-01-01" max="2021-12-31">
+        </div>
+      </div>
+      <div class="col-4">
+        <div style="width: 50%">
+          <button type="button" class="btn btn-primary btn-lg btn-block" (click)="getHorarios()">Buscar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+
+      <div class="row" *ngFor="let nFila of numberReturnSemanas(); index as indexRow;">
+        <div class="col" *ngFor="let nCol of numberReturn(7); index as index;">
+          <div *ngIf="horarios.length > ((indexRow * 7) + index)">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">{{parserService.getDiaSemana(horarios[(indexRow * 7) + index].dia.getDay())}}</th>
+              </tr>
+              <tr>
+                <th scope="col">{{horarios[(indexRow * 7) + index].dia.getDate()}} /
+                  {{horarios[(indexRow * 7) + index].dia.getMonth() + 1}} / 2020</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let nHora of numberReturn(horarios[(indexRow * 7) + index].horaFin -
+                  horarios[(indexRow * 7) + index].horaInicio); index as hora;">
+                <div *ngIf="(horarios[(indexRow * 7) + index].horasOcupadas.
+                indexOf(horarios[(indexRow * 7) + index].horaInicio + hora)) != -1">
+                  <div style="background-color: #db271a" class="row">
+                    <div class="col-5">
+                    {{horarios[(indexRow * 7) + index].horaInicio + hora}} -
+                    {{horarios[(indexRow * 7) + index].horaInicio + hora + 1}}
+                    </div>
+                    <div class="col-7">
+                      OCUPADO
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="(horarios[(indexRow * 7) + index].horasOcupadas.
+                indexOf(horarios[(indexRow * 7) + index].horaInicio + hora)) == -1">
+                  <div class="row">
+                    <div class="col-5">
+                      {{horarios[(indexRow * 7) + index].horaInicio + hora}} -
+                      {{horarios[(indexRow * 7) + index].horaInicio + hora + 1}}
+                    </div>
+                    <div class="col-7">
+                      LIBRE
+                    </div>
+                  </div>
+                </div>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-      <br>
-      <div class="row">
-        <button type="button" class="btn btn-primary btn-lg btn-block">Guardar</button>
-      </div>
-    </div>
-    <div class="col-sm-10">
-
-    </div>
-
   </div>
 </div>

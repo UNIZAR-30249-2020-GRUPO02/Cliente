@@ -1,18 +1,78 @@
+<div class="row" style="text-align: center; margin: auto; padding-top: 1vh; padding-bottom: 1vh">
+  <div class="col-sm-6">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goInicio()" type="button">Inicio</button>
+  </div>
+  <div class="col-sm-6">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goBusqueda()" type="button">Buscar</button>
+  </div>
+</div>
 <form>
-  <div class="jumbotron">
+  <div class="jumbotron" style="padding-top: 2vh">
     <div class="row">
       <div class="col-md-6">
+        <div *ngIf="datosReserva.datosDisponibles">
+          <label>
+            Datos de la reserva
+          </label>
+          <table>
+            <div *ngIf="datosReserva.periodo">
+            <tr>
+              <td>Fecha de inicio: {{datosReserva.fechaInicio.getDate()}} -
+                {{datosReserva.fechaInicio.getMonth() + 1}} - {{datosReserva.fechaInicio.getFullYear()}}</td>
+            </tr>
+            <tr>
+              <td>Fecha de final: {{datosReserva.fechaFinal.getDate()}} -
+                {{datosReserva.fechaFinal.getMonth() + 1}} - {{datosReserva.fechaFinal.getFullYear()}}</td>
+            </tr>
+            <tr>
+              <td>Hora de inicio: {{datosReserva.horaInicio}}</td>
+            </tr>
+            <tr>
+              <td>Hora de final: {{datosReserva.horaFinal}}</td>
+            </tr>
+            </div>
+            <div *ngIf="!datosReserva.periodo">
+            <tr>
+              <td>Fecha: {{datosReserva.fechaInicio.getDate()}} -
+                {{datosReserva.fechaInicio.getMonth() + 1}} - {{datosReserva.fechaInicio.getFullYear()}}</td>
+            </tr>
+            <tr>
+              <td>Hora de inicio: {{datosReserva.horaInicio}}</td>
+            </tr>
+            <tr>
+              <td>Hora de final: {{datosReserva.horaFinal}}</td>
+            </tr>
+            </div>
+            <tr *ngIf="datosReserva.periodo">
+              <td>Dias: {{datosReserva.dias}}</td>
+            </tr>
+          </table>
+        </div>
+        <div *ngIf="!datosReserva.datosDisponibles">
+          <h5>REALIZA UNA BUSQUEDA ANTES PARA REALIZAR RESERVAS</h5>
+        </div>
+        <br>
         <div class="form-group">
           <label>Selección</label>
-          <table class="table table-hover">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Edificio</th>
+              <th scope="col">Planta</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Capacidad</th>
+            </tr>
+            </thead>
             <tbody>
-              <tr class="table-active">
-                <th scope="row">Edificio</th>
-                <td>Ada Byron</td>
-              </tr>
-              <tr class="table-secondary">
-                <th scope="row">Nombre</th>
-                <td>Aula A.13</td>
+              <tr *ngFor="let espacio of espacios; index as i" id="espacioRow_{{i}}" (click)="seleccionarRow(i)">
+                <th scope="row"> {{ espacio.nombre }} </th>
+                <td>{{ espacio.ubicacion.edificio }}</td>
+                <td>{{ espacio.ubicacion.planta }}</td>
+                <td>{{ espacio.tipo }}</td>
+                <td>{{ espacio.capacidad }}</td>
               </tr>
             </tbody>
           </table>
@@ -24,7 +84,7 @@
         <fieldset>
           <div class="form-group">
             <label for="exampleInputEmail1">Correo Electrónico (UNIZAR)</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">No se compartirá tu email bajo ninguna circunstancia.</small>
           </div>
           <div class="form-group">
@@ -37,14 +97,14 @@
           </div>
           <div class="form-group">
             <label for="inputNIA">NIA</label>
-            <input type="text" class="form-control" id="inputNIA" placeholder="NIA">
+            <input type="number" class="form-control" id="inputNIA" placeholder="NIA">
           </div>
           <div class="form-group">
             <label for="inputTlf">Teléfono</label>
-            <input type="text" class="form-control" id="inputTlf" placeholder="Teléfono">
+            <input type="number" class="form-control" id="inputTlf" placeholder="Teléfono">
           </div>
 
-          <button type="submit" class="btn btn-success">Solicitar</button>
+          <button type="submit" class="btn btn-success" (click)="crearReserva()">Solicitar</button>
         </fieldset>
       </div>
 

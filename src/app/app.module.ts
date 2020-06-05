@@ -21,6 +21,7 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import { ModDatosComponent } from './mod-datos/mod-datos.component';
 import { ModHorarioComponent } from './mod-horario/mod-horario.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { InfoEspacioComponent } from './info-espacio/info-espacio/info-espacio.component';
 
 // Rutas necesarias para navegar entre componentes
 const appRoutes: Routes = [
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
     SeleccionEspaciosComponent,
     ModDatosComponent,
     ModHorarioComponent,
+    InfoEspacioComponent,
   ],
   entryComponents: [BusquedaComponent, ModHorarioComponent],
   imports: [

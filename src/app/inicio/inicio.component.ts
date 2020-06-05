@@ -60,12 +60,9 @@ export class InicioComponent implements OnInit {
     // Redirect the user
     this.router.navigate([redirectUrl]);
   }
-  goBusqueda() {
-    this.matDialog.open(BusquedaComponent, {
-      width: '1400px',
-      height: '650px'
-    });
 
+  goBusqueda() {
+    this.router.navigate(["/busqueda"]);
   }
 
   goLoginGerencia() {

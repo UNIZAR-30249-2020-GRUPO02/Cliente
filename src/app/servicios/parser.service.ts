@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Dia} from "../entidades/dia.enum";
 import {Equipamiento} from "../entidades/equipamiento";
 import {TipoEquipamiento} from "../entidades/tipo-equipamiento.enum";
+import {EstadoReserva} from "../entidades/estado-reserva.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,18 @@ export class ParserService {
     }
   }
 
+  public getDiaSemana(numero: number) {
+    var weekday = [];
+    weekday[0] = "Domingo";
+    weekday[1] = "Lunes";
+    weekday[2] = "Martes";
+    weekday[3] = "Miercoles";
+    weekday[4] = "Jueves";
+    weekday[5] = "Viernes";
+    weekday[6] = "Sábado";
+    return weekday[numero];
+  }
+
   public tipoEquipamientoToString(equipamiento: TipoEquipamiento) {
     if (equipamiento.toString() == "cañon") {
       return "CANON";
@@ -69,6 +82,16 @@ export class ParserService {
       return "PIZARRA";
     } else if (equipamiento.toString() == "ordenador") {
       return "ORDENADOR";
+    }
+  }
+
+  public estadoReservatoString(estado: EstadoReserva) {
+    if (estado.toString() == "Aceptada") {
+      return "ACEPTADA";
+    } else if (estado.toString() == "Rechazada") {
+      return "RECHAZADA";
+    } else if (estado.toString() == "Pendiente") {
+      return "PENDIENTE";
     }
   }
 

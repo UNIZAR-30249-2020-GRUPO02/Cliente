@@ -1,5 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ReservasService } from '../servicios/reservas.service';
+import {Component, OnInit} from '@angular/core';
+import {SesionService} from "../servicios/sesion.service";
+import {EspacioDTO} from "../entidades/espacio-dto";
+import * as $ from "jquery";
+import {ReservaDTO} from "../entidades/reserva-dto";
+import {EstadoReserva} from "../entidades/estado-reserva.enum";
+import {Usuario} from "../entidades/usuario";
+import {ReservasService} from "../servicios/reservas.service";
+import {ParserService} from "../servicios/parser.service";
+import {Location} from '@angular/common';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-reserva',
@@ -8,7 +17,12 @@ import { ReservasService } from '../servicios/reservas.service';
 })
 export class ReservaComponent implements OnInit {
 
-  constructor(){ }
+  espacios: Array<EspacioDTO> = [];
+  espacioSeleccionado: EspacioDTO;
+  datosReserva;
+
+  constructor(public sesionService: SesionService, public reservasService: ReservasService,
+              public parserService: ParserService, public router: Router){ }
   // getReservas(): void{
     //  this.reservaService.getReservas()
     // .subscribe(reservas => this.reservas = reservas);
@@ -19,7 +33,46 @@ export class ReservaComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    // this.getReservas();
+    this.espacios = this.sesionService.getEspaciosSeleccionados();
+    this.datosReserva = this.sesionService.getDatosReserva();
+    console.log(this.datosReserva.dias);
+  }
+
+  seleccionarRow(i) {
+    for (let index in this.espacios) {
+      $('#espacioRow_' + index).prop('style', '');
+    }
+    this.espacioSeleccionado = this.espacios[i];
+    $('#espacioRow_' + i).prop('style', 'background-color: lightgray; color: black');
+  }
+
+  crearReserva() {
+    let usuario: Usuario = {
+      nombre: <string>$('#inputName').val(),
+      apellidos: <string>$('#inputApellidos').val(),
+      email: <string>$('#inputEmail').val(),
+      telefono: <number>$('#inputTlf').val(),
+      nia: <number>$('#inputNIA').val()
+    }
+    let reserva: ReservaDTO = {
+      dias: this.sesionService.getDias(),
+      fechaInicio: this.datosReserva.fechaInicio,
+      fechaFin: this.datosReserva.fechaFinal,
+      horaInicio: this.datosReserva.horaInicio,
+      horaFin: this.datosReserva.horaFinal - 1,
+      estado: this.parserService.estadoReservatoString(EstadoReserva.PENDIENTE),
+      idEspacio: this.espacioSeleccionado.id,
+      usuario: usuario
+    }
+    this.reservasService.crearReserva(reserva);
+  }
+
+  goInicio() {
+    this.router.navigate(["/inicio"]);
+  }
+
+  goBusqueda() {
+    this.router.navigate(["/busqueda"]);
   }
 
 }
