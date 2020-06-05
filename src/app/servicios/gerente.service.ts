@@ -10,7 +10,7 @@ export class GerenteService {
   private urlApp: string;  // URL to web api
 
   constructor(private http: HttpClient) {
-    this.urlApp = 'http://localhost:3000';
+    this.urlApp = 'http://localhost:3000/gerente';
   }
 
   public logInGerente(nomUsuario: string, password: string) {

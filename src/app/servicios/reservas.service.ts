@@ -22,17 +22,10 @@ export class ReservasService {
     return this.http.get(this.urlApp + '/getReservasByEspacio', {params: params});
   }
 
-  public getReservasFiltradas(edificio: string, tipoEspacio: string, equipamiento: Array<Equipamiento>,
-                              capacidad: number) {
-    /*this.busqDTO = {
-              edificio: edificio,
-              tipoEspacio: tipoEspacio,
-              equipamiento: equipamiento,
-              capacidad: capacidad
-            };*/
-
+  public getReservasFiltradas(busqDTO: BusquedaDTO) {
     return this.http.get(this.urlApp + '/getReservasFiltradas'+ this.busqDTO);
   }
+
 
   public crearReserva(reserva: ReservaDTO) {
     return this.http.post<ReservaDTO>(this.urlApp + '/createReserva', reserva).subscribe(data => {

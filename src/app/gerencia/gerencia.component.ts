@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GerenteService } from '../servicios/gerente.service';
+import { BusquedaDTO } from "../entidades/busqueda-dto"
+import { ReservaDTO } from "../entidades/reserva-dto"
+import {ReservasService} from "../servicios/reservas.service";
 
 import { AuthService } from '../auth/auth.service';
 
@@ -10,8 +13,10 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./gerencia.component.css']
 })
 export class GerenciaComponent implements OnInit {
+  reservas: ReservaDTO[];
 
-  constructor(public authService: AuthService, public router: Router) { }
+  constructor(public authService: AuthService, public router: Router, public gerenteService: GerenteService,
+    public reservaService: ReservasService) { }
 
   ngOnInit(): void {
   }
@@ -31,6 +36,24 @@ export class GerenciaComponent implements OnInit {
         // Redirect the user
         this.router.navigate([redirectUrl]);
       }
+  }
+
+  getReservas(edificio: string, tipo: string, inputTimeExit: number, inputTimeEntry: number,
+    fechaIni: Date, fechaFin: Date){
+
+    let busqDTO: BusquedaDTO = {
+        edificio: edificio,
+        tipoEspacio: tipo,
+        equipamiento: null,
+        capacidad: null,
+        fechaInicio: fechaIni,
+        fechaFin: fechaIni,
+        horaInicio: inputTimeEntry,
+        horaFin: inputTimeExit,
+        dias: null,
+        periodo: null
+    }
+    //this.reservas = this.reservaService.getReservasFiltradas(busqDTO);
   }
 
 }

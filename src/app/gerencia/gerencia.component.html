@@ -15,67 +15,68 @@
       <div class="col-md-6">
         <fieldset>
           <div class="form-group">
-            <label for="reservasPendientes">Reservas Pendientes</label>
-            <select multiple="" class="form-control" id="reservasPendientes">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
+            <label>Reservas Pendientes</label>
+            <div *ngFor ="let reserva of reservas;index as i">
+
+
+            </div>
           </div>
           <div class="row">
             <div class="col-sm-3">
-              <label>Edificio</label>
-              <select class="custom-select">
+              <div class="row">
+                <label>Edificio</label>
+              </div>
+              <select #edificio class="custom-select">
                 <option selected="">Seleccionar</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="1">Ada Byron</option>
+                <option value="2">Torres Quevedo</option>
+                <option value="3">Betancourt</option>
               </select>
             </div>
             <div class="col-sm-3">
               <label>Fecha Fin</label>
-              <input type="text" class="form-control" id="inputFechaFin">
+              <input #inputFechaFin type="date" class="form-control">
             </div>
           </div>
           <div class="row">
             <div class="col-sm-3">
-              <label>Tipo de espacio</label>
-              <select class="custom-select">
+              <div class="row">
+                <label>Tipo de espacio</label>
+              </div>
+              <select #tipo class="custom-select">
                 <option selected="">Seleccionar</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="1">Laboratorio</option>
+                <option value="2">Aula</option>
+                <option value="3">Despacho</option>
+                <option value="4">Baño</option>
+                <option value="5">Cafetería</option>
+                <option value="6">Sala de conferencias</option>
+                <option value="7">Almacén</option>
               </select>
             </div>
             <div class="col-sm-3">
               <label>Hora de entrada</label>
-              <select class="custom-select">
-                <option selected="">Seleccionar</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
+              <input #inputTimeEntry type="time" class="form-control">
             </div>
           </div>
           <div class="row">
             <div class="col-sm-3">
-              <label for="inputFechaInicio">Fecha de inicio</label>
-              <input type="text" class="form-control" id="inputFechaInicio">
+              <label>Fecha de inicio</label>
+              <input #inputFechaInicio type="date" class="form-control">
+              <br>
+              <br>
+              <div class="row" style="text-align: right; margin: auto;">
+                <button (click)="getReservas(edificio, tipo, inputTimeExit, inputTimeEntry, inputFechaInicio, inputFechaFin)" type="button" class="btn btn-primary btn-small">Aplicar</button>
+              </div>
             </div>
             <div class="col-sm-3">
               <div class="form-group">
                 <label>Hora de salida</label>
-                <select class="custom-select">
-                  <option selected="">Seleccionar</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
+                <input #inputTimeExit type="time" class="form-control">
               </div>
             </div>
           </div>
+
         </fieldset>
       </div>
 
