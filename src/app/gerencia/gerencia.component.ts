@@ -13,7 +13,7 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./gerencia.component.css']
 })
 export class GerenciaComponent implements OnInit {
-  reservas: ReservaDTO[];
+  reservas: Array<ReservaDTO> = [];
 
   constructor(public authService: AuthService, public router: Router, public gerenteService: GerenteService,
     public reservaService: ReservasService) { }
@@ -53,6 +53,7 @@ export class GerenciaComponent implements OnInit {
         dias: null,
         periodo: null
     }
+    //Revisar falla lo que devuelve el get no se guarda correctamente.
     //this.reservas = this.reservaService.getReservasFiltradas(busqDTO);
   }
 

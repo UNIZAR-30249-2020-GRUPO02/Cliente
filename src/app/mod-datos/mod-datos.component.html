@@ -1,46 +1,48 @@
-<div class="jumbotron">
+<div class="jumbotron" style="padding: 1vh 2vh">
   <div class="row">
     <h2> Modificar Datos </h2>
   </div>
-  <br>
-  <br>
   <div class="row">
-    <div class="col-sm-5">
-      <div class="row">
-        <div class="form-group">
-          <label for="edificio">Edificio</label>
-          <select class="form-control" id="edificio">
-            <option>Ada Byron</option>
-            <option>Torres Quevedo</option>
-            <option>Betancourt</option>
-          </select>
+    <div class="col-sm-6">
+      <div class="col-sm-5">
+        <div class="row">
+          <div class="form-group">
+            <label for="edificio">Edificio</label>
+            <select class="form-control" id="edificio">
+              <option>Ada Byron</option>
+              <option>Torres Quevedo</option>
+              <option>Betancourt</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="form-group">
+            <label for="espacio">Tipo de Espacio</label>
+            <select class="form-control" id="espacio">
+              <option selected="">Seleccionar</option>
+              <option value="1">Laboratorio</option>
+              <option value="2">Aula</option>
+              <option value="3">Despacho</option>
+              <option value="4">Baño</option>
+              <option value="5">Cafetería</option>
+              <option value="6">Sala de conferencias</option>
+              <option value="7">Almacén</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="form-group">
+            <select multiple="" class="form-control" id="eleccion">
+              <option>Lab 0.01</option>
+              <option>Lab 0.02</option>
+              <option>Lab 0.03</option>
+            </select>
+          </div>
         </div>
       </div>
-      <br>
-      <div class="row">
-        <div class="form-group">
-          <label for="espacio">Tipo de Espacio</label>
-          <select class="form-control" id="espacio">
-            <option>Laboratorio</option>
-            <option>Aula</option>
-            <option>Sala de profesores</option>
-            <option>Baño</option>
-          </select>
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="form-group">
-          <select multiple="" class="form-control" id="eleccion">
-            <option>Lab 0.01</option>
-            <option>Lab 0.02</option>
-            <option>Lab 0.03</option>
-          </select>
-        </div>
-      </div>
-
     </div>
-
     <div class="col-sm-6">
       <div class="row">
         <div class="col-sm-5">
@@ -72,17 +74,22 @@
       </div>
       <br>
       <br>
-      <div class="row">
+      <div class="row" style="text-align: left; margin-top: auto; margin-right: 25%">
         <div class="form-group">
           <label for="exampleTextarea">Añadir nota</label>
           <textarea class="form-control" id="exampleTextarea" rows="5" cols="50"></textarea>
         </div>
       </div>
       <br>
-      <div class="row">
+      <div class="row" style="text-align: left; margin-top: auto; margin-right: 25%">
         <div class="col-sm-6"> <button type="button" class="btn btn-primary btn-lg btn-block">Horario</button></div>
         <div class="col-sm-6"><button type="button" class="btn btn-primary btn-lg btn-block">Guardar</button></div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
