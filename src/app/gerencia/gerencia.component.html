@@ -1,86 +1,91 @@
-<form>
-  <div class="jumbotron">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="row">
-          <div class="col-sm-3">
-            <button (click)="logout()" type="submit" class="btn btn-secondary" *ngIf="authService.isLoggedIn">Salir</button>
-          </div>
-          <div class="col-sm-3">
-            <button routerLink="reservas" type="submit" class="btn btn-primary">Espacios</button>
-          </div>
-        </div>
-      </div>
+<div class="row" style="text-align: center; margin: auto; padding-top: 1vh; padding-bottom: 1vh">
+  <div class="col-sm-6">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goInicio()" type="button">Inicio</button>
+  </div>
+  <div class="col-sm-6">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goEspacios()" type="button">Espacios</button>
+  </div>
+</div>
+<br>
 
-      <div class="col-md-6">
-        <fieldset>
-          <div class="form-group">
-            <label>Reservas Pendientes</label>
-            <div *ngFor ="let reserva of reservas;index as i">
-
-
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <div class="row">
-                <label>Edificio</label>
-              </div>
-              <select #edificio class="custom-select">
-                <option selected="">Seleccionar</option>
-                <option value="1">Ada Byron</option>
-                <option value="2">Torres Quevedo</option>
-                <option value="3">Betancourt</option>
-              </select>
-            </div>
-            <div class="col-sm-3">
-              <label>Fecha Fin</label>
-              <input #inputFechaFin type="date" class="form-control">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <div class="row">
-                <label>Tipo de espacio</label>
-              </div>
-              <select #tipo class="custom-select">
-                <option selected="">Seleccionar</option>
-                <option value="1">Laboratorio</option>
-                <option value="2">Aula</option>
-                <option value="3">Despacho</option>
-                <option value="4">Baño</option>
-                <option value="5">Cafetería</option>
-                <option value="6">Sala de conferencias</option>
-                <option value="7">Almacén</option>
-              </select>
-            </div>
-            <div class="col-sm-3">
-              <label>Hora de entrada</label>
-              <input #inputTimeEntry type="time" class="form-control">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <label>Fecha de inicio</label>
-              <input #inputFechaInicio type="date" class="form-control">
-              <br>
-              <br>
-              <div class="row" style="text-align: right; margin: auto;">
-                <button (click)="getReservas(edificio, tipo, inputTimeExit, inputTimeEntry, inputFechaInicio, inputFechaFin)" type="button" class="btn btn-primary btn-small">Aplicar</button>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label>Hora de salida</label>
-                <input #inputTimeExit type="time" class="form-control">
-              </div>
-            </div>
-          </div>
-
-        </fieldset>
-      </div>
+<div class="jumbotron" style="text-align: center;">
+  <div class="row">
+    <div class="col-sm-6" style="text-align: center;">
 
     </div>
+
+    <div class="col-sm-6" style="text-align: center;">
+      <fieldset>
+        <div class="form-group">
+          <h2>Reservas Pendientes</h2>
+          <div *ngFor ="let reserva of reservas;index as i">
+
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6" >
+            <div class="row">
+              <label>Edificio</label>
+            </div>
+            <select #edificio class="custom-select">
+              <option selected="">Seleccionar</option>
+              <option value="1">Ada Byron</option>
+              <option value="2">Torres Quevedo</option>
+              <option value="3">Betancourt</option>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <label>Fecha Fin</label>
+            <input #inputFechaFin type="date" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="row">
+              <label>Tipo de espacio</label>
+            </div>
+            <select #tipo class="custom-select">
+              <option selected="">Seleccionar</option>
+              <option value="1">Laboratorio</option>
+              <option value="2">Aula</option>
+              <option value="3">Despacho</option>
+              <option value="4">Baño</option>
+              <option value="5">Cafetería</option>
+              <option value="6">Sala de conferencias</option>
+              <option value="7">Almacén</option>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <label>Hora de entrada</label>
+            <input #inputTimeEntry type="time" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Fecha de inicio</label>
+            <input #inputFechaInicio type="date" class="form-control">
+            <br>
+            <br>
+
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Hora de salida</label>
+              <input #inputTimeExit type="time" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row" style="text-align: center;">
+          <button (click)="getReservas(edificio, tipo, inputTimeExit, inputTimeEntry, inputFechaInicio, inputFechaFin)" type="button" class="btn btn-primary btn-large">Aplicar</button>
+        </div>
+
+      </fieldset>
+    </div>
+
   </div>
 
-</form>
+</div>
+

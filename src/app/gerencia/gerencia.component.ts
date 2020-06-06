@@ -57,4 +57,8 @@ export class GerenciaComponent implements OnInit {
     //this.reservas = this.reservaService.getReservasFiltradas(busqDTO);
   }
 
+  goEspacios(){
+    this.router.navigate(["/seleccion-espacios"]);
+  }
+
 }
