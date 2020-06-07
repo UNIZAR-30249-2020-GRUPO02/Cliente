@@ -26,7 +26,7 @@ import { InfoEspacioComponent } from './info-espacio/info-espacio/info-espacio.c
 // Rutas necesarias para navegar entre componentes
 const appRoutes: Routes = [
   { path: 'reserva', component: ReservaComponent },
-  { path: 'mod-datos', component: ModDatosComponent },
+  { path: 'mod-datos', component: ModDatosComponent, canActivate: [AuthGuard] },
   { path: 'mod-horario', component: ModHorarioComponent },
   { path: 'accept', component: AcceptComponent, canActivate: [AuthGuard]  },
   { path: 'busqueda', component: BusquedaComponent },

@@ -100,7 +100,8 @@ export class ModDatosComponent implements OnInit {
     let equipamiento: Array<Equipamiento> = [];
           if (!$('#equipamientoNumero_1').prop("disabled")) {
             let cantidad = this.cantidadEq1;
-            if (<string>$('#equipamientoNumero_1').val() != "" && <number>$('#equipamientoNumero_1').val() >= 0) {
+            if (<string>$('#equipamientoNumero_1').val() != "" && <number>$('#equipamientoNumero_1').val() >= 0
+              && <number>$('#equipamientoNumero_1').val() <= this.cantidadMaxEq1) {
               cantidad = <number>$('#equipamientoNumero_1').val();
             }
             equipamiento.push({
@@ -110,7 +111,8 @@ export class ModDatosComponent implements OnInit {
           }
           if (!$('#equipamientoNumero_2').prop("disabled")) {
             let cantidad = this.cantidadEq2;
-            if (<string>$('#equipamientoNumero_2').val() != "" && <number>$('#equipamientoNumero_2').val() >= 0) {
+            if (<string>$('#equipamientoNumero_2').val() != "" && <number>$('#equipamientoNumero_2').val() >= 0
+              && <number>$('#equipamientoNumero_2').val() <= this.cantidadMaxEq2) {
               cantidad = <number>$('#equipamientoNumero_2').val();
             }
             equipamiento.push({
@@ -120,7 +122,8 @@ export class ModDatosComponent implements OnInit {
           }
           if (!$('#equipamientoNumero_3').prop("disabled")) {
             let cantidad = this.cantidadEq3;
-            if (<string>$('#equipamientoNumero_3').val() != "" && <number>$('#equipamientoNumero_3').val() >= 0) {
+            if (<string>$('#equipamientoNumero_3').val() != "" && <number>$('#equipamientoNumero_3').val() >= 0
+              && <number>$('#equipamientoNumero_3').val() <= this.cantidadMaxEq3) {
               cantidad = <number>$('#equipamientoNumero_3').val();
             }
             equipamiento.push({
@@ -130,7 +133,8 @@ export class ModDatosComponent implements OnInit {
           }
           if (!$('#equipamientoNumero_4').prop("disabled")) {
             let cantidad = this.cantidadEq4;
-            if (<string>$('#equipamientoNumero_4').val() != "" && <number>$('#equipamientoNumero_4').val() >= 0) {
+            if (<string>$('#equipamientoNumero_4').val() != "" && <number>$('#equipamientoNumero_4').val() >= 0
+              && <number>$('#equipamientoNumero_4').val() <= this.cantidadMaxEq4) {
               cantidad = <number>$('#equipamientoNumero_4').val();
             }
             equipamiento.push({
@@ -140,7 +144,8 @@ export class ModDatosComponent implements OnInit {
           }
           if (!$('#equipamientoNumero_5').prop("disabled")) {
             let cantidad = this.cantidadEq5;
-            if (<string>$('#equipamientoNumero_5').val() != "" && <number>$('#equipamientoNumero_5').val() >= 0) {
+            if (<string>$('#equipamientoNumero_5').val() != "" && <number>$('#equipamientoNumero_5').val() >= 0
+              && <number>$('#equipamientoNumero_5').val() <= this.cantidadMaxEq5) {
               cantidad = <number>$('#equipamientoNumero_5').val();
             }
             equipamiento.push({
@@ -150,7 +155,8 @@ export class ModDatosComponent implements OnInit {
           }
           if (!$('#equipamientoNumero_6').prop("disabled")) {
             let cantidad = this.cantidadEq6;
-            if (<string>$('#equipamientoNumero_6').val() != "" && <number>$('#equipamientoNumero_6').val() >= 0) {
+            if (<string>$('#equipamientoNumero_6').val() != "" && <number>$('#equipamientoNumero_6').val() >= 0
+              && <number>$('#equipamientoNumero_6').val() <= this.cantidadMaxEq6) {
               cantidad = <number>$('#equipamientoNumero_6').val();
             }
             equipamiento.push({
@@ -160,7 +166,8 @@ export class ModDatosComponent implements OnInit {
           }
           if (!$('#equipamientoNumero_7').prop("disabled")) {
             let cantidad = this.cantidadEq7;
-            if (<string>$('#equipamientoNumero_7').val() != "" && <number>$('#equipamientoNumero_7').val() >= 0) {
+            if (<string>$('#equipamientoNumero_7').val() != "" && <number>$('#equipamientoNumero_7').val() >= 0
+              && <number>$('#equipamientoNumero_7').val() <= this.cantidadMaxEq7) {
               cantidad = <number>$('#equipamientoNumero_7').val();
             }
             equipamiento.push({
