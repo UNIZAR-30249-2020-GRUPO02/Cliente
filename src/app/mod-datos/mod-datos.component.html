@@ -8,7 +8,7 @@
         <div class="row">
           <div class="form-group">
             <label for="edificio">Edificio</label>
-            <select #id class="form-control" id="edificio">
+            <select class="form-control" id="edificio">
               <option>Ada Byron</option>
               <option>Torres Quevedo</option>
               <option>Betancourt</option>
@@ -18,58 +18,150 @@
         <br>
         <div class="row">
           <div class="form-group">
-            <label for="espacio">Tipo de Espacio</label>
-            <select class="form-control" id="espacio">
-              <option selected="">Seleccionar</option>
-              <option value="1">Laboratorio</option>
-              <option value="2">Aula</option>
-              <option value="3">Despacho</option>
-              <option value="4">Baño</option>
-              <option value="5">Cafetería</option>
-              <option value="6">Sala de conferencias</option>
-              <option value="7">Almacén</option>
+            <label for="tipoEspacio">Tipo de espacio</label>
+            <select class="form-control" id="tipoEspacio">
+              <option>Aula</option>
+              <option>Laboratorio</option>
+              <option>Seminario</option>
+              <option>Sala</option>
+              <option>Salon de actos</option>
             </select>
           </div>
         </div>
         <br>
         <div class="row">
-          <div class="form-group">
-            <select multiple="" class="form-control" id="eleccion">
-              <option>Lab 0.01</option>
-              <option>Lab 0.02</option>
-              <option>Lab 0.03</option>
-            </select>
+          <button type="button" (click)="busqueda()" class="btn btn-primary btn-lg btn-block">Buscar espacios</button>
+        </div>
+        <br>
+        <div class="row">
+          <div style="text-align: center; margin: auto;">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Edificio</th>
+                <th scope="col">Planta</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Capacidad</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let espacio of espacios">
+                <th scope="row"> {{ espacio.nombre }} </th>
+                <td>{{ espacio.ubicacion.edificio }}</td>
+                <td>{{ espacio.ubicacion.planta }}</td>
+                <td>{{ espacio.tipo }}</td>
+                <td>{{ espacio.capacidad }}</td>
+                <td><button mat-button style="width:80%" (click)="goInfoEspacio(espacio)">Ver info completa</button></td>
+                <td *ngIf="this.espaciosSeleccionados.indexOf(espacio) < 0">
+                  <button mat-button style="width:80%" (click)="seleccionarEspacio(espacio)">Añadir a lista</button>
+                </td>
+                <td *ngIf="this.espaciosSeleccionados.indexOf(espacio) >= 0">
+                  <button class="btn btn-primary" mat-button style="width:80%"
+                          (click)="quitarEspacioSeleccionado(espacio)">Añadido</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <div *ngIf="espacios.length == 0" style="text-align: center;">
+              <br>
+              <h4>{{this.mensajeInformacion}}</h4>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="col-sm-6">
       <div class="row">
-        <div class="col-sm-5">
-          <div class="form-group">
-            <label for="capacidad">Capacidad</label>
-            <select #capacidad class="form-control" id="capacidad">
-              <option>20</option>
-              <option>30</option>
-              <option>40</option>
-            </select>
+        <div class="col" style="width: 30%">
+          <div class="form-group" style="width: 75%">
+            <label for="capacidad">Capacidad mínima</label>
+            <input #capacidad type="number" class="form-control" id="capacidad" placeholder="Capacidad">
+          </div>
+          <br>
+          <br>
+          <div class="row" style="margin-left: 5%">
+            <h4>Reservable</h4>
+            <input type="checkbox" class="form-check-input" id="reservable">
+
           </div>
         </div>
-        <div class="col-sm-7">
-          <fieldset class="form-group">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input #equipamiento type="radio" class="form-check-input" name="optionsRadios" id="equipamiento1" value="option1" checked="">
-                Pizarra
-              </label>
-            </div>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionsRadios" id="equipamiento2" value="option2">
-                Cañón
-              </label>
-            </div>
-          </fieldset>
+        <div class="col" style="width: 30%">
+            <fieldset class="form-group">
+              <legend>Equipamiento</legend>
+              <div class="row">
+                <div class="col-3" style="margin-top: 2%">
+                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_1"
+                         (change)="checkEquipamiento($event)">
+                  Cañon
+                </div>
+                <div class="col-9">
+                  <input type="number" id="equipamientoNumero_1" placeholder="Número mínimo" disabled>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3" style="margin-top: 2%">
+                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_2"
+                         (change)="checkEquipamiento($event)">
+                  Pantalla
+                </div>
+                <div class="col-9">
+                  <input type="number" id="equipamientoNumero_2" placeholder="Número mínimo" disabled>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3" style="margin-top: 2%">
+                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_3"
+                         (change)="checkEquipamiento($event)">
+                  Tv
+                </div>
+                <div class="col-9">
+                  <input type="number" id="equipamientoNumero_3" placeholder="Número mínimo" disabled>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3" style="margin-top: 2%">
+                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_4"
+                         (change)="checkEquipamiento($event)">
+                  Video
+                </div>
+                <div class="col-9">
+                  <input type="number" id="equipamientoNumero_4" placeholder="Número mínimo" disabled>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3" style="margin-top: 2%">
+                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_5"
+                         (change)="checkEquipamiento($event)">
+                  Dvd
+                </div>
+                <div class="col-9">
+                  <input type="number" id="equipamientoNumero_5" placeholder="Número mínimo" disabled>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3" style="margin-top: 2%">
+                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_6"
+                         (change)="checkEquipamiento($event)">
+                  Pizarra
+                </div>
+                <div class="col-9">
+                  <input type="number" id="equipamientoNumero_6" placeholder="Número mínimo" disabled>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3" style="margin-top: 2%">
+                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_7"
+                         (change)="checkEquipamiento($event)">
+                  Ordenador
+                </div>
+                <div class="col-9">
+                  <input type="number" id="equipamientoNumero_7" placeholder="Número mínimo" disabled>
+                </div>
+              </div>
+            </fieldset>
         </div>
       </div>
       <br>
@@ -81,9 +173,8 @@
         </div>
       </div>
       <br>
-      <div class="row" style="text-align: left; margin-top: auto; margin-right: 25%">
-        <div class="col-sm-6"> <button type="button" class="btn btn-primary btn-lg btn-block">Horario</button></div>
-        <div class="col-sm-6"><button (click)="modEspacio(id, equipamiento, capacidad, notas)" type="button" class="btn btn-primary btn-lg btn-block">Guardar</button></div>
+      <div class="row" style="text-align: left; margin-top: auto; margin-right: 75%">
+        <div class="col"><button type="button" (click)="modificar()" class="btn btn-primary btn-lg btn-block">Guardar</button></div>
       </div>
     </div>
   </div>
