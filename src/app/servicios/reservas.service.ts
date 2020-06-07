@@ -25,15 +25,15 @@ export class ReservasService {
   }
 
   public getReservasFiltradas(edificio: string, tipoEspacio: string, fechaInicio: Date, fechaFin: Date,
-                              horaInicio: number, horaFin: number, estado: EstadoReserva) {
+                              horaInicio: number, horaFin: number, estado: string) {
     let params = new HttpParams()
       .set("edificio", edificio)
-      .set("tipoEspacio", tipoEspacio)
-      .set("fechaInicio", fechaInicio.getTime().toString())
+      .set("tipo", tipoEspacio)
+      .set("fechaIni", fechaInicio.getTime().toString())
       .set("fechaFin", fechaFin.getTime().toString())
-      .set("horaInicio", horaInicio.toString())
+      .set("horaIni", horaInicio.toString())
       .set("horaFin", horaFin.toString())
-      .set("estado", estado.toString());
+      .set("estado", estado);
     return this.http.get(this.urlApp + '/getReservasFiltradas', {params: params});
   }
 
@@ -44,9 +44,21 @@ export class ReservasService {
     });
   }
 
-  public cambiarEstado(id: string, estado: EstadoReserva, motivo: string) {
-    let params = new HttpParams().set("estado", estado).set("motivo", motivo);
-    return this.http.patch(this.urlApp + '/changeState/' + id, {params: params});
+  public cambiarEstado(id: string, estado: string, motivo: string) {
+    let params = {
+      "estado": estado,
+      "motivo": motivo
+    }
+    const data: FormData = new FormData();
+    data.append('estado', estado);
+    data.append('motivo', motivo);
+    let body = new HttpParams();
+    body = body.set('estado', estado);
+    body = body.set('motivo', motivo);
+    let dataU = new URLSearchParams();
+    dataU.append('estado', estado);
+    dataU.append('motivo', motivo);
+    return this.http.patch(this.urlApp + '/changeState/' + id, body);
   }
 
   public getHorarios(idEspacio: string, fechaInicio: Date, fechaFin: Date) {

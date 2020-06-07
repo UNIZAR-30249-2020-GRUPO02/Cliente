@@ -269,7 +269,16 @@
     </table>
     <div *ngIf="espacios.length == 0" style="text-align: center;">
       <br>
-      <h4>{{this.mensajeInformacion}}</h4>
+      <div *ngIf="!cargando">
+        <h4>{{this.mensajeInformacion}}</h4>
+      </div>
+      <div *ngIf="cargando">
+        <h4>{{this.mensajeInformacion}}
+          <div class="spinner-border" role="status">
+            <span class="sr-only"></span>
+          </div>
+        </h4>
+      </div>
     </div>
   </div>
 </div>

@@ -18,7 +18,7 @@ import {AuthService} from "../auth/auth.service";
 export class AcceptComponent implements OnInit {
 
   reserva: ReservaDTO;
-  espacio: EspacioDTO;
+  espacio;
   diasReserva: string;
 
   constructor(public sesionService: SesionService, public router: Router,
@@ -27,12 +27,14 @@ export class AcceptComponent implements OnInit {
 
   ngOnInit(): void {
     this.reserva = this.sesionService.getReservaSeleccionada();
-    this.espacio = this.espaciosService.getInfoEspacio(this.reserva.idEspacio);
+    this.espaciosService.getInfoEspacio(this.reserva.idEspacio).subscribe(data => {
+      this.espacio = data;
+    });
     this.diasReserva = this.parserService.diaArraytoString(this.reserva.dias);
   }
 
   aceptarReserva(){
-    this.reservasService.cambiarEstado(this.reserva.id, EstadoReserva.ACEPTADA,
+    this.reservasService.cambiarEstado(this.reserva.id, "ACEPTADA",
       <string>$('#motivo').val()).subscribe(data => {
       // POP-UP
     });
@@ -41,7 +43,7 @@ export class AcceptComponent implements OnInit {
   }
 
   rechazarReserva(){
-    this.reservasService.cambiarEstado(this.reserva.id, EstadoReserva.RECHAZADA,
+    this.reservasService.cambiarEstado(this.reserva.id, "RECHAZADA",
       <string>$('#motivo').val()).subscribe(data => {
       // POP-UP
     });

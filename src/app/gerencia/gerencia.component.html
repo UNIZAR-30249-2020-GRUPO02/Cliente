@@ -27,17 +27,25 @@
             <tr *ngFor="let reserva of reservas">
               <td>{{ reserva.usuario.nia }}</td>
               <td>{{ reserva.idEspacio }}</td>
-              <td>{{reserva.fechaInicio.getDate()}}/{{reserva.fechaInicio.getMonth() + 1}}/
-                {{reserva.fechaInicio.getFullYear()}} - {{reserva.fechaFin.getDate()}}/
-                {{reserva.fechaFin.getMonth() + 1}}/{{reserva.fechaFin.getFullYear()}}</td>
-              <td>{{ reserva.horaInicio }} - {{ reserva.horaFin }}</td>
+              <td>{{reserva.fechaInicio.getDate()}}/{{reserva.fechaInicio.getMonth() + 1}}/{{reserva.fechaInicio.getFullYear()}}
+                - {{reserva.fechaFin.getDate()}}/{{reserva.fechaFin.getMonth() + 1}}/{{reserva.fechaFin.getFullYear()}}</td>
+              <td>{{ reserva.horaInicio }} - {{ reserva.horaFin + 1 }}</td>
               <td><button mat-button style="width:80%" (click)="goAccept(reserva)">Gestionar reserva</button></td>
             </tr>
             </tbody>
           </table>
           <div *ngIf="reservas.length == 0" style="text-align: center;">
             <br>
-            <h4>{{this.mensajeInformacion}}</h4>
+            <div *ngIf="!cargando">
+              <h4>{{this.mensajeInformacion}}</h4>
+            </div>
+            <div *ngIf="cargando">
+              <h4>{{this.mensajeInformacion}}
+                <div class="spinner-border" role="status">
+                  <span class="sr-only"></span>
+                </div>
+              </h4>
+            </div>
           </div>
         </div>
       </div>
@@ -50,25 +58,25 @@
           <div class="col-sm-6" >
             <label for="edificio">Edificio</label>
             <select class="form-control" id="edificio">
-              <option value="1">Ada Byron</option>
-              <option value="2">Torres Quevedo</option>
-              <option value="3">Betancourt</option>
+              <option value="Ada Byron">Ada Byron</option>
+              <option value="Torres Quevedo">Torres Quevedo</option>
+              <option value="Betancourt">Betancourt</option>
             </select>
           </div>
           <div class="col-sm-6">
             <label>Fecha Fin</label>
-            <input id="fechaFinal" min="2020-01-01" max="2021-12-31" type="date" class="form-control">
+            <input id="fechaFinal" min="2020-01-01" max="2022-1-1" type="date" class="form-control">
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
             <label for="tipoEspacio">Tipo de espacio</label>
             <select class="form-control" id="tipoEspacio">
-              <option value="1">Laboratorio</option>
-              <option value="2">Aula</option>
-              <option value="3">Sala</option>
-              <option value="4">Salón de actos</option>
-              <option value="5">Seminario</option>
+              <option value="Aula">Aula</option>
+              <option value="Laboratorio">Laboratorio</option>
+              <option value="Seminario">Seminario</option>
+              <option value="Sala">Sala</option>
+              <option value="Salon de actos">Salon de actos</option>
             </select>
           </div>
           <div class="col-sm-6">
@@ -94,7 +102,7 @@
         <div class="row"  style="text-align: center;">
           <div class="col-sm-6">
             <label>Fecha de inicio</label>
-            <input id="fechaInicio" min="2020-01-01" max="2021-12-31" type="date" class="form-control">
+            <input id="fechaInicio" min="2019-12-31" max="2021-12-31" type="date" class="form-control">
           </div>
           <div class="col-sm-6">
             <div class="form-group">
@@ -122,8 +130,8 @@
           <div class="col-sm-6">
             <label for="edificio">Estado</label>
             <select class="form-control" id="estado">
-              <option value="1">Pendientes</option>
-              <option value="1">Aceptadas</option>
+              <option value="Pendientes">Pendientes</option>
+              <option value="Aceptadas">Aceptadas</option>
             </select>
           </div>
           <div class="col-sm-6" style="margin: auto;">

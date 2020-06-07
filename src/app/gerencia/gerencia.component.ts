@@ -17,6 +17,7 @@ import {Dia} from "../entidades/dia.enum";
 })
 export class GerenciaComponent implements OnInit {
 
+  cargando: boolean = false;
   reservas: Array<ReservaDTO> = [];
   mensajeInformacion: String = "Todavía no has realizado ninguna búsqueda";
 
@@ -35,13 +36,13 @@ export class GerenciaComponent implements OnInit {
   }
 
   getReservas() {
+    this.cargando = true;
+    this.reservas = [];
     this.mensajeInformacion = "Cargando reservas..."
 
-    let cancelar: boolean = false;
-
-    let estado = EstadoReserva.PENDIENTE;
+    let estado = "PENDIENTE";
     if (<string>$("#estado").val() == "Aceptadas") {
-      estado = EstadoReserva.ACEPTADA;
+      estado = "ACEPTADA";
     }
     let edificio = <string>$("#edificio").val();
     let tipoEspacio = <string>$("#tipoEspacio").val();
@@ -54,7 +55,7 @@ export class GerenciaComponent implements OnInit {
       fechaInicio.setFullYear(+fechaInicioArray[0], +fechaInicioArray[1] -1 , +fechaInicioArray[2]);
       fechaInicio.setHours(0,0,0,0);
     } else {
-      fechaInicio.setFullYear(2020, 0, 1);
+      fechaInicio.setFullYear(2019, 11, 31);
     }
 
     let fechaFin: Date = new Date();
@@ -64,7 +65,7 @@ export class GerenciaComponent implements OnInit {
       fechaFin.setFullYear(+fechaFinArray[0], +fechaFinArray[1] - 1, +fechaFinArray[2]);
       fechaFin.setHours(0,0,0,0);
     } else {
-      fechaFin.setFullYear(2021, 11, 31);
+      fechaFin.setFullYear(2022, 0, 1);
     }
 
     if (!(fechaInicio >= fechaFin) && !(horaEntrada >= horaSalida)) {
@@ -72,14 +73,18 @@ export class GerenciaComponent implements OnInit {
         horaEntrada, horaSalida, estado).subscribe(data => {
         for (let index in data) {
           this.reservas.push(data[index]);
+          this.reservas[index].fechaInicio = new Date(data[index].fechaInicio);
+          this.reservas[index].fechaFin = new Date(data[index].fechaFin);
         }
         this.mensajeInformacion = "No hay ninguna reserva asociada a esos criterios de búsqueda";
+        this.cargando = false;
+        console.log(this.reservas);
       });
     } else {
       this.mensajeInformacion = "Hay un error con los criterios de búsqueda";
+      this.cargando = false;
     }
-
-    let usuario: Usuario = {
+    /*let usuario: Usuario = {
       nombre: "Gonzalo",
       apellidos: "Berné",
       email: "715891@unizar.es",
@@ -98,14 +103,14 @@ export class GerenciaComponent implements OnInit {
       usuario: usuario,
       dias: [Dia.DOMINGO, Dia.JUEVES, Dia.MARTES]
     }
-    this.reservas.push(reserva);
+    this.reservas.push(reserva);*/
 
     //Revisar falla lo que devuelve el get no se guarda correctamente.
     //this.reservas = this.reservaService.getReservasFiltradas(busqDTO);
   }
 
   goEspacios(){
-    this.router.navigate(["/seleccion-espacios"]);
+    this.router.navigate(["/mod-datos"]);
   }
 
   goAccept(reserva: ReservaDTO){

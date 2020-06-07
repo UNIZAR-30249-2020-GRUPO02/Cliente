@@ -22,7 +22,8 @@ export class BusquedaComponent implements OnInit {
 
   espacios: Array<EspacioDTO> = [];
   espaciosSeleccionados: Array<EspacioDTO> = [];
-  mensajeInformacion: String = "Todavía no has realizado ninguna búsqueda";
+  mensajeInformacion: string = "Todavía no has realizado ninguna búsqueda";
+  cargando: boolean = false;
 
   constructor(public espaciosService: EspaciosService, public router: Router,
               public sesionService: SesionService, public matDialog: MatDialog) { }
@@ -35,13 +36,14 @@ export class BusquedaComponent implements OnInit {
 
   busqueda(): void{
 
+    this.cargando = true;
     let cancelar: boolean = false;
 
     let periodo: boolean = $('#periodo').prop("checked");
     let horaEntrada = <number>$("#horaEntrada").val();
     let horaSalida = <number>$("#horaSalida").val();
 
-    this.mensajeInformacion = "Cargando espacios..."
+    this.mensajeInformacion = "Cargando espacios"
 
     this.espacios = [];
     this.espaciosSeleccionados = [];
@@ -188,10 +190,12 @@ export class BusquedaComponent implements OnInit {
         }
         this.mensajeInformacion = "No hay ningún espacio asociado a esos criterios de búsqueda";
         this.sesionService.actualizarEspaciosBuscados(this.espacios);
+        this.cargando = false;
       });
 
     } else {
-      this.mensajeInformacion = "Hay un error con los criterios de búsqueda"
+      this.mensajeInformacion = "Hay un error con los criterios de búsqueda";
+      this.cargando = false;
     }
   }
 
