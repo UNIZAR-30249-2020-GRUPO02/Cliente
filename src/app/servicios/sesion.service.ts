@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import {EspacioDTO} from "../entidades/espacio-dto";
 import {Dia} from "../entidades/dia.enum"
 import {ParserService} from "./parser.service";
+import {ReservaDTO} from "../entidades/reserva-dto";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SesionService {
 
+  //Usuario
   espaciosBuscados: Array<EspacioDTO> = [];
   espaciosSeleccionados: Array<EspacioDTO> = [];
   espacioSeleccionadoInfo: EspacioDTO;
@@ -18,6 +20,9 @@ export class SesionService {
   horaFinal: number;
   dias: Array<Dia> = [];
   periodo: boolean;
+
+  //Gerente
+  reservaSeleccionada: ReservaDTO;
 
   constructor(public parserService: ParserService) { }
 
@@ -81,6 +86,14 @@ export class SesionService {
 
   public getDias() {
     return this.dias;
+  }
+
+  public setReservaSeleccionada(reserva: ReservaDTO) {
+    this.reservaSeleccionada = reserva;
+  }
+
+  public getReservaSelecciona() {
+    return this.reservaSeleccionada;
   }
 
 }

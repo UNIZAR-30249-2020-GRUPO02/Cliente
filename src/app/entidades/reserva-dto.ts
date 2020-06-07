@@ -3,6 +3,7 @@ import {Usuario} from "./usuario"
 import {Dia} from "./dia.enum"
 
 export class ReservaDTO {
+    id: string;
     horaInicio: number;
     horaFin: number;
     fechaInicio: Date;

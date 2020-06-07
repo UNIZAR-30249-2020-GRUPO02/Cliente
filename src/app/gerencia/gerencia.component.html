@@ -1,7 +1,7 @@
 <div class="row" style="text-align: center; margin: auto; padding-top: 1vh; padding-bottom: 1vh">
   <div class="col-sm-6">
-    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
-            (click)="goInicio()" type="button">Inicio</button>
+    <button mat-button class="btn btn-secondary" style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="logout()" type="button">Cerrar sesión</button>
   </div>
   <div class="col-sm-6">
     <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
@@ -21,17 +21,38 @@
         <div class="form-group">
           <h2>Reservas Pendientes</h2>
           <div *ngFor ="let reserva of reservas;index as i">
-
-
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">NIA</th>
+                <th scope="col">id Espacio</th>
+                <th scope="col">Fechas</th>
+                <th scope="col">Horas</th>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let reserva of reservas">
+                <td>{{ reserva.usuario.nia }}</td>
+                <td>{{ reserva.idEspacio }}</td>
+                <td>{{reserva.fechaInicio.getDate()}}/{{reserva.fechaInicio.getMonth() + 1}}/
+                  {{reserva.fechaInicio.getFullYear()}} - {{reserva.fechaFin.getDate()}}/
+                  {{reserva.fechaFin.getMonth() + 1}}/{{reserva.fechaFin.getFullYear()}}</td>
+                <td>{{ reserva.horaInicio }} - {{ reserva.horaFin }}</td>
+                <td><button mat-button style="width:80%" (click)="goAccept(reserva)">Ver info completa</button></td>
+              </tr>
+              </tbody>
+            </table>
+            <div *ngIf="reservas.length == 0" style="text-align: center;">
+              <br>
+              <h4>{{this.mensajeInformacion}}</h4>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6" >
-            <div class="row">
-              <label>Edificio</label>
-            </div>
-            <select #edificio class="custom-select">
-              <option selected="">Seleccionar</option>
+            <label for="edificio">Edificio</label>
+            <select class="form-control" id="edificio">
               <option value="1">Ada Byron</option>
               <option value="2">Torres Quevedo</option>
               <option value="3">Betancourt</option>
@@ -39,47 +60,78 @@
           </div>
           <div class="col-sm-6">
             <label>Fecha Fin</label>
-            <input #inputFechaFin type="date" class="form-control">
+            <input id="fechaFinal" min="2020-01-01" max="2021-12-31" type="date" class="form-control">
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <div class="row">
-              <label>Tipo de espacio</label>
-            </div>
-            <select #tipo class="custom-select">
-              <option selected="">Seleccionar</option>
+            <label for="tipoEspacio">Tipo de espacio</label>
+            <select class="form-control" id="tipoEspacio">
               <option value="1">Laboratorio</option>
               <option value="2">Aula</option>
-              <option value="3">Despacho</option>
-              <option value="4">Baño</option>
-              <option value="5">Cafetería</option>
-              <option value="6">Sala de conferencias</option>
-              <option value="7">Almacén</option>
+              <option value="3">Sala</option>
+              <option value="4">Salón de actos</option>
+              <option value="5">Seminario</option>
             </select>
           </div>
           <div class="col-sm-6">
-            <label>Hora de entrada</label>
-            <input #inputTimeEntry type="time" class="form-control">
+            <label>Hora de entrada (08-21)</label>
+            <select id="horaEntrada" class="form-control">
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+            </select>
           </div>
         </div>
-        <div class="row">
+        <div class="row"  style="text-align: center;">
           <div class="col-sm-6">
             <label>Fecha de inicio</label>
-            <input #inputFechaInicio type="date" class="form-control">
-            <br>
-            <br>
-
+            <input id="fechaInicio" min="2020-01-01" max="2021-12-31" type="date" class="form-control">
           </div>
           <div class="col-sm-6">
             <div class="form-group">
-              <label>Hora de salida</label>
-              <input #inputTimeExit type="time" class="form-control">
+              <label>Hora de salida (09-22)</label>
+              <select id="horaSalida" class="form-control">
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+              </select>
             </div>
           </div>
         </div>
         <div class="row" style="text-align: center;">
-          <button (click)="getReservas(edificio, tipo, inputTimeExit, inputTimeEntry, inputFechaInicio, inputFechaFin)" type="button" class="btn btn-primary btn-large">Aplicar</button>
+          <div class="col-sm-6">
+            <label for="edificio">Estado</label>
+            <select class="form-control" id="estado">
+              <option value="1">Pendientes</option>
+              <option value="1">Aceptadas</option>
+            </select>
+          </div>
+          <div class="col-sm-6" style="margin: auto;">
+            <button (click)="getReservas()" type="button" class="btn btn-primary btn-large">Aplicar</button>
+          </div>
         </div>
 
       </fieldset>

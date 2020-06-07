@@ -7,7 +7,6 @@ import {EstadoReserva} from "../entidades/estado-reserva.enum";
 import {Usuario} from "../entidades/usuario";
 import {ReservasService} from "../servicios/reservas.service";
 import {ParserService} from "../servicios/parser.service";
-import {Location} from '@angular/common';
 import {Router} from "@angular/router";
 
 @Component({
@@ -23,14 +22,6 @@ export class ReservaComponent implements OnInit {
 
   constructor(public sesionService: SesionService, public reservasService: ReservasService,
               public parserService: ParserService, public router: Router){ }
-  // getReservas(): void{
-    //  this.reservaService.getReservas()
-    // .subscribe(reservas => this.reservas = reservas);
-  // }
-  // selectedReserva: Reserv;
-  // onSelect(reserva: Reserv): void{
-    // this.selectedReserva = reserva;
-  // }
 
   ngOnInit(): void {
     this.espacios = this.sesionService.getEspaciosSeleccionados();
@@ -55,6 +46,7 @@ export class ReservaComponent implements OnInit {
       nia: <number>$('#inputNIA').val()
     }
     let reserva: ReservaDTO = {
+      id: "",
       dias: this.sesionService.getDias(),
       fechaInicio: this.datosReserva.fechaInicio,
       fechaFin: this.datosReserva.fechaFinal,

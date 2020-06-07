@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { GerenteService } from '../servicios/gerente.service';
-import { BusquedaDTO } from "../entidades/busqueda-dto"
-import { ReservaDTO } from "../entidades/reserva-dto"
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {GerenteService} from '../servicios/gerente.service';
+import {ReservaDTO} from "../entidades/reserva-dto"
 import {ReservasService} from "../servicios/reservas.service";
+import {EstadoReserva} from "../entidades/estado-reserva.enum";
+import {SesionService} from "../servicios/sesion.service";
+import * as $ from "jquery";
 
-import { AuthService } from '../auth/auth.service';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-gerencia',
@@ -13,52 +15,79 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./gerencia.component.css']
 })
 export class GerenciaComponent implements OnInit {
-  reservas: Array<ReservaDTO> = [];
 
-  constructor(public authService: AuthService, public router: Router, public gerenteService: GerenteService,
-    public reservaService: ReservasService) { }
+  reservas: Array<ReservaDTO> = [];
+  mensajeInformacion: String = "Todavía no has realizado ninguna búsqueda";
+
+  constructor(public authService: AuthService, public router: Router,
+              public sesionService: SesionService, public reservaService: ReservasService) { }
 
   ngOnInit(): void {
-  }
-  goInicio() {
-    const redirectUrl = '/inicio';
-    // Redirect the user
-    this.router.navigate([redirectUrl]);
   }
 
   logout() {
       this.authService.logout();
       if (!this.authService.isLoggedIn) {
-        // Usually you would use the redirect URL from the auth service.
-        // However to keep the example simple, we will always redirect to `/admin`.
         const redirectUrl = '/inicio';
-
-        // Redirect the user
         this.router.navigate([redirectUrl]);
       }
   }
 
-  getReservas(edificio: string, tipo: string, inputTimeExit: number, inputTimeEntry: number,
-    fechaIni: Date, fechaFin: Date){
+  getReservas() {
 
-    let busqDTO: BusquedaDTO = {
-        edificio: edificio,
-        tipoEspacio: tipo,
-        equipamiento: null,
-        capacidad: null,
-        fechaInicio: fechaIni,
-        fechaFin: fechaIni,
-        horaInicio: inputTimeEntry,
-        horaFin: inputTimeExit,
-        dias: null,
-        periodo: null
+    let cancelar: boolean = false;
+
+    let estado = EstadoReserva.PENDIENTE;
+    if (<string>$("#estado").val() == "Aceptadas") {
+      estado = EstadoReserva.ACEPTADA;
     }
+    let edificio = <string>$("#edificio").val();
+    let tipoEspacio = <string>$("#tipoEspacio").val();
+    let horaEntrada = <number>$("#horaEntrada").val();
+    let horaSalida = <number>$("#horaSalida").val();
+    let fechaInicio: Date = new Date();
+    if (<string>$("#fechaInicio").val() != "") {
+      let fechaInicioString: string = <string>$("#fechaInicio").val();
+      let fechaInicioArray = fechaInicioString.split("-");
+      fechaInicio.setFullYear(+fechaInicioArray[0], +fechaInicioArray[1] -1 , +fechaInicioArray[2]);
+      fechaInicio.setHours(0,0,0,0);
+    } else {
+      fechaInicio.setFullYear(2020, 0, 1);
+    }
+
+    let fechaFin: Date = new Date();
+    if (<string>$("#fechaFinal").val() != "") {
+      let fechaFinString: string = <string>$("#fechaFinal").val();
+      let fechaFinArray = fechaFinString.split("-");
+      fechaFin.setFullYear(+fechaFinArray[0], +fechaFinArray[1] - 1, +fechaFinArray[2]);
+      fechaFin.setHours(0,0,0,0);
+    } else {
+      fechaFin.setFullYear(2021, 11, 31);
+    }
+
+    if (!(fechaInicio >= fechaFin) && !(horaEntrada >= horaSalida)) {
+      this.reservaService.getReservasFiltradas(edificio, tipoEspacio, fechaInicio, fechaFin,
+        horaEntrada, horaSalida, estado).subscribe(data => {
+        for (let index in data) {
+          this.reservas.push(data[index]);
+        }
+        this.mensajeInformacion = "No hay ninguna reserva asociada a esos criterios de búsqueda";
+      });
+    } else {
+      this.mensajeInformacion = "Hay un error con los criterios de búsqueda";
+    }
+
     //Revisar falla lo que devuelve el get no se guarda correctamente.
     //this.reservas = this.reservaService.getReservasFiltradas(busqDTO);
   }
 
   goEspacios(){
     this.router.navigate(["/seleccion-espacios"]);
+  }
+
+  goAccept(reserva: ReservaDTO){
+    this.sesionService.setReservaSeleccionada(reserva);
+    this.router.navigate(["/accept"]);
   }
 
 }

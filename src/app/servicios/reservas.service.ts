@@ -5,6 +5,8 @@ import { catchError, retry } from 'rxjs/operators';
 import { ReservaDTO } from "../entidades/reserva-dto"
 import { BusquedaDTO } from "../entidades/busqueda-dto"
 import {Equipamiento} from "../entidades/equipamiento";
+import {Dia} from "../entidades/dia.enum";
+import {EstadoReserva} from "../entidades/estado-reserva.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +24,17 @@ export class ReservasService {
     return this.http.get(this.urlApp + '/getReservasByEspacio', {params: params});
   }
 
-  public getReservasFiltradas(busqDTO: BusquedaDTO) {
-    return this.http.get(this.urlApp + '/getReservasFiltradas'+ this.busqDTO);
+  public getReservasFiltradas(edificio: string, tipoEspacio: string, fechaInicio: Date, fechaFin: Date,
+                              horaInicio: number, horaFin: number, estado: EstadoReserva) {
+    let params = new HttpParams()
+      .set("edificio", edificio)
+      .set("tipoEspacio", tipoEspacio)
+      .set("fechaInicio", fechaInicio.getTime().toString())
+      .set("fechaFin", fechaFin.getTime().toString())
+      .set("horaInicio", horaInicio.toString())
+      .set("horaFin", horaFin.toString())
+      .set("estado", estado.toString());
+    return this.http.get(this.urlApp + '/getReservasFiltradas', {params: params});
   }
 
 
