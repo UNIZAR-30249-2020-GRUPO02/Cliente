@@ -1,9 +1,9 @@
 export enum TipoEquipamiento {
-  CANON = "cañon",
-  PANTALLA = "pantalla",
-  TV = "tv",
-  VIDEO = "video",
-  DVD = "dvd",
-  PIZARRA = "pizarra",
-  ORDENADOR = "ordenador",
+  CANON = "CANON",
+  PANTALLA = "PANTALLA",
+  TV = "TV",
+  VIDEO = "VIDEO",
+  DVD = "DVD",
+  PIZARRA = "PIZARRA",
+  ORDENADOR = "ORDENADOR",
 }

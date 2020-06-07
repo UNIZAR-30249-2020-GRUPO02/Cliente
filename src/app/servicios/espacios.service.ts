@@ -50,7 +50,7 @@ export class EspaciosService {
   public getInfoEspacioFiltered(edificio: string, tipo: string) {
     let params = new HttpParams()
           .set("edificio", edificio).set("tipo", tipo);
-        return this.http.get(this.urlApp + '/getInfoFiltered'+ {params: params});
+        return this.http.get(this.urlApp + '/getInfoFiltered', {params: params});
   }
 
   public modificarEspacio( id: string, equipamiento: Array<Equipamiento>, capacidad: number, reservable: boolean,
@@ -62,6 +62,7 @@ export class EspaciosService {
         reservable: reservable,
         notas: notas
     };
+
      return this.http.patch(this.urlApp + '/modifySpace', this.datosDTO);
   }
 

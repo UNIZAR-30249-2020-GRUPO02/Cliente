@@ -99,8 +99,8 @@ export class InicioComponent implements OnInit {
       version: '1.1.0',//wms version (ver get capabilities)
       attribution: "UNIZAR"
     }).addTo(map);*/
-console.log(L);
-console.log(proj4L);
+//console.log(L);
+//console.log(proj4L);
     /*var vectorGrid = L.vectorGrid.slicer( this.jsonEx, {
       maxZoom: 20,
       rendererFactory: L.svg.tile,
@@ -121,8 +121,8 @@ console.log(proj4L);
 
     var myLayer = L.geoJson().addTo(map);
     myLayer.addData(this.jsonEx);
-    console.log(this.jsonEx);
-    console.log(myLayer);
+    //console.log(this.jsonEx);
+    //console.log(myLayer);
 
     //L.geoJson().addTo(map);
 

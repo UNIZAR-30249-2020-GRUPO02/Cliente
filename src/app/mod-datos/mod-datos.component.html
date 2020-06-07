@@ -1,40 +1,52 @@
+<div class="row" style="text-align: center; margin: auto; padding-top: 1vh; padding-bottom: 1vh">
+  <div class="col-sm-6">
+    <button mat-button class="btn btn-secondary" style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="logout()" type="button">Cerrar sesión</button>
+  </div>
+  <div class="col-sm-6">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goReservas()" type="button">Reservas</button>
+  </div>
+</div>
+
+
 <div class="jumbotron" style="padding: 1vh 2vh">
-  <div class="row">
+  <div class="row" style="text-align: center;">
     <h2> Modificar Datos </h2>
   </div>
   <div class="row">
     <div class="col-sm-6">
-      <div class="col-sm-5">
-        <div class="row">
-          <div class="form-group">
-            <label for="edificio">Edificio</label>
-            <select class="form-control" id="edificio">
-              <option>Ada Byron</option>
-              <option>Torres Quevedo</option>
-              <option>Betancourt</option>
-            </select>
+        <div class="row" style="text-align: center;">
+          <div class="col-sm-6">
+            <div class="form-group" style="width: 80%">
+              <label for="edificio">Edificio</label>
+              <select class="form-control" id="edificio">
+                <option>Ada Byron</option>
+                <option>Torres Quevedo</option>
+                <option>Betancourt</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group" style="width: 80%">
+              <label for="tipoEspacio">Tipo de espacio</label>
+              <select class="form-control" id="tipoEspacio">
+                <option>Aula</option>
+                <option>Laboratorio</option>
+                <option>Seminario</option>
+                <option>Sala</option>
+                <option>Salon de actos</option>
+              </select>
+            </div>
           </div>
         </div>
         <br>
-        <div class="row">
-          <div class="form-group">
-            <label for="tipoEspacio">Tipo de espacio</label>
-            <select class="form-control" id="tipoEspacio">
-              <option>Aula</option>
-              <option>Laboratorio</option>
-              <option>Seminario</option>
-              <option>Sala</option>
-              <option>Salon de actos</option>
-            </select>
-          </div>
+        <div class="row" style="text-align: center;">
+          <button style="width: 50%; margin-left: 25%;" type="button" (click)="busqueda()" class="btn btn-primary btn-lg btn-block">Buscar espacios</button>
         </div>
         <br>
         <div class="row">
-          <button type="button" (click)="busqueda()" class="btn btn-primary btn-lg btn-block">Buscar espacios</button>
-        </div>
-        <br>
-        <div class="row">
-          <div style="text-align: center; margin: auto;">
+          <div style="text-align: center; margin: auto; width: 90%">
             <table class="table">
               <thead>
               <tr>
@@ -43,25 +55,15 @@
                 <th scope="col">Planta</th>
                 <th scope="col">Tipo</th>
                 <th scope="col">Capacidad</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let espacio of espacios">
+              <tr *ngFor="let espacio of espacios; index as i" id="espacioRow_{{i}}" (click)="seleccionarEspacio(i)">
                 <th scope="row"> {{ espacio.nombre }} </th>
                 <td>{{ espacio.ubicacion.edificio }}</td>
                 <td>{{ espacio.ubicacion.planta }}</td>
                 <td>{{ espacio.tipo }}</td>
                 <td>{{ espacio.capacidad }}</td>
-                <td><button mat-button style="width:80%" (click)="goInfoEspacio(espacio)">Ver info completa</button></td>
-                <td *ngIf="this.espaciosSeleccionados.indexOf(espacio) < 0">
-                  <button mat-button style="width:80%" (click)="seleccionarEspacio(espacio)">Añadir a lista</button>
-                </td>
-                <td *ngIf="this.espaciosSeleccionados.indexOf(espacio) >= 0">
-                  <button class="btn btn-primary" mat-button style="width:80%"
-                          (click)="quitarEspacioSeleccionado(espacio)">Añadido</button>
-                </td>
               </tr>
               </tbody>
             </table>
@@ -71,110 +73,109 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
     <div class="col-sm-6">
       <div class="row">
-        <div class="col" style="width: 30%">
+        <div class="col-sm-6">
           <div class="form-group" style="width: 75%">
             <label for="capacidad">Capacidad mínima</label>
             <input #capacidad type="number" class="form-control" id="capacidad" placeholder="Capacidad">
           </div>
-          <br>
-          <br>
+          <div class="form-group">
+            <label for="notas">Notas</label>
+            <textarea #notas class="form-control" id="notas" rows="5"></textarea>
+          </div>
+        </div>
+        <div class="col-sm-6">
           <div class="row" style="margin-left: 5%">
             <h4>Reservable</h4>
             <input type="checkbox" class="form-check-input" id="reservable">
-
           </div>
-        </div>
-        <div class="col" style="width: 30%">
-            <fieldset class="form-group">
-              <legend>Equipamiento</legend>
-              <div class="row">
-                <div class="col-3" style="margin-top: 2%">
-                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_1"
-                         (change)="checkEquipamiento($event)">
-                  Cañon
-                </div>
-                <div class="col-9">
-                  <input type="number" id="equipamientoNumero_1" placeholder="Número mínimo" disabled>
-                </div>
+          <fieldset class="form-group">
+            <legend>Equipamiento</legend>
+            <div class="row">
+              <div class="col-3" style="margin-top: 2%">
+                Cañon
               </div>
-              <div class="row">
-                <div class="col-3" style="margin-top: 2%">
-                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_2"
-                         (change)="checkEquipamiento($event)">
-                  Pantalla
-                </div>
-                <div class="col-9">
-                  <input type="number" id="equipamientoNumero_2" placeholder="Número mínimo" disabled>
-                </div>
+              <div class="col-5">
+                <input type="number" id="equipamientoNumero_1" placeholder="Número mínimo" disabled>
               </div>
-              <div class="row">
-                <div class="col-3" style="margin-top: 2%">
-                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_3"
-                         (change)="checkEquipamiento($event)">
-                  Tv
-                </div>
-                <div class="col-9">
-                  <input type="number" id="equipamientoNumero_3" placeholder="Número mínimo" disabled>
-                </div>
+              <small class="form-text text-muted col-4">
+                Max: {{cantidadMaxEq1}}
+              </small>
+            </div>
+            <div class="row">
+              <div class="col-3" style="margin-top: 2%">
+                Pantalla
               </div>
-              <div class="row">
-                <div class="col-3" style="margin-top: 2%">
-                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_4"
-                         (change)="checkEquipamiento($event)">
-                  Video
-                </div>
-                <div class="col-9">
-                  <input type="number" id="equipamientoNumero_4" placeholder="Número mínimo" disabled>
-                </div>
+              <div class="col-5">
+                <input type="number" id="equipamientoNumero_2" placeholder="Número mínimo" disabled>
               </div>
-              <div class="row">
-                <div class="col-3" style="margin-top: 2%">
-                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_5"
-                         (change)="checkEquipamiento($event)">
-                  Dvd
-                </div>
-                <div class="col-9">
-                  <input type="number" id="equipamientoNumero_5" placeholder="Número mínimo" disabled>
-                </div>
+              <small class="form-text text-muted col-4">
+                Max: {{cantidadMaxEq2}}
+              </small>
+            </div>
+            <div class="row">
+              <div class="col-3" style="margin-top: 2%">
+                Tv
               </div>
-              <div class="row">
-                <div class="col-3" style="margin-top: 2%">
-                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_6"
-                         (change)="checkEquipamiento($event)">
-                  Pizarra
-                </div>
-                <div class="col-9">
-                  <input type="number" id="equipamientoNumero_6" placeholder="Número mínimo" disabled>
-                </div>
+              <div class="col-5">
+                <input type="number" id="equipamientoNumero_3" placeholder="Número mínimo" disabled>
               </div>
-              <div class="row">
-                <div class="col-3" style="margin-top: 2%">
-                  <input type="checkbox" class="form-check-input" id="equipamientoCheck_7"
-                         (change)="checkEquipamiento($event)">
-                  Ordenador
-                </div>
-                <div class="col-9">
-                  <input type="number" id="equipamientoNumero_7" placeholder="Número mínimo" disabled>
-                </div>
+              <small class="form-text text-muted col-4">
+                Max: {{cantidadMaxEq3}}
+              </small>
+            </div>
+            <div class="row">
+              <div class="col-3" style="margin-top: 2%">
+                Video
               </div>
-            </fieldset>
-        </div>
-      </div>
-      <br>
-      <br>
-      <div class="row" style="text-align: left; margin-top: auto; margin-right: 25%">
-        <div class="form-group">
-          <label for="exampleTextarea">Añadir nota</label>
-          <textarea #notas class="form-control" id="exampleTextarea" rows="5" cols="50"></textarea>
+              <div class="col-5">
+                <input type="number" id="equipamientoNumero_4" placeholder="Número mínimo" disabled>
+              </div>
+              <small class="form-text text-muted col-4">
+                Max: {{cantidadMaxEq4}}
+              </small>
+            </div>
+            <div class="row">
+              <div class="col-3" style="margin-top: 2%">
+                Dvd
+              </div>
+              <div class="col-5">
+                <input type="number" id="equipamientoNumero_5" placeholder="Número mínimo" disabled>
+              </div>
+              <small class="form-text text-muted col-4">
+                Max: {{cantidadMaxEq5}}
+              </small>
+            </div>
+            <div class="row">
+              <div class="col-3" style="margin-top: 2%">
+                Pizarra
+              </div>
+              <div class="col-5">
+                <input type="number" id="equipamientoNumero_6" placeholder="Número mínimo" disabled>
+              </div>
+              <small class="form-text text-muted col-4">
+                Max: {{cantidadMaxEq6}}
+              </small>
+            </div>
+            <div class="row">
+              <div class="col-3" style="margin-top: 2%">
+                Ordenador
+              </div>
+              <div class="col-5">
+                <input type="number" id="equipamientoNumero_7" placeholder="Número mínimo" disabled>
+              </div>
+              <small class="form-text text-muted col-4">
+                Max: {{cantidadMaxEq7}}
+              </small>
+            </div>
+          </fieldset>
         </div>
       </div>
-      <br>
-      <div class="row" style="text-align: left; margin-top: auto; margin-right: 75%">
-        <div class="col"><button type="button" (click)="modificar()" class="btn btn-primary btn-lg btn-block">Guardar</button></div>
+
+      <div class="row" style="margin: auto;">
+        <button type="button" style="width: 50%" (click)="modificar()" class="btn btn-primary btn-lg btn-block">Guardar</button>
       </div>
     </div>
   </div>
