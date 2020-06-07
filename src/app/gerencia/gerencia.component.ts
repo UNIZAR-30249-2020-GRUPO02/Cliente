@@ -34,6 +34,7 @@ export class GerenciaComponent implements OnInit {
   }
 
   getReservas() {
+    this.mensajeInformacion = "Cargando reservas..."
 
     let cancelar: boolean = false;
 
