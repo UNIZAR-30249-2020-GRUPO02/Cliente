@@ -7,6 +7,7 @@ import {SesionService} from "../servicios/sesion.service";
 import {ReservasService} from "../servicios/reservas.service";
 import {ParserService} from "../servicios/parser.service";
 import * as $ from "jquery";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-mod-horario',
@@ -18,11 +19,16 @@ export class ModHorarioComponent implements OnInit {
   espacio: EspacioDTO;
   horarios: Array<HorarioDTO> = [];
   fechaInicioD: Date;
+  gerente: boolean = false;
 
   constructor(public sesionService: SesionService, public router: Router,
-              public reservasService: ReservasService, public parserService: ParserService) { }
+              public reservasService: ReservasService, public parserService: ParserService,
+              public authService: AuthService) { }
 
   ngOnInit(): void {
+    if (this.authService.isLoggedIn) {
+      this.gerente = true;
+    }
     this.espacio = this.sesionService.getEspacioSeleccionadoInfo();
     this.getHorarios();
   }
@@ -97,5 +103,20 @@ export class ModHorarioComponent implements OnInit {
     return new Array(length);
   }
 
+  logout() {
+    this.authService.logout();
+    if (!this.authService.isLoggedIn) {
+      const redirectUrl = '/inicio';
+      this.router.navigate([redirectUrl]);
+    }
+  }
+
+  goReservas() {
+    this.router.navigate(["/gerencia"]);
+  }
+
+  goEspacios(){
+    this.router.navigate(["/mod-datos"]);
+  }
 
 }

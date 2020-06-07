@@ -1,4 +1,4 @@
-<div class="row" style="text-align: center; margin: auto; padding-top: 1vh; padding-bottom: 1vh">
+<div *ngIf="!gerente" class="row" style="text-align: center; margin: auto; padding-top: 1vh; padding-bottom: 1vh">
   <div class="col-sm-4">
     <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
             (click)="goInicio()" type="button">Inicio</button>
@@ -12,6 +12,22 @@
             (click)="goReserva()" type="button">Tramitar</button>
   </div>
 </div>
+
+<div *ngIf="gerente" class="row" style="text-align: center; margin: auto; padding-top: 1vh; padding-bottom: 1vh">
+  <div class="col-sm-4">
+    <button mat-button class="btn btn-secondary" style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="logout()" type="button">Cerrar sesión</button>
+  </div>
+  <div class="col-sm-4">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goReservas()" type="button">Reservas</button>
+  </div>
+  <div class="col-sm-4">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goEspacios()" type="button">Espacios</button>
+  </div>
+</div>
+
 <div class="jumbotron">
   <div style="text-align: center; margin: auto;">
     <div>

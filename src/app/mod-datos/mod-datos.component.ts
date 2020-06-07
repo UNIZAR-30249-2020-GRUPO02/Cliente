@@ -252,23 +252,10 @@ export class ModDatosComponent implements OnInit {
       index++;
     }
   }
-
-  confirmarCambio() {
-      let capacidad = this.espacioSeleccionado.capacidad;
-      if (<number>$('#capacidad').val() >= 0) {
-        capacidad = <number>$('#capacidad').val();
-      }
-      let notas = <string>$('#notas').val();
-      let reservable = <boolean>$('#reservable').prop("checked");
-      let equipamiento = [];
-  }
-
-  goInfoEspacio(espacio: EspacioDTO) {
-      this.sesionService.setEspacioSeleccionadoInfo(espacio);
-      this.matDialog.open(InfoEspacioComponent, {
-        width: '40%',
-        height: 'auto'
-      });
+  
+  verHorario(espacio: EspacioDTO) {
+    this.sesionService.setEspacioSeleccionadoInfo(espacio);
+    this.router.navigate(["/mod-horario"]);
   }
 
   logout() {
