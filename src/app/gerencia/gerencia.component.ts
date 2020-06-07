@@ -105,7 +105,7 @@ export class GerenciaComponent implements OnInit {
   }
 
   goEspacios(){
-    this.router.navigate(["/seleccion-espacios"]);
+    this.router.navigate(["/mod-datos"]);
   }
 
   goAccept(reserva: ReservaDTO){
