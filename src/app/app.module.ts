@@ -28,7 +28,7 @@ const appRoutes: Routes = [
   { path: 'reserva', component: ReservaComponent },
   { path: 'mod-datos', component: ModDatosComponent },
   { path: 'mod-horario', component: ModHorarioComponent },
-  { path: 'accept', component: AcceptComponent },
+  { path: 'accept', component: AcceptComponent, canActivate: [AuthGuard]  },
   { path: 'busqueda', component: BusquedaComponent },
   { path: 'seleccion-espacios', component: SeleccionEspaciosComponent },
   { path: 'gerencia', component: GerenciaComponent, canActivate: [AuthGuard] },

@@ -44,8 +44,8 @@ export class ReservasService {
     });
   }
 
-  public cambiarEstado(id: number, nuevoEstado: string, motivo: string) {
-    let params = new HttpParams().set("nuevoEstado", nuevoEstado).set("motivo", motivo);
+  public cambiarEstado(id: string, estado: EstadoReserva, motivo: string) {
+    let params = new HttpParams().set("estado", estado).set("motivo", motivo);
     return this.http.patch(this.urlApp + '/changeState/' + id, {params: params});
   }
 

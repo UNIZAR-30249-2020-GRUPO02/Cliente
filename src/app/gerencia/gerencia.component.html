@@ -8,8 +8,6 @@
             (click)="goEspacios()" type="button">Espacios</button>
   </div>
 </div>
-<br>
-
 <div class="jumbotron" style="text-align: center;">
   <div class="row">
     <div class="col-sm-6" style="text-align: center;">
@@ -33,7 +31,7 @@
                 {{reserva.fechaInicio.getFullYear()}} - {{reserva.fechaFin.getDate()}}/
                 {{reserva.fechaFin.getMonth() + 1}}/{{reserva.fechaFin.getFullYear()}}</td>
               <td>{{ reserva.horaInicio }} - {{ reserva.horaFin }}</td>
-              <td><button mat-button style="width:80%" (click)="goAccept(reserva)">Ver info completa</button></td>
+              <td><button mat-button style="width:80%" (click)="goAccept(reserva)">Gestionar reserva</button></td>
             </tr>
             </tbody>
           </table>

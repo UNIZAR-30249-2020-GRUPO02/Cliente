@@ -24,9 +24,21 @@ export class EspaciosService {
   public getInfoEspacio(id: string) {
     let params = new HttpParams()
       .set("id", id);
-      return this.http.get(this.urlApp + '/espacio/getInfo', {params: params}).subscribe(data => {
-        console.log(data);
+      this.http.get(this.urlApp + '/espacio/getInfo', {params: params}).subscribe(data => {
+        return data;
       });
+      let espacio :EspacioDTO = {
+        id: "Aula 0.2",
+        nombre: "NombreEspace",
+        equipamiento: [],
+        ubicacion: {planta: 2, edificio: "Ada"},
+        capacidad: 50,
+        reservable: true,
+        notas: "",
+        geom:"",
+        tipo:"Aula"
+      }
+      return espacio;
   }
 
   public buscarEspacio(edificio: string, tipoEspacio: string, equipamiento: Array<Equipamiento>, capacidad: number,

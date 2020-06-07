@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {GerenteService} from '../servicios/gerente.service';
 import {ReservaDTO} from "../entidades/reserva-dto"
 import {ReservasService} from "../servicios/reservas.service";
 import {EstadoReserva} from "../entidades/estado-reserva.enum";
@@ -8,6 +7,8 @@ import {SesionService} from "../servicios/sesion.service";
 import * as $ from "jquery";
 
 import {AuthService} from '../auth/auth.service';
+import {Usuario} from "../entidades/usuario";
+import {Dia} from "../entidades/dia.enum";
 
 @Component({
   selector: 'app-gerencia',
@@ -77,6 +78,27 @@ export class GerenciaComponent implements OnInit {
     } else {
       this.mensajeInformacion = "Hay un error con los criterios de búsqueda";
     }
+
+    let usuario: Usuario = {
+      nombre: "Gonzalo",
+      apellidos: "Berné",
+      email: "715891@unizar.es",
+      telefono: 562387642387,
+      nia: 715891
+    }
+
+    let reserva: ReservaDTO = {
+      id: "id",
+      idEspacio: "AULA 0.01",
+      horaInicio: 9,
+      horaFin: 14,
+      fechaInicio: fechaInicio,
+      fechaFin: fechaFin,
+      estado: "Pendiente",
+      usuario: usuario,
+      dias: [Dia.DOMINGO, Dia.JUEVES, Dia.MARTES]
+    }
+    this.reservas.push(reserva);
 
     //Revisar falla lo que devuelve el get no se guarda correctamente.
     //this.reservas = this.reservaService.getReservasFiltradas(busqDTO);

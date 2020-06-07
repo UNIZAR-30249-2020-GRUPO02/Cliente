@@ -1,69 +1,84 @@
-<div class="row">
-  <div class="col-sm-6">
-    <table class="table table-hover">
-
-      <tbody>
-      <tr class="table-active">
-        <th scope="row">Edificio</th>
-        <td>{{ datosReserva.idEspacio }}</td>
-      </tr>
-      <tr class="table-dark">
-        <th scope="row">Fecha Inicio</th>
-        <td>{{ datosReserva.fechaInicio }}</td>
-      </tr>
-      <tr class="table-dark">
-        <th scope="row">Fecha Fin</th>
-        <td>{{ datosReserva.fechaFin }}</td>
-      </tr>
-      <tr class="table-dark">
-        <th scope="row">Hora de entrada</th>
-        <td>{{ datosReserva.horaInicio }}</td>
-      </tr>
-      <tr class="table-dark">
-        <th scope="row">Hora de salida</th>
-        <td>{{ datosReserva.horaFin }}</td>
-      </tr>
-      </tbody>
-    </table>
+<div class="row" style="text-align: center; margin: auto; padding-top: 1vh; padding-bottom: 1vh">
+  <div class="col-sm-4">
+    <button mat-button class="btn btn-secondary" style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="logout()" type="button">Cerrar sesión</button>
   </div>
-
-  <div class="col-sm-6">
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="row">
-      <button type="button"  class="btn btn-primary btn-lg">Aceptar</button>
-    </div>
-    <br>
-    <br>
-    <div class="row">
-      <button type="button" class="btn btn-primary btn-lg">Rechazar</button>
-    </div>
+  <div class="col-sm-4">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goEspacios()" type="button">Espacios</button>
+  </div>
+  <div class="col-sm-4">
+    <button mat-button style="width:80%; font-size: 25px; padding-top: 1vh; padding-bottom: 1vh"
+            (click)="goReservas()" type="button">Reservas</button>
   </div>
 </div>
 
-<br>
+<div class="jumbotron" style="text-align: center;">
+  <div class="row">
+    <div class="col-sm-6">
+      <table class="table table-hover">
 
-<div class="row">
-  <div class="col-sm-5">
-
-  </div>
-  <div class="col-sm-6">
-    <div class="form-group">
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <label for="exampleTextarea">Motivo de rechazo</label>
-      <textarea class="form-control" id="exampleTextarea" rows="8"></textarea>
+        <tbody>
+        <tr class="table-active">
+          <th scope="row">ID de reserva</th>
+          <td>{{ reserva.id }}</td>
+        </tr>
+        <tr class="table-dark">
+          <th scope="row">ID de espacio</th>
+          <td>{{ reserva.idEspacio }}</td>
+        </tr>
+        <tr class="table-dark">
+          <th scope="row">Nombre de espacio</th>
+          <td>{{ espacio.nombre }}</td>
+        </tr>
+        <tr class="table-dark">
+          <th scope="row">Ubicación</th>
+          <td>{{ espacio.ubicacion.edificio }}, planta: {{ espacio.ubicacion.planta }}</td>
+        </tr>
+        <tr class="table-dark">
+          <th scope="row">Fecha Inicio</th>
+          <td>{{reserva.fechaInicio.getDate()}}/{{reserva.fechaInicio.getMonth() + 1}}/
+            {{reserva.fechaInicio.getFullYear()}}</td>
+        </tr>
+        <tr class="table-dark">
+          <th scope="row">Fecha Fin</th>
+          <td>{{reserva.fechaFin.getDate()}}/{{reserva.fechaFin.getMonth() + 1}}/
+            {{reserva.fechaFin.getFullYear()}}</td>
+        </tr>
+        <tr class="table-dark">
+          <th scope="row">Dias</th>
+          <td>{{diasReserva}}</td>
+        </tr>
+        <tr class="table-dark">
+          <th scope="row">Hora de entrada</th>
+          <td>{{ reserva.horaInicio }}</td>
+        </tr>
+        <tr class="table-dark">
+          <th scope="row">Hora de salida</th>
+          <td>{{ reserva.horaFin }}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-  </div>
-  <div class="col-sm-1">
 
+    <div class="col-sm-6" style="margin: 2% auto; width: 95%">
+      <div class="row" style="text-align: center; margin: auto;">
+        <div class="col-sm-6" style="margin: auto;">
+          <button (click)="aceptarReserva()" type="button"  class="btn btn-primary btn-lg">Aceptar</button>
+        </div>
+        <div class="col-sm-6" style="margin: auto;">
+          <button (click)="rechazarReserva()" type="button" class="btn btn-primary btn-lg">Rechazar</button>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="form-group" style="width: 95%">
+          <label for="motivo">Motivo de rechazo</label>
+          <textarea class="form-control" id="motivo" rows="8"></textarea>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

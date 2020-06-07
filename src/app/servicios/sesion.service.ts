@@ -92,7 +92,7 @@ export class SesionService {
     this.reservaSeleccionada = reserva;
   }
 
-  public getReservaSelecciona() {
+  public getReservaSeleccionada() {
     return this.reservaSeleccionada;
   }
 
