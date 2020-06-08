@@ -19,6 +19,12 @@ export class ReservasService {
     this.urlApp = 'http://localhost:8080/reserva';
   }
 
+  public getReservaPorId(id: string) {
+    let params = new HttpParams()
+      .set("id", id);
+    return this.http.get(this.urlApp + '/getReservaById', {params: params});
+  }
+
   public getReservasByEspacio(id: string) {
     let params = new HttpParams().set(id, id);
     return this.http.get(this.urlApp + '/getReservasByEspacio', {params: params});
@@ -39,9 +45,7 @@ export class ReservasService {
 
 
   public crearReserva(reserva: ReservaDTO) {
-    return this.http.post<ReservaDTO>(this.urlApp + '/createReserva', reserva).subscribe(data => {
-      console.log(data);
-    });
+    return this.http.post<ReservaDTO>(this.urlApp + '/createReserva', reserva);
   }
 
   public cambiarEstado(id: string, estado: string, motivo: string) {

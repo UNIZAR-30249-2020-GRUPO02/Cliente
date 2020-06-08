@@ -22,6 +22,7 @@ import { ModDatosComponent } from './mod-datos/mod-datos.component';
 import { ModHorarioComponent } from './mod-horario/mod-horario.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { InfoEspacioComponent } from './info-espacio/info-espacio/info-espacio.component';
+import { VentanaDialogoComponent } from './ventana-dialogo/ventana-dialogo.component';
 
 // Rutas necesarias para navegar entre componentes
 const appRoutes: Routes = [
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
     ModDatosComponent,
     ModHorarioComponent,
     InfoEspacioComponent,
+    VentanaDialogoComponent,
   ],
   entryComponents: [BusquedaComponent, ModHorarioComponent],
   imports: [

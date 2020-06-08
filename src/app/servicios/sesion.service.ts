@@ -24,6 +24,9 @@ export class SesionService {
   //Gerente
   reservaSeleccionada: ReservaDTO;
 
+  //Ventana dialogo
+  numeroDialogo: number;
+
   constructor(public parserService: ParserService) { }
 
   public getEspaciosBuscados() {
@@ -94,6 +97,14 @@ export class SesionService {
 
   public getReservaSeleccionada() {
     return this.reservaSeleccionada;
+  }
+
+  public setNumeroDialogo(numero: number) {
+    this.numeroDialogo = numero;
+  }
+
+  public getNumeroDialogo() {
+    return this.numeroDialogo;
   }
 
 }

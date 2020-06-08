@@ -9,6 +9,8 @@ import {EstadoReserva} from "../entidades/estado-reserva.enum";
 import * as $ from "jquery";
 import {ParserService} from "../servicios/parser.service";
 import {AuthService} from "../auth/auth.service";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {VentanaDialogoComponent} from "../ventana-dialogo/ventana-dialogo.component";
 
 @Component({
   selector: 'app-accept',
@@ -20,10 +22,12 @@ export class AcceptComponent implements OnInit {
   reserva: ReservaDTO;
   espacio;
   diasReserva: string;
+  ventanaDialogoReferencia: MatDialogRef<any>;
 
   constructor(public sesionService: SesionService, public router: Router,
               public espaciosService: EspaciosService, public reservasService: ReservasService,
-              public authService: AuthService, public parserService: ParserService) { }
+              public authService: AuthService, public parserService: ParserService,
+              public matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.reserva = this.sesionService.getReservaSeleccionada();
@@ -34,19 +38,42 @@ export class AcceptComponent implements OnInit {
   }
 
   aceptarReserva(){
-    this.reservasService.cambiarEstado(this.reserva.id, "ACEPTADA",
-      <string>$('#motivo').val()).subscribe(data => {
-      // POP-UP
+    this.sesionService.setNumeroDialogo(0);
+    this.ventanaDialogoReferencia = this.abrirDialogo();
+    let nuevaReserva: ReservaDTO = this.reserva;
+    this.reservasService.getReservaPorId(this.reserva.id).subscribe(reserva => {
+      nuevaReserva = <ReservaDTO>reserva;
     });
-
+    if (nuevaReserva.estado == this.reserva.estado) {
+      this.reservasService.cambiarEstado(this.reserva.id, "ACEPTADA",
+        <string>$('#motivo').val()).subscribe(data => {
+        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(4);
+      }, error => {
+        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
+      });
+    } else {
+      this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(3);
+    }
     this.router.navigate(["/gerencia"]);
   }
 
   rechazarReserva(){
-    this.reservasService.cambiarEstado(this.reserva.id, "RECHAZADA",
-      <string>$('#motivo').val()).subscribe(data => {
-      // POP-UP
+    this.sesionService.setNumeroDialogo(0);
+    this.ventanaDialogoReferencia = this.abrirDialogo();
+    let nuevaReserva: ReservaDTO = this.reserva;
+    this.reservasService.getReservaPorId(this.reserva.id).subscribe(reserva => {
+      nuevaReserva = <ReservaDTO>reserva;
     });
+    if (nuevaReserva.estado == this.reserva.estado) {
+      this.reservasService.cambiarEstado(this.reserva.id, "RECHAZADA",
+        <string>$('#motivo').val()).subscribe(data => {
+        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(5);
+      }, error => {
+        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
+      });
+    } else {
+      this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(3);
+    }
     this.router.navigate(["/gerencia"]);
   }
 
@@ -64,6 +91,13 @@ export class AcceptComponent implements OnInit {
 
   goReservas() {
     this.router.navigate(["/gerencia"]);
+  }
+
+  abrirDialogo() {
+    return this.matDialog.open(VentanaDialogoComponent, {
+      width: '40%',
+      height: 'auto'
+    });
   }
 
 

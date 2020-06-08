@@ -8,6 +8,8 @@ import {Usuario} from "../entidades/usuario";
 import {ReservasService} from "../servicios/reservas.service";
 import {ParserService} from "../servicios/parser.service";
 import {Router} from "@angular/router";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {VentanaDialogoComponent} from "../ventana-dialogo/ventana-dialogo.component";
 
 @Component({
   selector: 'app-reserva',
@@ -17,11 +19,13 @@ import {Router} from "@angular/router";
 export class ReservaComponent implements OnInit {
 
   espacios: Array<EspacioDTO> = [];
-  espacioSeleccionado: EspacioDTO;
+  espacioSeleccionado: EspacioDTO = null;
   datosReserva;
+  ventanaDialogoReferencia: MatDialogRef<any>;
 
   constructor(public sesionService: SesionService, public reservasService: ReservasService,
-              public parserService: ParserService, public router: Router){ }
+              public parserService: ParserService, public router: Router,
+              public matDialog: MatDialog){ }
 
   ngOnInit(): void {
     this.espacios = this.sesionService.getEspaciosSeleccionados();
@@ -38,25 +42,36 @@ export class ReservaComponent implements OnInit {
   }
 
   crearReserva() {
-    let usuario: Usuario = {
-      nombre: <string>$('#inputName').val(),
-      apellidos: <string>$('#inputApellidos').val(),
-      email: <string>$('#inputEmail').val(),
-      telefono: <number>$('#inputTlf').val(),
-      nia: <number>$('#inputNIA').val()
+    if (this.espacioSeleccionado != null) {
+      this.sesionService.setNumeroDialogo(0);
+      this.ventanaDialogoReferencia = this.abrirDialogo();
+
+      let usuario: Usuario = {
+        nombre: <string>$('#inputName').val(),
+        apellidos: <string>$('#inputApellidos').val(),
+        email: <string>$('#inputEmail').val(),
+        telefono: <number>$('#inputTlf').val(),
+        nia: <number>$('#inputNIA').val()
+      }
+      let reserva: ReservaDTO = {
+        id: "",
+        dias: this.sesionService.getDias(),
+        fechaInicio: this.datosReserva.fechaInicio,
+        fechaFin: this.datosReserva.fechaFinal,
+        horaInicio: this.datosReserva.horaInicio,
+        horaFin: this.datosReserva.horaFinal - 1,
+        estado: this.parserService.estadoReservatoString(EstadoReserva.PENDIENTE),
+        idEspacio: this.espacioSeleccionado.id,
+        usuario: usuario
+      }
+      this.reservasService.crearReserva(reserva).subscribe(data => {
+        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(6);
+      }, error => {
+        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
+      });
     }
-    let reserva: ReservaDTO = {
-      id: "",
-      dias: this.sesionService.getDias(),
-      fechaInicio: this.datosReserva.fechaInicio,
-      fechaFin: this.datosReserva.fechaFinal,
-      horaInicio: this.datosReserva.horaInicio,
-      horaFin: this.datosReserva.horaFinal - 1,
-      estado: this.parserService.estadoReservatoString(EstadoReserva.PENDIENTE),
-      idEspacio: this.espacioSeleccionado.id,
-      usuario: usuario
-    }
-    this.reservasService.crearReserva(reserva);
+    this.sesionService.setNumeroDialogo(8);
+    this.ventanaDialogoReferencia = this.abrirDialogo();
   }
 
   goInicio() {
@@ -65,6 +80,13 @@ export class ReservaComponent implements OnInit {
 
   goBusqueda() {
     this.router.navigate(["/busqueda"]);
+  }
+
+  abrirDialogo() {
+    return this.matDialog.open(VentanaDialogoComponent, {
+      width: '40%',
+      height: 'auto'
+    });
   }
 
 }

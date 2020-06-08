@@ -4,11 +4,12 @@ import {TipoEquipamiento} from "../entidades/tipo-equipamiento.enum";
 import {EspacioDTO} from "../entidades/espacio-dto";
 import {Equipamiento} from "../entidades/equipamiento";
 import {SesionService} from "../servicios/sesion.service";
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {InfoEspacioComponent} from "../info-espacio/info-espacio/info-espacio.component";
 import * as $ from "jquery";
 import {Router} from "@angular/router";
 import {AuthService} from "../auth/auth.service";
+import {VentanaDialogoComponent} from "../ventana-dialogo/ventana-dialogo.component";
 
 @Component({
   selector: 'app-mod-datos',
@@ -17,6 +18,7 @@ import {AuthService} from "../auth/auth.service";
 })
 export class ModDatosComponent implements OnInit {
 
+  ventanaDialogoReferencia: MatDialogRef<any>;
   espacios: Array<EspacioDTO> = [];
   espacioSeleccionado: EspacioDTO;
   espaciosSeleccionados: Array<EspacioDTO> = [];
@@ -37,8 +39,7 @@ export class ModDatosComponent implements OnInit {
   cantidadMaxEq7;
 
   constructor(public espaciosService: EspaciosService, public sesionService: SesionService,
-              public matDialog: MatDialog, public router: Router,
-              public authService: AuthService) { }
+              public matDialog: MatDialog, public router: Router, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.limpiar();
@@ -96,7 +97,9 @@ export class ModDatosComponent implements OnInit {
       }
   }
 
-  modificar(): void{
+  modificar(): void {
+    this.sesionService.setNumeroDialogo(0);
+    this.ventanaDialogoReferencia = this.abrirDialogo();
     let equipamiento: Array<Equipamiento> = [];
           if (!$('#equipamientoNumero_1').prop("disabled")) {
             let cantidad = this.cantidadEq1;
@@ -182,9 +185,25 @@ export class ModDatosComponent implements OnInit {
           }
     let notas = <string>$('#notas').val();
     let reservable: boolean = <boolean>$('#reservable').prop("checked");
-    this.espaciosService.modificarEspacio(this.espacioSeleccionado.id, equipamiento, capacidad, reservable, notas).subscribe( data => {
-      console.log(data);
-    });
+
+    let nuevoEspacio: EspacioDTO = this.espacioSeleccionado;
+    this.espaciosService.getInfoEspacio(this.espacioSeleccionado.id).subscribe(espacio => {
+      nuevoEspacio = <EspacioDTO>espacio;
+    })
+
+    if (nuevoEspacio.capacidad == this.espacioSeleccionado.capacidad &&
+        nuevoEspacio.equipamiento == this.espacioSeleccionado.equipamiento &&
+        nuevoEspacio.notas == this.espacioSeleccionado.notas &&
+        nuevoEspacio.reservable == this.espacioSeleccionado.reservable) {
+      this.espaciosService.modificarEspacio(this.espacioSeleccionado.id, equipamiento, capacidad, reservable, notas).subscribe(data => {
+        console.log(data);
+        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(2);
+      }, error => {
+        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
+      });
+    } else {
+      this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(1);
+    }
   }
 
   seleccionarEspacio(i: number) {
@@ -252,7 +271,14 @@ export class ModDatosComponent implements OnInit {
       index++;
     }
   }
-  
+
+  abrirDialogo() {
+    return this.matDialog.open(VentanaDialogoComponent, {
+      width: '40%',
+      height: 'auto'
+    });
+  }
+
   verHorario(espacio: EspacioDTO) {
     this.sesionService.setEspacioSeleccionadoInfo(espacio);
     this.router.navigate(["/mod-horario"]);
