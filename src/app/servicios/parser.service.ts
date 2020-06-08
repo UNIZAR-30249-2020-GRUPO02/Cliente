@@ -27,10 +27,10 @@ export class ParserService {
     let stringReturn: string = "";
     for (let index in equipamientos) {
       if (stringReturn == "") {
-        stringReturn = this.tipoEquipamientoToString(equipamientos[index].tipo) + ";"
+        stringReturn = equipamientos[index].tipo + ";"
           + equipamientos[index].cantidad;
       } else {
-        stringReturn += "," + this.tipoEquipamientoToString(equipamientos[index].tipo)
+        stringReturn += "," + equipamientos[index].tipo
           + ";" + equipamientos[index].cantidad;
       }
     }
