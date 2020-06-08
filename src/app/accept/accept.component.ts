@@ -40,40 +40,47 @@ export class AcceptComponent implements OnInit {
   aceptarReserva(){
     this.sesionService.setNumeroDialogo(0);
     this.ventanaDialogoReferencia = this.abrirDialogo();
-    let nuevaReserva: ReservaDTO = this.reserva;
+    let nuevaReserva: ReservaDTO = null;
     this.reservasService.getReservaPorId(this.reserva.id).subscribe(reserva => {
       nuevaReserva = <ReservaDTO>reserva;
+      console.log(nuevaReserva);
+      console.log(reserva);
+      console.log(nuevaReserva.estado + " // " + this.reserva.estado);
+      if (nuevaReserva.estado == this.reserva.estado) {
+        this.reservasService.cambiarEstado(this.reserva.id, "ACEPTADA",
+          <string>$('#motivo').val()).subscribe(data => {
+          this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(4);
+        }, error => {
+          this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
+        });
+      } else {
+        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(3);
+      }
+      this.router.navigate(["/gerencia"]);
     });
-    if (nuevaReserva.estado == this.reserva.estado) {
-      this.reservasService.cambiarEstado(this.reserva.id, "ACEPTADA",
-        <string>$('#motivo').val()).subscribe(data => {
-        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(4);
-      }, error => {
-        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
-      });
-    } else {
-      this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(3);
-    }
-    this.router.navigate(["/gerencia"]);
   }
 
   rechazarReserva(){
     this.sesionService.setNumeroDialogo(0);
     this.ventanaDialogoReferencia = this.abrirDialogo();
-    let nuevaReserva: ReservaDTO = this.reserva;
+    let nuevaReserva: ReservaDTO = null;
     this.reservasService.getReservaPorId(this.reserva.id).subscribe(reserva => {
       nuevaReserva = <ReservaDTO>reserva;
+      console.log(nuevaReserva);
+      console.log(reserva);
+      console.log(nuevaReserva.estado + " // " + this.reserva.estado);
+      if (nuevaReserva.estado == this.reserva.estado) {
+        this.reservasService.cambiarEstado(this.reserva.id, "RECHAZADA",
+          <string>$('#motivo').val()).subscribe(data => {
+          this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(5);
+        }, error => {
+          this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
+        });
+      } else {
+        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(3);
+      }
+
     });
-    if (nuevaReserva.estado == this.reserva.estado) {
-      this.reservasService.cambiarEstado(this.reserva.id, "RECHAZADA",
-        <string>$('#motivo').val()).subscribe(data => {
-        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(5);
-      }, error => {
-        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
-      });
-    } else {
-      this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(3);
-    }
     this.router.navigate(["/gerencia"]);
   }
 

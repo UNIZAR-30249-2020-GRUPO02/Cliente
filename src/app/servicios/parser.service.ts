@@ -38,19 +38,19 @@ export class ParserService {
   }
 
   public diaToString(dia: Dia) {
-    if (dia.toString() == "1") {
+    if (dia.toString() == "0") {
       return "DOMINGO";
-    } else if (dia.toString() == "2") {
+    } else if (dia.toString() == "1") {
       return "LUNES";
-    } else if (dia.toString() == "3") {
+    } else if (dia.toString() == "2") {
       return "MARTES";
-    } else if (dia.toString() == "4") {
+    } else if (dia.toString() == "3") {
       return "MIERCOLES";
-    } else if (dia.toString() == "5") {
+    } else if (dia.toString() == "4") {
       return "JUEVES";
-    } else if (dia.toString() == "6") {
+    } else if (dia.toString() == "5") {
       return "VIERNES";
-    } else if (dia.toString() == "7") {
+    } else if (dia.toString() == "6") {
       return "SABADO";
     }
   }

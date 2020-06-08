@@ -18,7 +18,7 @@ export class EspaciosService {
   private busqDTO: BusquedaDTO = null;
 
   constructor(private http: HttpClient, private  parser: ParserService) {
-     this.urlApp = 'http://localhost:8080/espacio';
+     this.urlApp = 'https://smartcampus-unizar.herokuapp.com/espacio';
   }
 
   public getInfoEspacio(id: string) {

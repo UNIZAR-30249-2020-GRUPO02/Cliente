@@ -69,9 +69,10 @@ export class ReservaComponent implements OnInit {
       }, error => {
         this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
       });
+    } else {
+      this.sesionService.setNumeroDialogo(8);
+      this.ventanaDialogoReferencia = this.abrirDialogo();
     }
-    this.sesionService.setNumeroDialogo(8);
-    this.ventanaDialogoReferencia = this.abrirDialogo();
   }
 
   goInicio() {

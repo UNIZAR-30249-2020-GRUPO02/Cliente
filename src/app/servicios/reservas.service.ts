@@ -16,13 +16,13 @@ export class ReservasService {
   private busqDTO: BusquedaDTO = null;
 
   constructor(private http: HttpClient) {
-    this.urlApp = 'http://localhost:8080/reserva';
+    this.urlApp = 'https://smartcampus-unizar.herokuapp.com/reserva';
   }
 
   public getReservaPorId(id: string) {
     let params = new HttpParams()
       .set("id", id);
-    return this.http.get(this.urlApp + '/getReservaById', {params: params});
+    return this.http.get(this.urlApp + '/getReservasById', {params: params});
   }
 
   public getReservasByEspacio(id: string) {

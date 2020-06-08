@@ -108,7 +108,7 @@ export class ModDatosComponent implements OnInit {
               cantidad = <number>$('#equipamientoNumero_1').val();
             }
             equipamiento.push({
-              tipo: TipoEquipamiento.CANON,
+              tipo: "CANON",
               cantidad: cantidad,
               maxCantidad: this.cantidadMaxEq1});
           }
@@ -119,7 +119,7 @@ export class ModDatosComponent implements OnInit {
               cantidad = <number>$('#equipamientoNumero_2').val();
             }
             equipamiento.push({
-              tipo: TipoEquipamiento.PANTALLA,
+              tipo: "PANTALLA",
               cantidad: cantidad,
               maxCantidad: this.cantidadMaxEq2});
           }
@@ -130,7 +130,7 @@ export class ModDatosComponent implements OnInit {
               cantidad = <number>$('#equipamientoNumero_3').val();
             }
             equipamiento.push({
-              tipo: TipoEquipamiento.TV,
+              tipo: "TV",
               cantidad: cantidad,
               maxCantidad: this.cantidadMaxEq3});
           }
@@ -141,7 +141,7 @@ export class ModDatosComponent implements OnInit {
               cantidad = <number>$('#equipamientoNumero_4').val();
             }
             equipamiento.push({
-              tipo: TipoEquipamiento.VIDEO,
+              tipo: "VIDEO",
               cantidad: cantidad,
               maxCantidad: this.cantidadMaxEq4});
           }
@@ -152,7 +152,7 @@ export class ModDatosComponent implements OnInit {
               cantidad = <number>$('#equipamientoNumero_5').val();
             }
             equipamiento.push({
-              tipo: TipoEquipamiento.DVD,
+              tipo: "DVD",
               cantidad: cantidad,
               maxCantidad: this.cantidadMaxEq5});
           }
@@ -163,7 +163,7 @@ export class ModDatosComponent implements OnInit {
               cantidad = <number>$('#equipamientoNumero_6').val();
             }
             equipamiento.push({
-              tipo: TipoEquipamiento.PIZARRA,
+              tipo: "PIZARRA",
               cantidad: cantidad,
               maxCantidad: this.cantidadMaxEq6});
           }
@@ -174,7 +174,7 @@ export class ModDatosComponent implements OnInit {
               cantidad = <number>$('#equipamientoNumero_7').val();
             }
             equipamiento.push({
-              tipo: TipoEquipamiento.ORDENADOR,
+              tipo: "ORDENADOR",
               cantidad: cantidad,
               maxCantidad: this.cantidadMaxEq7});
           }
@@ -231,6 +231,7 @@ export class ModDatosComponent implements OnInit {
 
     let index = 0;
     for (let i of this.espacioSeleccionado.equipamiento) {
+      console.log(this.espacioSeleccionado.equipamiento[index].tipo.toString());
       if (this.espacioSeleccionado.equipamiento[index].tipo.toString() == "CANON") {
         this.cantidadEq1 = this.espacioSeleccionado.equipamiento[index].cantidad;
         this.cantidadMaxEq1 = this.espacioSeleccionado.equipamiento[index].maxCantidad;

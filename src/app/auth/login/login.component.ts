@@ -29,21 +29,22 @@ export class LoginComponent {
   login(user: string, password: string) {
     this.message = 'Trying to log in ...';
 
-    if (this.gerenteService.logIn(user, password)) {
+    this.gerenteService.logIn(user, password).subscribe(auth => {
+      if (auth) {
+        this.authService.login().subscribe(() => {
+          this.setMessage();
+          if (this.authService.isLoggedIn) {
+            this.onCancelClick();
+            // Usually you would use the redirect URL from the auth service.
+            // However to keep the example simple, we will always redirect to `/admin`.
+            const redirectUrl = '/gerencia';
 
-      this.authService.login().subscribe(() => {
-        this.setMessage();
-        if (this.authService.isLoggedIn) {
-          this.onCancelClick();
-          // Usually you would use the redirect URL from the auth service.
-          // However to keep the example simple, we will always redirect to `/admin`.
-          const redirectUrl = '/gerencia';
-
-          // Redirect the user
-          this.router.navigate([redirectUrl]);
-        }
-      });
-    }
+            // Redirect the user
+            this.router.navigate([redirectUrl]);
+          }
+        });
+      }
+    });
   }
 
 }
