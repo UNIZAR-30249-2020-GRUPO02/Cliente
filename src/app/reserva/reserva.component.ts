@@ -46,11 +46,11 @@ export class ReservaComponent implements OnInit {
       this.sesionService.setNumeroDialogo(0);
       this.ventanaDialogoReferencia = this.abrirDialogo();
 
-      if (<string>$('#inputName').val() == "" &&
-          <string>$('#inputApellidos').val() == "" &&
-          <string>$('#inputEmail').val() == "" &&
-          <string>$('#inputTlf').val() == "" &&
-          <string>$('#inputNIA').val()) {
+      if (<string>$('#inputName').val() == "" || <string>$('#inputName').val() == null &&
+          <string>$('#inputApellidos').val() == "" || <string>$('#inputApellidos').val() == null &&
+          <string>$('#inputEmail').val() == "" || <string>$('#inputEmail').val() == null &&
+          <string>$('#inputTlf').val() == "" || <string>$('#inputTlf').val() == null &&
+          <string>$('#inputNIA').val() == "" || <string>$('#inputNIA').val() == null) {
         this.sesionService.setNumeroDialogo(8);
         this.ventanaDialogoReferencia = this.abrirDialogo();
       } else {
