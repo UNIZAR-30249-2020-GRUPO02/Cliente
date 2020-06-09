@@ -186,24 +186,24 @@ export class ModDatosComponent implements OnInit {
     let notas = <string>$('#notas').val();
     let reservable: boolean = <boolean>$('#reservable').prop("checked");
 
-    let nuevoEspacio: EspacioDTO = this.espacioSeleccionado;
+    let nuevoEspacio: EspacioDTO = null;
     this.espaciosService.getInfoEspacio(this.espacioSeleccionado.id).subscribe(espacio => {
       nuevoEspacio = <EspacioDTO>espacio;
-    })
+      if (nuevoEspacio.capacidad == this.espacioSeleccionado.capacidad &&
+          nuevoEspacio.equipamiento == this.espacioSeleccionado.equipamiento &&
+          nuevoEspacio.notas == this.espacioSeleccionado.notas &&
+          nuevoEspacio.reservable == this.espacioSeleccionado.reservable) {
+        this.espaciosService.modificarEspacio(this.espacioSeleccionado.id, equipamiento, capacidad, reservable, notas).subscribe(data => {
+          console.log(data);
+          this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(2);
+        }, error => {
+          this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
+        });
+      } else {
+        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(1);
+      }
 
-    if (nuevoEspacio.capacidad == this.espacioSeleccionado.capacidad &&
-        nuevoEspacio.equipamiento == this.espacioSeleccionado.equipamiento &&
-        nuevoEspacio.notas == this.espacioSeleccionado.notas &&
-        nuevoEspacio.reservable == this.espacioSeleccionado.reservable) {
-      this.espaciosService.modificarEspacio(this.espacioSeleccionado.id, equipamiento, capacidad, reservable, notas).subscribe(data => {
-        console.log(data);
-        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(2);
-      }, error => {
-        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
-      });
-    } else {
-      this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(1);
-    }
+    });
   }
 
   seleccionarEspacio(i: number) {

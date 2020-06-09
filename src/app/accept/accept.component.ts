@@ -43,9 +43,6 @@ export class AcceptComponent implements OnInit {
     let nuevaReserva: ReservaDTO = null;
     this.reservasService.getReservaPorId(this.reserva.id).subscribe(reserva => {
       nuevaReserva = <ReservaDTO>reserva;
-      console.log(nuevaReserva);
-      console.log(reserva);
-      console.log(nuevaReserva.estado + " // " + this.reserva.estado);
       if (nuevaReserva.estado == this.reserva.estado) {
         this.reservasService.cambiarEstado(this.reserva.id, "ACEPTADA",
           <string>$('#motivo').val()).subscribe(data => {
@@ -66,9 +63,6 @@ export class AcceptComponent implements OnInit {
     let nuevaReserva: ReservaDTO = null;
     this.reservasService.getReservaPorId(this.reserva.id).subscribe(reserva => {
       nuevaReserva = <ReservaDTO>reserva;
-      console.log(nuevaReserva);
-      console.log(reserva);
-      console.log(nuevaReserva.estado + " // " + this.reserva.estado);
       if (nuevaReserva.estado == this.reserva.estado) {
         this.reservasService.cambiarEstado(this.reserva.id, "RECHAZADA",
           <string>$('#motivo').val()).subscribe(data => {
