@@ -32,6 +32,9 @@
 <div *ngIf="numeroDialogo == 8" style="text-align: center; margin: auto; display: block" class="row">
   Debe seleccionar un espacio de la lista para poder crear una reserva
 </div>
+<div *ngIf="numeroDialogo == 9" style="text-align: center; margin: auto; display: block" class="row">
+  Debe rellenar todos los campos del formulario para tramitar una reserva
+</div>
 <div *ngIf="numeroDialogo != 0" mat-dialog-actions>
   <div class="col" style="text-align: center; margin: auto;">
     <button mat-button style="height:50px; width:150px; font-size: 25px;" (click)="onCancelClick()">Volver</button>

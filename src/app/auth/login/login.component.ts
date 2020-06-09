@@ -27,7 +27,7 @@ export class LoginComponent {
   }
 
   login(user: string, password: string) {
-    this.message = 'Trying to log in ...';
+    this.message = 'Iniciando sesión ...';
 
     this.gerenteService.logIn(user, password).subscribe(auth => {
       if (auth) {
@@ -42,6 +42,8 @@ export class LoginComponent {
             // Redirect the user
             this.router.navigate([redirectUrl]);
           }
+        }, error => {
+          this.message = 'Has introducido mal el usuario o la contraseña';
         });
       }
     });

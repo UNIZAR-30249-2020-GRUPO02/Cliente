@@ -87,7 +87,7 @@ export class AcceptComponent implements OnInit {
   }
 
   goEspacios() {
-    this.router.navigate(["/seleccion-espacios"]);
+    this.router.navigate(["/mod-datos"]);
   }
 
   goReservas() {

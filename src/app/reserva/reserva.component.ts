@@ -46,33 +46,45 @@ export class ReservaComponent implements OnInit {
       this.sesionService.setNumeroDialogo(0);
       this.ventanaDialogoReferencia = this.abrirDialogo();
 
-      let usuario: Usuario = {
-        nombre: <string>$('#inputName').val(),
-        apellidos: <string>$('#inputApellidos').val(),
-        email: <string>$('#inputEmail').val(),
-        telefono: <number>$('#inputTlf').val(),
-        nia: <number>$('#inputNIA').val()
+      if (<string>$('#inputName').val() == "" &&
+          <string>$('#inputApellidos').val() == "" &&
+          <string>$('#inputEmail').val() == "" &&
+          <string>$('#inputTlf').val() == "" &&
+          <string>$('#inputNIA').val()) {
+        this.sesionService.setNumeroDialogo(8);
+        this.ventanaDialogoReferencia = this.abrirDialogo();
+      } else {
+
+        let usuario: Usuario = {
+          nombre: <string>$('#inputName').val(),
+          apellidos: <string>$('#inputApellidos').val(),
+          email: <string>$('#inputEmail').val(),
+          telefono: <number>$('#inputTlf').val(),
+          nia: <number>$('#inputNIA').val()
+        }
+
+        let reserva: ReservaDTO = {
+          id: "",
+          dias: this.sesionService.getDias(),
+          fechaInicio: this.datosReserva.fechaInicio,
+          fechaFin: this.datosReserva.fechaFinal,
+          horaInicio: this.datosReserva.horaInicio,
+          horaFin: this.datosReserva.horaFinal - 1,
+          estado: this.parserService.estadoReservatoString(EstadoReserva.PENDIENTE),
+          idEspacio: this.espacioSeleccionado.id,
+          usuario: usuario
+        }
+        this.reservasService.crearReserva(reserva).subscribe(data => {
+          this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(6);
+        }, error => {
+          this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
+        });
       }
-      let reserva: ReservaDTO = {
-        id: "",
-        dias: this.sesionService.getDias(),
-        fechaInicio: this.datosReserva.fechaInicio,
-        fechaFin: this.datosReserva.fechaFinal,
-        horaInicio: this.datosReserva.horaInicio,
-        horaFin: this.datosReserva.horaFinal - 1,
-        estado: this.parserService.estadoReservatoString(EstadoReserva.PENDIENTE),
-        idEspacio: this.espacioSeleccionado.id,
-        usuario: usuario
-      }
-      this.reservasService.crearReserva(reserva).subscribe(data => {
-        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(6);
-      }, error => {
-        this.ventanaDialogoReferencia.componentInstance.setNumeroDialogo(7);
-      });
     } else {
       this.sesionService.setNumeroDialogo(8);
       this.ventanaDialogoReferencia = this.abrirDialogo();
     }
+
   }
 
   goInicio() {
