@@ -189,6 +189,20 @@ export class ModDatosComponent implements OnInit {
     let nuevoEspacio: EspacioDTO = null;
     this.espaciosService.getInfoEspacio(this.espacioSeleccionado.id).subscribe(espacio => {
       nuevoEspacio = <EspacioDTO>espacio;
+      console.log(nuevoEspacio);
+      console.log(this.espacioSeleccionado);
+      console.log(nuevoEspacio.capacidad);
+      console.log(this.espacioSeleccionado.capacidad);
+      console.log(nuevoEspacio.capacidad == this.espacioSeleccionado.capacidad);
+      console.log(nuevoEspacio.equipamiento);
+      console.log(this.espacioSeleccionado.equipamiento);
+      console.log(nuevoEspacio.equipamiento == this.espacioSeleccionado.equipamiento);
+      console.log(nuevoEspacio.notas);
+      console.log(this.espacioSeleccionado.notas);
+      console.log(nuevoEspacio.notas == this.espacioSeleccionado.notas);
+      console.log(nuevoEspacio.reservable);
+      console.log(this.espacioSeleccionado.reservable);
+      console.log(nuevoEspacio.reservable == this.espacioSeleccionado.reservable);
       if (nuevoEspacio.capacidad == this.espacioSeleccionado.capacidad &&
           nuevoEspacio.equipamiento == this.espacioSeleccionado.equipamiento &&
           nuevoEspacio.notas == this.espacioSeleccionado.notas &&
